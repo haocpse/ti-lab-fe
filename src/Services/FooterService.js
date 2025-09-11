@@ -1,8 +1,8 @@
-import axios from "axios";
+import AxiosSetup from "./AxiosSetup";
 
 export const sendEmailFooter = async (email) => {
     try {
-        const response = await axios.post("http://103.110.87.196/api/sendMail", {
+        const response = await AxiosSetup.post("/sendMail", {
             email
         });
         return response;

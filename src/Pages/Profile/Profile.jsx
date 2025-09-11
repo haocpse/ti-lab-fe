@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
-import axios from "axios";
+import { fetchProfileCustomer } from "../../Services/Profile";
 
 const Profile = () => {
     const [profile, setProfile] = useState(null);
-    const [userId] = useState(localStorage.userId);
-    // const [activeTab, setActiveTab] = useState("account");
 
+    const [profile1, setProfile1] = useState(null);
     const fetchProfile = async () => {
         try {
-            const response = await axios.get(`http://103.110.87.196/api/users/${userId}`)
-            setProfile(response.data.data.content)
+            const data = await fetchProfileCustomer();
+            setProfile(data)
+            setProfile1(data.userResponse)
+
         } catch (error) {
             console.log(error)
         }
     };
+
     useEffect(() => {
         fetchProfile();
-    }, [userId])
+    }, [])
+
+
 
     return (
         <>
@@ -44,19 +48,19 @@ const Profile = () => {
                         <div className="col-12 col-md-6">
                             <div className="mb-3 d-flex">
                                 <span className="me-3" style={{ width: 130, color: "#caff01" }}>Full name:</span>
-                                <span>{(profile?.fullName || "TRUONG HOANG LONG").toUpperCase()}</span>
+                                <span>{(profile?.fullName || "Name").toUpperCase()}</span>
                             </div>
                             <div className="mb-3 d-flex">
                                 <span className="me-3" style={{ width: 130, color: "#caff01" }}>Date of birth:</span>
-                                <span>{profile?.dob || "08/04/2004"}</span>
+                                <span>{profile?.dob || "Birth"}</span>
                             </div>
                             <div className="mb-3 d-flex">
                                 <span className="me-3" style={{ width: 130, color: "#caff01" }}>Phone number:</span>
-                                <span>{profile?.phone || "0707804907"}</span>
+                                <span>{profile1?.phone || "Phone"}</span>
                             </div>
                             <div className="mb-3 d-flex">
                                 <span className="me-3" style={{ width: 130, color: "#caff01" }}>Email:</span>
-                                <span>{profile?.email || "hoanglong123longtruong@gmail.com"}</span>
+                                <span>{profile1?.email || "Gmail"}</span>
                             </div>
                         </div>
                     </div>

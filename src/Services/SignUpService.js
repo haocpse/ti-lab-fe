@@ -1,8 +1,8 @@
-import axios from "axios";
+import AxiosSetup from "./AxiosSetup";
 
 export const signUp = async (account, password, email, firstName, lastName) => {
     try {
-        const response = await axios.post("http://103.110.87.196/api/register", {
+        const response = await AxiosSetup.post("/register", {
             username: account,
             rawPassword: password,
             firstName: firstName,

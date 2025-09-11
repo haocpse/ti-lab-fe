@@ -1,11 +1,12 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import './ShopViewDetail.css';
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import { toast } from "react-toastify";
 import { fetchCoreCollection, fetchArtistCollection } from "../../Services/ShopService";
+import AxiosSetup from "../../Services/AxiosSetup";
+import { fetchViewDetailBag } from "../../Services/ShopViewDetail";
 
 const ShopViewDetail = () => {
     const [bag, setBag] = useState([])
@@ -13,11 +14,12 @@ const ShopViewDetail = () => {
     const [quantity, setQuantity] = useState(1);
     const [coreBag, setCoreBag] = useState([])
     const [artistBag, setArtistBag] = useState([])
+    const navigate = useNavigate();
 
     const fetchDetailBag = async () => {
         try {
-            const response = await axios.get(`http://103.110.87.196/api/bags/${id}`);
-            setBag(response.data.data.content);
+            const data = await fetchViewDetailBag(id);
+            setBag(data);
         } catch (error) {
             console.error('Error fetching bag details:', error);
         }
@@ -50,7 +52,7 @@ const ShopViewDetail = () => {
 
     const addToCart = async () => {
         try {
-            await axios.post("http://103.110.87.196/api/carts", {
+            await AxiosSetup.post("/carts", {
                 bagId: id,
                 quantity: quantity,
                 totalPrice: bag.price * quantity
@@ -59,6 +61,7 @@ const ShopViewDetail = () => {
         } catch (error) {
             console.log(error)
             toast.warning("Add to cart fail! Please try again ^^")
+            navigate("/login")
         }
 
     }
@@ -72,17 +75,17 @@ const ShopViewDetail = () => {
                     <div className="row">
                         <div className="col-12 col-lg-6 d-flex flex-column align-items-center">
                             <img
-                                src={bag.bagImages ? encodeURI(bag.bagImages) : `https://picsum.photos/300/250?`}
-                                alt={bag.name}
+                                src={bag?.images ? encodeURI(bag.images) : `https://picsum.photos/300/250?`}
+                                alt={bag?.name}
                                 className="img-fluid mb-3"
                                 style={{ width: "600px", maxWidth: "100%", background: "#eee", borderRadius: "8px" }}
                             />
                             <div className="d-flex align-items-center mt-2">
                                 <button className="btn btn-outline-secondary btn-sm me-2">&lt;</button>
-                                {bag.images && bag.images.map((img, idx) => (
+                                {bag?.images && bag?.images.map((img, idx) => (
                                     <img
                                         src={img}
-                                        alt={`${bag.name} thumb`}
+                                        alt={`${bag?.name} thumb`}
                                         key={idx}
                                         className="img-thumbnail mx-1"
                                         style={{ width: "70px", height: "70px", objectFit: "cover" }}
@@ -94,24 +97,24 @@ const ShopViewDetail = () => {
 
 
                         <div className="col-12 col-lg-6">
-                            <h3 className="mt-3 mt-lg-0 mb-2 bagNameDetail">{bag.name || "Túi xách 1"}</h3>
+                            <h3 className="mt-3 mt-lg-0 mb-2 bagNameDetail">{bag?.name || "Túi xách 1"}</h3>
                             <hr className="custom-divider1" />
-                            <p className="mb-2 bagDescription">{bag.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc et tincidunt luctus, ligula arcu pulvinar purus, in fringilla nisl neque ut nisl. Curabitur vitae risus nec nulla ullamcorper tincidunt. Aenean eget sapien sit amet urna facilisis venenatis. Vivamus auctor, justo a dapibus posuere, magna lectus tincidunt libero, sit amet feugiat orci metus a justo. Phasellus eget erat a risus vehicula tincidunt."} </p>
-                            <p className="bagDescription">Artwork by {(bag.author || "HoangLong").toUpperCase()}.</p>
+                            <p className="mb-2 bagDescription">{bag?.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc et tincidunt luctus, ligula arcu pulvinar purus, in fringilla nisl neque ut nisl. Curabitur vitae risus nec nulla ullamcorper tincidunt. Aenean eget sapien sit amet urna facilisis venenatis. Vivamus auctor, justo a dapibus posuere, magna lectus tincidunt libero, sit amet feugiat orci metus a justo. Phasellus eget erat a risus vehicula tincidunt."} </p>
+                            <p className="bagDescription">Artwork by {(bag?.author || "HoangLong").toUpperCase()}.</p>
 
                             <div className="mb-2">
-                                <span className="fw-bold fs-1 text-dark bagNameDetail">{bag.price || "120.000"} VND</span>
+                                <span className="fw-bold fs-1 text-dark bagNameDetail">{bag?.price || "120.000"} VND</span>
                                 {/* {bag.oldPrice &&
                                     <span className="text-decoration-line-through ms-3 text-secondary">{bag.oldPrice || "1200.000"} VND</span>
                                 } */}
                             </div>
                             <div className="mb-2">
-                                <span className="text-danger">tí.lab’s Secret Price : <span className="fw-bold text-danger fs-5">{bag.secretPrice || "208.000"}</span> VND </span>
+                                <span className="text-danger">tí.lab’s Secret Price : <span className="fw-bold text-danger fs-5">{bag?.secretPrice || "Recieve more Voucher"}</span></span>
                             </div>
                             <hr />
                             <div className="mb-3 text-secondary bagDescription">
                                 Measurements<br />
-                                {bag.length && bag.weight ? `${bag.length} cm (L) x ${bag.weight} cm (W)` : "55cm (L) x 50cm (W)"}
+                                {bag?.length && bag?.weight ? `${bag?.length} cm (L) x ${bag?.weight} cm (W)` : "55cm (L) x 50cm (W)"}
                             </div>
 
                             <div className="d-flex align-items-center mb-3">
@@ -131,7 +134,7 @@ const ShopViewDetail = () => {
                                     </h2>
                                     <div id="storyCollapse" className="accordion-collapse collapse show bagDescription" aria-labelledby="storyHeading" data-bs-parent="#bagDetailAccordion">
                                         <div className="accordion-body">
-                                            {bag.story || "The bag is designed to be large and spacious so you can hold many items from documents to clothes or other miscellaneous things. A zipper at the top adds security, combined with handy internal pockets ensuring you don't have to scramble to find your keys. Versatile and fashionable design."}
+                                            {bag?.story || "The bag is designed to be large and spacious so you can hold many items from documents to clothes or other miscellaneous things. A zipper at the top adds security, combined with handy internal pockets ensuring you don't have to scramble to find your keys. Versatile and fashionable design."}
                                         </div>
                                     </div>
                                 </div>
@@ -143,7 +146,7 @@ const ShopViewDetail = () => {
                                     </h2>
                                     <div id="materialCollapse" className="accordion-collapse collapse bagDescription" aria-labelledby="materialHeading" data-bs-parent="#bagDetailAccordion">
                                         <div className="accordion-body">
-                                            {bag.material || "High-quality canvas/cotton, sturdy & fashionable."}
+                                            {bag?.material || "High-quality canvas/cotton, sturdy & fashionable."}
                                         </div>
                                     </div>
                                 </div>
@@ -155,7 +158,7 @@ const ShopViewDetail = () => {
                                     </h2>
                                     <div id="designCollapse" className="accordion-collapse collapse bagDescription" aria-labelledby="designHeading" data-bs-parent="#bagDetailAccordion">
                                         <div className="accordion-body">
-                                            {bag.design || "Unique design by artist."}
+                                            {bag?.design || "Unique design by artist."}
                                         </div>
                                     </div>
                                 </div>

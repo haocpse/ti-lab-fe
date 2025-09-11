@@ -1,9 +1,9 @@
-import axios from "axios";
 import React from "react";
+import AxiosSetup from "./AxiosSetup";
 
 export const login = async (account, password) => {
     try {
-        const response = await axios.post("http://103.110.87.196/api/login", {
+        const response = await AxiosSetup.post("/login", {
             username: account,
             password: password
         });

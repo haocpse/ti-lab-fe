@@ -65,6 +65,7 @@ const Navbar = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("role");
         window.location.reload();
+      
     };
 
     return (
