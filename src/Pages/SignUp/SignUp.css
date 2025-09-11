@@ -1,0 +1,16 @@
+.signup-compact .form-group {
+    margin-bottom: 15px;
+}
+
+.signup-compact .form-input {
+    padding: 10px 16px; 
+}
+
+.signup-compact .login-modal {
+    padding: 30px;
+}
+
+.signup-compact .login-title {
+    margin-bottom: 20px; 
+    font-size: 22px; 
+}

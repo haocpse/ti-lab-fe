@@ -1,0 +1,394 @@
+.membership-hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    background: #000;
+    overflow: hidden;
+}
+
+.membership-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bag-layer {
+    position: absolute;
+    transition: transform 0.3s ease;
+}
+
+.layer-1 {
+    z-index: 1;
+}
+
+.layer-2 {
+    z-index: 2;
+}
+
+.layer-3 {
+    z-index: 3;
+}
+
+.bag-image {
+    width: auto;
+    height: auto;
+    max-width: none;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+
+.bag-japanese {
+    width: 320px;
+    height: 400px;
+    object-fit: cover;
+}
+
+.bag-layer:nth-child(1) {
+    top: 20%;
+    left: 5%;
+    transform: rotate(-5deg);
+}
+
+.bag-blue {
+    width: 280px;
+    height: 350px;
+    object-fit: cover;
+}
+
+.bag-layer:nth-child(2) {
+    top: 15%;
+    left: 30%;
+    transform: rotate(3deg);
+}
+
+.bag-cartoon {
+    width: 300px;
+    height: 380px;
+    object-fit: cover;
+}
+
+.bag-layer:nth-child(3) {
+    top: 45%;
+    right: 2%;
+    transform: rotate(8deg);
+}
+
+.bag-flower {
+    width: 260px;
+    height: 320px;
+    object-fit: cover;
+}
+
+.bag-layer:nth-child(4) {
+    top: 10%;
+    right: 25%;
+    transform: rotate(-3deg);
+}
+
+
+.bag-eat {
+    width: 240px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.bag-layer:nth-child(5) {
+    top: 60%;
+    right: 15%;
+    transform: rotate(12deg);
+}
+
+
+.bag-layer:hover {
+    transform: scale(1.05) rotate(0deg) !important;
+    z-index: 10;
+}
+
+.bag-layer:hover .bag-image {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.center {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+.welcome-content {
+    text-align: center;
+    color: white;
+}
+
+.welcome-title {
+    font-size: 3.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 2px;
+    line-height: 1.2;
+}
+
+.welcome-buttons {
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.btn-simple {
+    color: white;
+    text-decoration: underline;
+    font-family: Arial, sans-serif;
+    font-size: 2.1rem;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    padding: 0;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-simple:hover {
+    opacity: 0.7;
+    color: white;
+    text-decoration: underline;
+}
+
+@media (max-width: 1200px) {
+
+    .bag-japanese {
+        width: 280px;
+        height: 350px;
+    }
+
+    .bag-blue {
+        width: 240px;
+        height: 300px;
+    }
+
+    .bag-cartoon {
+        width: 260px;
+        height: 330px;
+    }
+
+    .bag-flower {
+        width: 220px;
+        height: 280px;
+    }
+
+    .bag-eat {
+        width: 200px;
+        height: 250px;
+    }
+
+    .welcome-title {
+        font-size: 3rem;
+    }
+
+    .center {
+        padding: 2.5rem 3rem;
+    }
+}
+
+@media (max-width: 992px) {
+
+    .bag-layer:nth-child(1) {
+        top: 15%;
+        left: 2%;
+    }
+
+    .bag-layer:nth-child(2) {
+        top: 12%;
+        left: 20%;
+    }
+
+    .bag-layer:nth-child(3) {
+        top: 50%;
+        right: 5%;
+    }
+
+    .bag-layer:nth-child(4) {
+        top: 8%;
+        right: 20%;
+    }
+
+    .bag-layer:nth-child(5) {
+        top: 65%;
+        right: 12%;
+    }
+
+    .bag-japanese {
+        width: 240px;
+        height: 300px;
+    }
+
+    .bag-blue {
+        width: 200px;
+        height: 250px;
+    }
+
+    .bag-cartoon {
+        width: 220px;
+        height: 280px;
+    }
+
+    .bag-flower {
+        width: 180px;
+        height: 230px;
+    }
+
+    .bag-eat {
+        width: 160px;
+        height: 200px;
+    }
+
+    .welcome-title {
+        font-size: 2.5rem;
+    }
+
+    .center {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .membership-hero {
+        height: 80vh;
+        min-height: 600px;
+    }
+
+    .bag-layer:nth-child(1) {
+        top: 10%;
+        left: -5%;
+        transform: rotate(-8deg) scale(0.8);
+    }
+
+    .bag-layer:nth-child(2) {
+        top: 8%;
+        left: 15%;
+        transform: rotate(5deg) scale(0.8);
+    }
+
+    .bag-layer:nth-child(3) {
+        top: 55%;
+        right: -5%;
+        transform: rotate(10deg) scale(0.8);
+    }
+
+    .bag-layer:nth-child(4) {
+        top: 5%;
+        right: 15%;
+        transform: rotate(-5deg) scale(0.8);
+    }
+
+    .bag-layer:nth-child(5) {
+        top: 70%;
+        right: 8%;
+        transform: rotate(15deg) scale(0.8);
+    }
+
+    .welcome-title {
+        font-size: 2rem;
+    }
+
+    .welcome-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .btn-membership {
+        width: 200px;
+        padding: 0.8rem 2rem;
+    }
+
+    .center {
+        padding: 1.5rem;
+        width: 90%;
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 576px) {
+    .welcome-title {
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+    }
+
+    .btn-membership {
+        width: 180px;
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .center {
+        padding: 1rem;
+    }
+
+    .bag-layer:nth-child(3),
+    .bag-layer:nth-child(5) {
+        opacity: 0.7;
+    }
+}
+
+@keyframes floatBags {
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(var(--rotation));
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(var(--rotation));
+    }
+}
+
+.bag-layer:nth-child(1) {
+    animation: floatBags 5s ease-in-out infinite;
+    --rotation: -5deg;
+}
+
+.bag-layer:nth-child(2) {
+    animation: floatBags 6s ease-in-out infinite 0.5s;
+    --rotation: 3deg;
+}
+
+.bag-layer:nth-child(3) {
+    animation: floatBags 7s ease-in-out infinite 1s;
+    --rotation: 8deg;
+}
+
+.bag-layer:nth-child(4) {
+    animation: floatBags 5.5s ease-in-out infinite 1.5s;
+    --rotation: -3deg;
+}
+
+.bag-layer:nth-child(5) {
+    animation: floatBags 6.5s ease-in-out infinite 2s;
+    --rotation: 12deg;
+}
+
+.check-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 17px;
+    height: 17px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    color: #000;
+    margin-top: 5px;
+    flex-shrink: 0; 
+}

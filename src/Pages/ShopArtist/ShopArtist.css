@@ -1,0 +1,99 @@
+.shopcore-bg {
+    min-height: 100vh;
+}
+
+.shopcore-card,
+.shopcore-artist-card {
+    transition: box-shadow 0.2s;
+    box-shadow: 0 0 0 0 transparent;
+}
+
+.custom-divider {
+    height: 2.5px;
+    background-color: #000;
+    opacity: 1;
+    margin-bottom: 40px;
+}
+
+.shopcore-card:hover,
+.shopcore-artist-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.h2core {
+    font-family: 'Platform', 'Inter', sans-serif;
+    font-weight: 500;
+}
+
+.artistH5 {
+    font-family: 'Platform', 'Inter', sans-serif;
+    font-weight: 500;
+}
+
+.artistH4 {
+    font-family: 'Platform', 'Inter', sans-serif;
+    font-weight: 500;
+}
+
+.coreBagName {
+    font-family: 'DM Sans', sans-serif;
+}
+
+.coreBagPrice {
+    font-family: 'DM Sans', sans-serif;
+    color: black;
+}
+
+.seeMore {
+    font-family: 'DM Sans', sans-serif;
+    color: black;
+}
+
+.artistName {
+    font-family: 'DM Sans', sans-serif;
+}
+
+@media (max-width: 992px) {
+
+    .shopcore-card img,
+    .shopcore-artist-card img {
+        height: 160px !important;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .shopcore-card img,
+    .shopcore-artist-card img {
+        height: 120px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .shopcore-bg {
+        padding: 10px 0;
+    }
+
+    .shopcore-card img,
+    .shopcore-artist-card img {
+        height: 180px !important; 
+        width: 80% !important;
+        object-fit: cover;
+        max-width: 100%; 
+    }
+
+    .h2core {
+        font-size: 1.3rem !important;
+    }
+
+    .artistH5, .artistH4 {
+        font-size: 1rem !important;
+    }
+
+    .coreBagName, .coreBagPrice, .artistName {
+        font-size: 0.95rem !important;
+    }
+    .seeMore {
+        font-size: 0.95rem !important;
+    }
+}

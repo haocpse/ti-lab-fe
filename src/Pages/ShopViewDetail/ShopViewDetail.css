@@ -1,0 +1,15 @@
+.custom-divider1 {
+    height: 2.5px;
+    background-color: #000;
+    opacity: 1;
+    margin-bottom: 20px;
+}
+
+.bagNameDetail {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 30px;
+}
+
+.bagDescription {
+    font-family: 'DM Sans', sans-serif;
+}
