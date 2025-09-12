@@ -14,6 +14,7 @@ const ShopViewDetail = () => {
     const [quantity, setQuantity] = useState(1);
     const [coreBag, setCoreBag] = useState([])
     const [artistBag, setArtistBag] = useState([])
+    const [mainImageIndex, setMainImageIndex] = useState(0);
     const navigate = useNavigate();
 
     const fetchDetailBag = async () => {
@@ -71,7 +72,13 @@ const ShopViewDetail = () => {
         }
 
     }
+    const prevImage = () => {
+        setMainImageIndex((prev) => (prev === 0 ? bag.bagImages.length - 1 : prev - 1));
+    }
 
+    const nextImage = () => {
+        setMainImageIndex((prev) => (prev === bag.bagImages.length - 1 ? 0 : prev + 1));
+    }
 
     return (
         <>
@@ -86,21 +93,22 @@ const ShopViewDetail = () => {
                                     : `https://picsum.photos/300/250?`}
                                 alt={bag?.name}
                                 className="img-fluid mb-3"
-                                style={{  maxWidth: "100%", background: "#eee", borderRadius: "8px" }}
+                                style={{ maxWidth: "100%", background: "#eee", borderRadius: "8px" }}
                             />
 
                             <div className="d-flex align-items-center mt-2">
-                                <button className="btn btn-outline-secondary btn-sm me-2">&lt;</button>
-                                {bag?.bagImages && bag.bagImages.map((image) => (
+                                <button className="btn btn-outline-secondary btn-sm me-2" onClick={prevImage}>&lt;</button>
+                                {bag?.bagImages && bag.bagImages.map((image, index) => (
                                     <img
                                         src={encodeURI(image.url)}
                                         alt={`${bag?.name} thumb`}
                                         key={image.id}
-                                        className="img-thumbnail mx-1"
-                                        style={{ width: "70px", height: "70px", objectFit: "cover" }}
+                                        className={`img-thumbnail mx-1 ${index === mainImageIndex ? 'border border-primary' : ''}`}
+                                        style={{ width: "70px", height: "70px", objectFit: "cover", cursor: "pointer" }}
+                                        onClick={() => setMainImageIndex(index)}
                                     />
                                 ))}
-                                <button className="btn btn-outline-secondary btn-sm ms-2">&gt;</button>
+                                <button className="btn btn-outline-secondary btn-sm ms-2" onClick={nextImage}>&gt;</button>
                             </div>
                         </div>
 
