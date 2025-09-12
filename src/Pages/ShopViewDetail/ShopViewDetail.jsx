@@ -86,7 +86,7 @@ const ShopViewDetail = () => {
                                     : `https://picsum.photos/300/250?`}
                                 alt={bag?.name}
                                 className="img-fluid mb-3"
-                                style={{ maxWidth: "100%", maxWidth: "70%", background: "#eee", borderRadius: "8px" }}
+                                style={{  maxWidth: "100%", background: "#eee", borderRadius: "8px" }}
                             />
 
                             <div className="d-flex align-items-center mt-2">
