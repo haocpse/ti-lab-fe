@@ -75,7 +75,10 @@ const ShopCore = () => {
                                     <Link to={`/shop/core-collection/${product.id}`} className="text-decoration-none">
                                         <div className="bg-white h-100 p-2 text-center shopcore-card">
                                             <img
-                                                src={product.bagImages ? encodeURI(product.bagImages) : `https://picsum.photos/300/250?random=${product.id}`}
+                                                src={product.bagImages && product.bagImages.length > 0
+                                                    ? encodeURI(product.bagImages[0].url)
+                                                    : `https://picsum.photos/300/250?random=${product.id}`
+                                                }
                                                 alt={product.name}
                                                 className="img-fluid rounded mb-2"
                                                 style={{ width: "250px", height: "400px", objectFit: "cover", background: "#eee" }}

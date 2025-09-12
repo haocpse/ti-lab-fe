@@ -10,11 +10,17 @@ import ShopViewDetail from "./Pages/ShopViewDetail/ShopViewDetail";
 import ShopCart from "./Pages/ShopCart/ShopCart";
 import Profile from "./Pages/Profile/Profile";
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
+import AdminSideBar from "./Components/AdminSideBar/AdminSideBar";
+import ManageBag from "./Pages/ManageBag/ManageBag";
+import LayoutAdmin from "./Components/LayoutAdmin/LayoutAdmin";
+import ProtectedRoutesAdmin from "./Utils/ProtectedRoutesAdmin";
 function App() {
   return (
     <Router>
       <ScrollToTop />
       <Routes>
+
+
         <Route path="/" element={<Home />} />
         <Route path="/membership" element={<Membership />} />
         <Route path="/login" element={<Login />} />
@@ -26,6 +32,16 @@ function App() {
         <Route path="/shop/artist-collection/:id" element={<ShopViewDetail />} />
         <Route path="/shop/cart" element={<ShopCart />} />
         <Route path="/customer/profile" element={<Profile />} />
+
+
+        <Route element={<ProtectedRoutesAdmin />}>
+          <Route path='/admin' element={<LayoutAdmin />}>
+            <Route path="manage-bag" element={<ManageBag />} />
+          </Route>
+        </Route>
+
+
+
       </Routes>
     </Router >
   );

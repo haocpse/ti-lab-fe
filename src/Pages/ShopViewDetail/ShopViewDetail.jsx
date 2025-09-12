@@ -120,7 +120,7 @@ const ShopViewDetail = () => {
                             <p className="bagDescription">Artwork by {(bag?.author || "HoangLong").toUpperCase()}.</p>
 
                             <div className="mb-2">
-                                <span className="fw-bold fs-1 text-dark bagNameDetail">{bag?.price || "120.000"} VND</span>
+                                <span className="fw-bold fs-1 text-dark bagNameDetail">{bag.price || "120.000"} VND</span>
                                 {/* {bag.oldPrice &&
                                     <span className="text-decoration-line-through ms-3 text-secondary">{bag.oldPrice || "1200.000"} VND</span>
                                 } */}

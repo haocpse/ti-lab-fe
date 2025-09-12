@@ -5,6 +5,7 @@ import Footer from "../../Components/Footer/Footer";
 import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { fetchProfileCustomer } from "../../Services/Profile";
+import './ShopCart.css';
 
 const ShopCart = () => {
     const [cart, setCart] = useState([]);
@@ -128,13 +129,13 @@ const ShopCart = () => {
             <Navbar />
             <div className="container my-5">
 
-                <h2 style={{ textAlign: "center" }} className="py-4">
+                <h2 style={{ textAlign: "center", fontWeight: "bold" }} className="py-4 textPlatForm">
                     CART
                 </h2>
 
                 <div className="d-flex justify-content-center mb-5">
                     <div
-                        className={`me-5 border-bottom border-2 pb-1 ${currentTab === 1 ? 'text-dark fw-bold border-dark' : 'text-muted'}`}
+                        className={`me-5 textDmSan border-bottom border-2 pb-1 ${currentTab === 1 ? 'text-dark fw-bold border-dark' : 'text-muted'}`}
                     >
                         <span className={`badge ${currentTab === 1 ? 'bg-success' : 'bg-secondary'} me-2`}>1</span> Shopping cart
                     </div>
@@ -148,15 +149,15 @@ const ShopCart = () => {
 
 
                 <div className="row">
-                    <div className="col-md-8">
+                    <div className="col-md-8 textDmSan">
                         {currentTab === 1 && (
                             <>
                                 {cart.length === 0 ? (
                                     <div className="text-center py-5 text-muted">
-                                        Please select something to buy in shop
+                                        Please select something to buy in Tí.lab shop
                                     </div>
                                 ) : (
-                                    <table className="table align-middle">
+                                    <table className="table align-middle textDmSan">
                                         <thead>
                                             <tr>
                                                 <th>Product</th>
@@ -220,7 +221,7 @@ const ShopCart = () => {
                                         </tbody>
                                     </table>
                                 )}
-                                <Link to={"/shop"} className="btn btn-outline-dark mb-4">
+                                <Link to={"/shop"} className="btn btn-outline-dark mb-4 textDmSan">
                                     Update Cart
                                 </Link>
                             </>
@@ -377,7 +378,7 @@ const ShopCart = () => {
                     {/*complete */}
                     {currentTab === 3 && (
                         <div className="container d-flex align-items-center justify-content-center">
-                            <div className="row justify-content-center w-100">
+                            <div className="row justify-content-center w-100 textDmSan">
                                 <div className="col-lg-6 col-md-8 col-sm-10">
                                     <div className="card shadow-sm border-0" style={{ borderRadius: '15px', backgroundColor: '#f8f9fa' }}>
                                         <div className="card-body text-center py-5">
@@ -411,7 +412,7 @@ const ShopCart = () => {
 
                     {(currentTab === 1 || currentTab === 2) && (
                         <div className="col-md-4">
-                            <div className="border p-3 rounded">
+                            <div className="border p-3 rounded textDmSan">
                                 <h6>Order Summary</h6>
 
                                 {/* voucher */}
@@ -459,7 +460,7 @@ const ShopCart = () => {
                                     <strong>{total.toLocaleString()} VND</strong>
                                 </div>
                                 <button
-                                    className={`btn w-100 ${currentTab === 1 ? 'btn-primary' : 'btn-success'}`}
+                                    className={`textDmSan btn w-100 ${currentTab === 1 ? 'btn-primary' : 'btn-success'}`}
                                     onClick={() => {
                                         if (currentTab === 1) setCurrentTab(2);
                                         else creatingOrder();

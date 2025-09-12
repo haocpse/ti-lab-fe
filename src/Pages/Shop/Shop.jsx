@@ -19,7 +19,7 @@ const Shop = () => {
         setLoading(true)
         try {
             const coreBags = await fetchCoreCollection(0, 12);
-            setBag(coreBags)
+            setBag(coreBags.content)
 
             const artistBags = await fetchArtistCollection();
             setArtistBag(artistBags.content[0].bags)
