@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import AxiosSetup from "../../Services/AxiosSetup";
-import "./AddBagPopUp.css";
 import axios from "axios";
+import "./AddBagPopUp.css";
 
 const AddBagPopUp = ({ onClose, onSubmit }) => {
     const [formData, setFormData] = useState({
@@ -56,41 +55,48 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
         e.preventDefault();
         try {
             const formDataToSend = new FormData();
-            
-            // Append dữ liệu bag
-            formDataToSend.append("name", formData.name);
-            formDataToSend.append("description", formData.description);
-            formDataToSend.append("author", formData.author);
-            formDataToSend.append("price", parseFloat(formData.price));
-            formDataToSend.append("quantity", parseInt(formData.quantity));
-            formDataToSend.append("length", parseFloat(formData.length));
-            formDataToSend.append("weight", parseFloat(formData.weight));
-            formDataToSend.append("type", formData.type);
-            
+
+            // Tạo JSON từ dữ liệu bag
+            const bagData = {
+                name: formData.name,
+                description: formData.description,
+                author: formData.author,
+                price: parseFloat(formData.price),
+                quantity: parseInt(formData.quantity),
+                length: parseFloat(formData.length),
+                weight: parseFloat(formData.weight),
+                type: formData.type,
+            };
+
+            // Append JSON vào "bags"
+            formDataToSend.append(
+                "bags",
+                new Blob([JSON.stringify(bagData)], { type: "application/json" })
+            );
+
             // Append files
             formData.bagImages.forEach(img => {
                 let fileToSend = img.file;
-    
                 if (img.id === formData.mainImageId) {
                     const safeName = img.file.name.replace(/\s/g, "_");
                     fileToSend = new File([img.file], `_main_${safeName}`, { type: img.file.type });
                 }
-    
                 formDataToSend.append("imageBagRequest", fileToSend);
             });
-    
+
             const token = localStorage.getItem("token");
-    
+
             const response = await axios.post(
                 "http://103.110.87.196/api/bags",
                 formDataToSend,
                 {
                     headers: {
                         Authorization: token ? `Bearer ${token}` : undefined,
+                        "Content-Type": "multipart/form-data",
                     }
                 }
             );
-            
+
             console.log("Bag added:", response.data);
             onSubmit(response.data.data);
             onClose();
@@ -98,7 +104,7 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
             console.error("Error adding bag:", error.response?.data || error.message);
         }
     };
-    
+
     return (
         <div className="popup-overlay">
             <div className="container">
@@ -108,17 +114,16 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
                             <div className="card-body p-4">
                                 <h5 className="fw-semibold mb-4">Add New Bag</h5>
                                 <form onSubmit={handleSubmit}>
-
                                     {/* Name */}
                                     <div className="form-floating mb-3">
                                         <input
                                             type="text"
                                             className="form-control"
                                             id="name"
-                                            placeholder="Name"
                                             name="name"
                                             value={formData.name}
                                             onChange={handleChange}
+                                            placeholder="Name"
                                             required
                                         />
                                         <label htmlFor="name">Name</label>
@@ -129,11 +134,11 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
                                         <textarea
                                             className="form-control"
                                             id="description"
-                                            placeholder="Description"
                                             name="description"
                                             value={formData.description}
                                             onChange={handleChange}
                                             style={{ height: "100px" }}
+                                            placeholder="Description"
                                             required
                                         />
                                         <label htmlFor="description">Description</label>
@@ -145,10 +150,10 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
                                             type="text"
                                             className="form-control"
                                             id="author"
-                                            placeholder="Author"
                                             name="author"
                                             value={formData.author}
                                             onChange={handleChange}
+                                            placeholder="Author"
                                             required
                                         />
                                         <label htmlFor="author">Author</label>
@@ -162,10 +167,10 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
                                                     type="number"
                                                     className="form-control"
                                                     id="price"
-                                                    placeholder="Price"
                                                     name="price"
                                                     value={formData.price}
                                                     onChange={handleChange}
+                                                    placeholder="Price"
                                                     required
                                                 />
                                                 <label htmlFor="price">Price</label>
@@ -177,10 +182,10 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
                                                     type="number"
                                                     className="form-control"
                                                     id="quantity"
-                                                    placeholder="Quantity"
                                                     name="quantity"
                                                     value={formData.quantity}
                                                     onChange={handleChange}
+                                                    placeholder="Quantity"
                                                     required
                                                 />
                                                 <label htmlFor="quantity">Quantity</label>
@@ -196,10 +201,10 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
                                                     type="number"
                                                     className="form-control"
                                                     id="length"
-                                                    placeholder="Length"
                                                     name="length"
                                                     value={formData.length}
                                                     onChange={handleChange}
+                                                    placeholder="Length"
                                                 />
                                                 <label htmlFor="length">Length</label>
                                             </div>
@@ -210,10 +215,10 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
                                                     type="number"
                                                     className="form-control"
                                                     id="weight"
-                                                    placeholder="Weight"
                                                     name="weight"
                                                     value={formData.weight}
                                                     onChange={handleChange}
+                                                    placeholder="Weight"
                                                 />
                                                 <label htmlFor="weight">Weight</label>
                                             </div>
