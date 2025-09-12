@@ -34,7 +34,8 @@ const Footer = () => {
 
     const isShopPage = location.pathname === "/shop" ||
         location.pathname.startsWith("/shop/artist-collection/") ||
-        location.pathname.startsWith("/shop/core-collection/");
+        location.pathname.startsWith("/shop/core-collection/") ||
+        location.pathname === "/shop/cart";
 
 
     return (

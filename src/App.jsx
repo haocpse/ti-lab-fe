@@ -9,9 +9,11 @@ import ShopArtist from "./Pages/ShopArtist/ShopArtist";
 import ShopViewDetail from "./Pages/ShopViewDetail/ShopViewDetail";
 import ShopCart from "./Pages/ShopCart/ShopCart";
 import Profile from "./Pages/Profile/Profile";
+import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/membership" element={<Membership />} />

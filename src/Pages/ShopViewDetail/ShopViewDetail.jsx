@@ -60,8 +60,14 @@ const ShopViewDetail = () => {
             toast.success("Add to cart successfully!")
         } catch (error) {
             console.log(error)
-            toast.warning("Add to cart fail! Please try again ^^")
-            navigate("/login")
+            const token = localStorage.getItem("token");
+            if (token) {
+                toast.warning("Add to cart fail! Please try again ^^")
+            }
+            else {
+                navigate("/login")
+            }
+
         }
 
     }
@@ -109,7 +115,7 @@ const ShopViewDetail = () => {
                                 } */}
                             </div>
                             <div className="mb-2">
-                                <span className="text-danger">tí.lab’s Secret Price : <span className="fw-bold text-danger fs-5">{bag?.secretPrice || "Recieve more Voucher"}</span></span>
+                                <span className="text-danger">tí.lab’s Secret Price : <span className="fw-bold text-danger fs-5">{bag?.secretPrice || "Recieve more Vouchers"}</span></span>
                             </div>
                             <hr />
                             <div className="mb-3 text-secondary bagDescription">

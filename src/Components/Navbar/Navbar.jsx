@@ -105,7 +105,7 @@ const Navbar = () => {
                     <Link to="/" style={{ color: isMembershipPage ? "white" : "black" }}>
                         <i className="fa-solid fa-magnifying-glass"></i>
                     </Link>
-                    <Link to="/shopping" style={{ color: isMembershipPage ? "white" : "black" }}>
+                    <Link to="/shop/cart" style={{ color: isMembershipPage ? "white" : "black" }}>
                         <i className="fa-solid fa-cart-shopping"></i>
                     </Link>
                 </div>
