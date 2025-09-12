@@ -129,23 +129,30 @@ const ShopCart = () => {
             <Navbar />
             <div className="container my-5">
 
-                <h2 style={{ textAlign: "center", fontWeight: "bold" }} className="py-4 textPlatForm">
-                    CART
+                <h2
+                    style={{ textAlign: "center", fontWeight: "bold" }}
+                    className="py-4 textPlatForm"
+                >
+                    {currentTab === 2 ? "CHECKOUT" : currentTab === 3 ? "COMPLETE !!" : "CART"}
                 </h2>
 
                 <div className="d-flex justify-content-center mb-5">
-                    <div
-                        className={`me-5 textDmSan border-bottom border-2 pb-1 ${currentTab === 1 ? 'text-dark fw-bold border-dark' : 'text-muted'}`}
-                    >
-                        <span className={`badge ${currentTab === 1 ? 'bg-success' : 'bg-secondary'} me-2`}>1</span> Shopping cart
+                    <div className={`me-5 textDmSan border-bottom border-2 pb-1 ${currentTab >= 1 ? 'text-dark fw-bold border-dark' : 'text-muted'}`} >
+                        <span className={`badge ${currentTab >= 1 ? 'bg-success' : 'bg-secondary'} me-2`}>1</span>
+                        Shopping cart
                     </div>
-                    <div className={`me-5 ${currentTab === 2 ? 'text-dark fw-bold' : 'text-muted'}`}>
-                        <span className={`badge ${currentTab === 2 ? 'bg-success' : 'bg-secondary'} me-2`}>2</span> Checkout details
+
+                    <div className={`me-5 border-bottom border-2 ${currentTab >= 2 ? 'text-dark fw-bold border-dark' : 'text-muted'}`} >
+                        <span className={`badge ${currentTab >= 2 ? 'bg-success' : 'bg-secondary'} me-2`}>2</span>
+                        Checkout details
                     </div>
-                    <div className={`${currentTab === 3 ? 'text-dark fw-bold' : 'text-muted'}`}>
-                        <span className={`badge ${currentTab === 3 ? 'bg-success' : 'bg-secondary'} me-2`}>3</span> Order complete
+
+                    <div className={`border-bottom border-2 ${currentTab >= 3 ? 'text-dark fw-bold border-dark' : 'text-muted'}`}  >
+                        <span className={`badge ${currentTab >= 3 ? 'bg-success' : 'bg-secondary'} me-2`}>3</span>
+                        Order complete
                     </div>
                 </div>
+
 
 
                 <div className="row">
@@ -189,19 +196,25 @@ const ShopCart = () => {
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div className="d-flex align-items-center">
+                                                        <div className="d-inline-flex align-items-center rounded p-1" style={{ backgroundColor: "#EEEEEE" }}>
                                                             <button
-                                                                className="btn btn-sm btn-outline-primary"
+                                                                className="btn btn-sm border-0 bg-transparent text-muted px-2"
                                                                 onClick={() => changeQuantity(item, -1)}
+                                                                disabled={item.quantity <= 1}
                                                             >
-                                                                -
+                                                                <i className="bi bi-dash"></i>
                                                             </button>
-                                                            <span className="mx-2">{item.quantity}</span>
+
+                                                            <span className="mx-2 fw-medium text-dark">
+                                                                {item.quantity}
+                                                            </span>
+
                                                             <button
-                                                                className="btn btn-sm btn-outline-primary"
+                                                                className="btn btn-sm border-0 bg-transparent text-muted px-2"
                                                                 onClick={() => changeQuantity(item, 1)}
+                                                                disabled={item.quantity >= item.bagResponse.quantity}
                                                             >
-                                                                +
+                                                                <i className="bi bi-plus"></i>
                                                             </button>
                                                         </div>
                                                     </td>

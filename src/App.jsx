@@ -14,6 +14,7 @@ import AdminSideBar from "./Components/AdminSideBar/AdminSideBar";
 import ManageBag from "./Pages/ManageBag/ManageBag";
 import LayoutAdmin from "./Components/LayoutAdmin/LayoutAdmin";
 import ProtectedRoutesAdmin from "./Utils/ProtectedRoutesAdmin";
+import ViewDetailBag from "./Pages/ManageBag/ViewDetailBag";
 function App() {
   return (
     <Router>
@@ -37,6 +38,7 @@ function App() {
         <Route element={<ProtectedRoutesAdmin />}>
           <Route path='/admin' element={<LayoutAdmin />}>
             <Route path="manage-bag" element={<ManageBag />} />
+            <Route path="manage-bag/view/:id" element={<ViewDetailBag />} />
           </Route>
         </Route>
 

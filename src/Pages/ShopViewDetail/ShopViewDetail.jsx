@@ -89,15 +89,20 @@ const ShopViewDetail = () => {
                         <div className="col-12 col-lg-6 d-flex flex-column align-items-center">
                             <img
                                 src={bag?.bagImages && bag.bagImages.length > 0
-                                    ? encodeURI(bag.bagImages[0].url)
+                                    ? encodeURI(bag.bagImages[mainImageIndex].url)
                                     : `https://picsum.photos/300/250?`}
                                 alt={bag?.name}
                                 className="img-fluid mb-3"
-                                style={{ maxWidth: "100%", background: "#eee", borderRadius: "8px" }}
+                                style={{
+                                    width: "500px",
+                                    height: "500px",
+                                    background: "#eee",
+                                    borderRadius: "8px"
+                                }}
                             />
 
                             <div className="d-flex align-items-center mt-2">
-                                <button className="btn btn-outline-secondary btn-sm me-2" onClick={prevImage}>&lt;</button>
+                                <button className="btn btn-outline-secondary btn-sm me-2" onClick={prevImage}><i class="bi bi-caret-left"></i></button>
                                 {bag?.bagImages && bag.bagImages.map((image, index) => (
                                     <img
                                         src={encodeURI(image.url)}
@@ -108,7 +113,7 @@ const ShopViewDetail = () => {
                                         onClick={() => setMainImageIndex(index)}
                                     />
                                 ))}
-                                <button className="btn btn-outline-secondary btn-sm ms-2" onClick={nextImage}>&gt;</button>
+                                <button className="btn btn-outline-secondary btn-sm ms-2" onClick={nextImage}><i class="bi bi-caret-right"></i></button>
                             </div>
                         </div>
 
@@ -135,10 +140,28 @@ const ShopViewDetail = () => {
                             </div>
 
                             <div className="d-flex align-items-center mb-3">
-                                <button className="btn btn-outline-dark btn-sm" onClick={() => setQuantity(Math.max(1, quantity - 1))}> - </button>
-                                <span className="mx-2">{quantity}</span>
-                                <button className="btn btn-outline-dark btn-sm" onClick={() => setQuantity(quantity + 1)}>+ </button>
-                                <button className="btn btn-primary ms-3" style={{ width: "600px" }} onClick={addToCart}>ADD TO CART</button>
+                                <div className="d-inline-flex align-items-center rounded p-1" style={{ backgroundColor: "#EEEEEE" }}>
+                                    <button
+                                        className="btn btn-sm border-0 bg-transparent text-muted px-2" onClick={() => setQuantity(Math.max(1, quantity - 1))}  >
+                                        <i className="bi bi-dash"></i>
+                                    </button>
+                                    <span className="mx-2 fw-medium text-dark">
+                                        {quantity}
+                                    </span>
+                                    <button className="btn btn-sm border-0 bg-transparent text-muted px-2" onClick={() => setQuantity(Math.min(bag.quantity, quantity + 1))} disabled={quantity >= bag.quantity}
+                                    >
+                                        <i className="bi bi-plus"></i>
+                                    </button>
+                                </div>
+
+                                {/* Nút ADD TO CART */}
+                                <button
+                                    className="btn btn-primary ms-3"
+                                    style={{ width: "600px" }}
+                                    onClick={addToCart}
+                                >
+                                    ADD TO CART
+                                </button>
                             </div>
                             <Link to="/shop/cart" className="btn w-100 mb-3" style={{ background: "#CAFF01", color: "#222", fontWeight: 600 }}> BUY IT NOW </Link>
 

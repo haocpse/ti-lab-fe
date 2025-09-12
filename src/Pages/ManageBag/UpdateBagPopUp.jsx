@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import AxiosSetup from "../../Services/AxiosSetup";
-import "./AddBagPopUp.css";
+import React, { useState, useEffect } from "react";
+import "./UpdateBagPopUp.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const AddBagPopUp = ({ onClose, onSubmit }) => {
+const UpdateBagPopUp = ({ onClose, onSubmit, bag }) => {
     const [formData, setFormData] = useState({
         name: "",
         description: "",
@@ -17,6 +16,26 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
         bagImages: [],
         mainImageId: null,
     });
+
+    // Khởi tạo formData khi popup mở
+    useEffect(() => {
+        if (bag) {
+            setFormData({
+                name: bag.name || "",
+                description: bag.description || "",
+                author: bag.author || "",
+                price: bag.price || 0,
+                quantity: bag.quantity || 0,
+                length: bag.length || 0,
+                weight: bag.weight || 0,
+                type: bag.type || "CORE_COLLECTION",
+                bagImages: bag.bagImages
+                    ? bag.bagImages.map(img => ({ ...img, file: null }))
+                    : [],
+                mainImageId: bag.bagImages?.[0]?.id || null,
+            });
+        }
+    }, [bag]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -58,7 +77,13 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
         try {
             const formDataToSend = new FormData();
 
-            const bagData = {
+            // Danh sách ảnh cũ bị xóa
+            const removeIds = bag.bagImages
+                ?.filter(img => !formData.bagImages.find(f => f.id === img.id))
+                .map(img => img.id) || [];
+
+            // Dữ liệu chính
+            const bagsData = {
                 name: formData.name,
                 description: formData.description,
                 author: formData.author,
@@ -67,25 +92,29 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
                 length: parseFloat(formData.length),
                 weight: parseFloat(formData.weight),
                 type: formData.type,
+                removeIds
             };
 
-            formDataToSend.append("bags", new Blob([JSON.stringify(bagData)], { type: "application/json" }));
+            formDataToSend.append(
+                "bags",
+                new Blob([JSON.stringify(bagsData)], { type: "application/json" })
+            );
 
+            // Append chỉ file mới
             formData.bagImages.forEach(img => {
+                if (!img.file) return; // bỏ qua ảnh cũ
                 let fileToSend = img.file;
-
                 if (img.id === formData.mainImageId) {
                     const safeName = img.file.name.replace(/\s/g, "_");
                     fileToSend = new File([img.file], `_main_${safeName}`, { type: img.file.type });
                 }
-
                 formDataToSend.append("imageBagRequest", fileToSend);
             });
 
             const token = localStorage.getItem("token");
 
-            const response = await axios.post(
-                "http://103.110.87.196/api/bags",
+            const response = await axios.put(
+                `http://103.110.87.196/api/bags/${bag.id}`,
                 formDataToSend,
                 {
                     headers: {
@@ -95,17 +124,18 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
                 }
             );
 
-            console.log("Bag added:", response.data);
-            toast.success("Add new bag successfully")
+            toast.success("Bag updated successfully!");
             onSubmit(response.data.data);
             onClose();
         } catch (error) {
-            console.error("Error adding bag:", error.response?.data || error.message);
-            toast.warn("Add new bag failed")
+            console.error("Error updating bag:", error.response?.data || error.message);
+            toast.error("Update bag failed");
         }
     };
 
-    
+
+
+
     return (
         <div className="popup-overlay">
             <div className="container">
@@ -113,7 +143,7 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
                     <div className="col-lg-8 col-md-10 col-sm-12">
                         <div className="card shadow-sm" style={{ borderRadius: "15px" }}>
                             <div className="card-body p-4">
-                                <h5 className="fw-semibold mb-4">Add New Bag</h5>
+                                <h5 className="fw-semibold mb-4">Update Bag</h5>
                                 <form onSubmit={handleSubmit}>
 
                                     {/* Name */}
@@ -291,7 +321,7 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
                                             Cancel
                                         </button>
                                         <button type="submit" className="btn btn-primary">
-                                            Add Bag
+                                            Update Bag
                                         </button>
                                     </div>
                                 </form>
@@ -304,4 +334,4 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
     );
 };
 
-export default AddBagPopUp;
+export default UpdateBagPopUp;

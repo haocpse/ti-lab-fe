@@ -3,15 +3,18 @@ import "./ManageBag.css";
 import AxiosSetup from "../../Services/AxiosSetup";
 import { useNavigate } from "react-router-dom";
 import AddBagPopUp from "./AddBagPopUp";
+import { ToastContainer } from "react-toastify";
+import UpdateBagPopUp from "./UpdateBagPopUp";
+import { fetchViewDetailBag } from "../../Services/ShopViewDetail";
 
 const ManageBag = () => {
     const [bags, setBags] = useState([]);
     const [page, setPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [searchFunction, setSearchFunction] = useState("");
-    // const [showUpdateModal, setShowUpdateModal] = useState(false);
+    const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showAddModal, setShowAddModal] = useState(false);
-    // const [bagToEdit, setBagToEdit] = useState(null);
+    const [bagToEdit, setBagToEdit] = useState(null);
     const navigate = useNavigate();
 
     const fetchBags = async (page = 0) => {
@@ -37,13 +40,17 @@ const ManageBag = () => {
 
 
     // ê đít
-    // const handleEditClick = (bag) => {
-    //     setBagToEdit(bag);
-    //     setShowUpdateModal(true);
-    // };
-
+    const handleEditClick = async (bag) => {
+        try {
+            const detailedBag = await fetchViewDetailBag(bag.id);
+            setBagToEdit(detailedBag);
+            setShowUpdateModal(true);
+        } catch (error) {
+            console.error("Failed to fetch bag details:", error);
+        }
+    };
     const handleViewClick = (id) => {
-        navigate(`/admin/bag/${id}`);
+        navigate(`/admin/manage-bag/view/${id}`);
     };
 
     const hadleDelteClick = async (id) => {
@@ -63,6 +70,7 @@ const ManageBag = () => {
 
     return (
         <div className="container mt-4 textDmSan">
+            <ToastContainer position="top-right" autoClose={5000} />
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h2>Manage Bags</h2>
 
@@ -92,7 +100,11 @@ const ManageBag = () => {
                         <div className="col-lg-3 col-md-4 col-sm-6 mb-4" key={bag.id}>
                             <div className="card h-100 shadow-sm bag-card">
                                 <img
-                                    src={bag.imageUrl ? encodeURI(bag.bagImages) : `https://picsum.photos/600/500?random=${bag.id}`}
+                                    src={
+                                        bag.bagImages && bag.bagImages.length > 0
+                                            ? bag.bagImages[0].url
+                                            : `https://picsum.photos/600/500?random=${bag.id}`
+                                    }
                                     alt={bag.name}
                                     className="card-img-top bag-img"
                                 />
@@ -125,13 +137,13 @@ const ManageBag = () => {
                                         >
                                             <i class="bi bi-eye"></i>
                                         </button>
-                                        {/* <button
+                                        <button
                                             className="btn btn-sm btn-warning d-flex align-items-center justify-content-center"
                                             onClick={() => handleEditClick(bag)}
                                             title="Edit"
                                         >
                                             <i class="bi bi-pencil"></i>
-                                        </button> */}
+                                        </button>
                                         <button
                                             className="btn btn-sm btn-danger d-flex align-items-center justify-content-center"
                                             onClick={() => hadleDelteClick(bag.id)}
@@ -153,6 +165,15 @@ const ManageBag = () => {
                     onSubmit={handleCreateNewBag}
                 />
             )}
+
+            {showUpdateModal && bagToEdit && (
+                <UpdateBagPopUp
+                    bag={bagToEdit}
+                    onClose={() => setShowUpdateModal(false)}
+                    onUpdate={handleEditClick}
+                />
+            )}
+
 
             {/* paging */}
             <nav>
