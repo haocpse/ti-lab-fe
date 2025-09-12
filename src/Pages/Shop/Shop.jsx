@@ -19,7 +19,7 @@ const Shop = () => {
         setLoading(true)
         try {
             const coreBags = await fetchCoreCollection(0, 12);
-            setBag(coreBags.content)
+            setBag(coreBags)
 
             const artistBags = await fetchArtistCollection();
             setArtistBag(artistBags.content[0].bags)
@@ -82,7 +82,11 @@ const Shop = () => {
                                             <div className="card h-100 border-0 shadow-sm product-card">
                                                 <div className="bg-light p-4 d-flex align-items-center justify-content-center" style={{ minHeight: "280px" }}>
                                                     <img
-                                                        src={product.bagImages ? encodeURI(product.bagImages) : `https://picsum.photos/300/250?random=${product.id}`}
+                                                        src={
+                                                            product.bagImages && product.bagImages.length > 0
+                                                                ? encodeURI(product.bagImages[0].url)
+                                                                : `https://picsum.photos/300/250?random=${product.id}`
+                                                        }
                                                         alt={product.name}
                                                         className="img-fluid rounded product-image"
                                                         style={{ width: "100%", height: "300px", objectFit: "cover" }}

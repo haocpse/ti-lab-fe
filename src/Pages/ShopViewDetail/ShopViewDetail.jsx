@@ -75,18 +75,21 @@ const ShopViewDetail = () => {
                     <div className="row">
                         <div className="col-12 col-lg-6 d-flex flex-column align-items-center">
                             <img
-                                src={bag?.images ? encodeURI(bag.images) : `https://picsum.photos/300/250?`}
+                                src={bag?.bagImages && bag.bagImages.length > 0
+                                    ? encodeURI(bag.bagImages[0].url)
+                                    : `https://picsum.photos/300/250?`}
                                 alt={bag?.name}
                                 className="img-fluid mb-3"
-                                style={{ width: "600px", maxWidth: "100%", background: "#eee", borderRadius: "8px" }}
+                                style={{ maxWidth: "100%", maxWidth: "70%", background: "#eee", borderRadius: "8px" }}
                             />
+
                             <div className="d-flex align-items-center mt-2">
                                 <button className="btn btn-outline-secondary btn-sm me-2">&lt;</button>
-                                {bag?.images && bag?.images.map((img, idx) => (
+                                {bag?.bagImages && bag.bagImages.map((image) => (
                                     <img
-                                        src={img}
+                                        src={encodeURI(image.url)}
                                         alt={`${bag?.name} thumb`}
-                                        key={idx}
+                                        key={image.id}
                                         className="img-thumbnail mx-1"
                                         style={{ width: "70px", height: "70px", objectFit: "cover" }}
                                     />

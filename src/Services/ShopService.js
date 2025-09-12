@@ -3,7 +3,7 @@ import AxiosSetup from "./AxiosSetup";
 export const fetchCoreCollection = async (page = 0, size = 12) => {
     try {
         const response = await AxiosSetup.get(`/bags/core?page=${page}&size=${size}`);
-        return response.data.data;
+        return response.data.data.content;
     } catch (error) {
         console.error("Error fetching core bags:", error);
         throw error;
