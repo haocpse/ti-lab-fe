@@ -16,6 +16,7 @@ const ManageBag = () => {
     const [showAddModal, setShowAddModal] = useState(false);
     const [bagToEdit, setBagToEdit] = useState(null);
     const navigate = useNavigate();
+    const [totalElements, setTotalElements] = useState(0);
 
     const fetchBags = async (page = 0) => {
         try {
@@ -23,6 +24,7 @@ const ManageBag = () => {
             setBags(response.data.data.content);
             setTotalPages(response.data.data.totalPages);
             setPage(response.data.data.number);
+            setTotalElements(response.data.data.totalElements);
         } catch (error) {
             console.error("Error fetching bags:", error);
         }
@@ -93,7 +95,11 @@ const ManageBag = () => {
                     </button>
                 </div>
             </div>
-
+            <div className="d-flex justify-content-between align-items-center py-2">
+                <div className="badge bg-info fs-6">
+                    <i className="fas fa-info-circle"></i> Total: {totalElements} Bags
+                </div>
+            </div>
             <div className="row">
                 <div className="row">
                     {filteredBags.map((bag) => (

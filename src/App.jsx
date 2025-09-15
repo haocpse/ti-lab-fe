@@ -15,6 +15,10 @@ import ManageBag from "./Pages/ManageBag/ManageBag";
 import LayoutAdmin from "./Components/LayoutAdmin/LayoutAdmin";
 import ProtectedRoutesAdmin from "./Utils/ProtectedRoutesAdmin";
 import ViewDetailBag from "./Pages/ManageBag/ViewDetailBag";
+import ManageCollection from "./Pages/ManageCollection/ManageCollection";
+import ViewDetailCollection from "./Pages/ManageCollection/ViewDetailCollection";
+import ManageCustomer from "./Pages/ManageCustomer/ManageCustomer";
+import ViewDetailCustomer from "./Pages/ManageCustomer/ViewDetailCustomer";
 function App() {
   return (
     <Router>
@@ -39,6 +43,10 @@ function App() {
           <Route path='/admin' element={<LayoutAdmin />}>
             <Route path="manage-bag" element={<ManageBag />} />
             <Route path="manage-bag/view/:id" element={<ViewDetailBag />} />
+            <Route path="manage-collection" element={<ManageCollection />} />
+            <Route path="manage-collection/view/:id" element={<ViewDetailCollection />} />
+            <Route path="manage-customer" element={<ManageCustomer />} />
+            <Route path="manage-customer/view/:id" element={<ViewDetailCustomer />} />
           </Route>
         </Route>
 
