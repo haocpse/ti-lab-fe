@@ -1,33 +1,15 @@
-import React, { useState } from "react";
 import './Footer.css'
 import logo from "../../assets/LogoMain.png";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import logo1 from "../../assets/Tilab1.png";
-import { sendEmailFooter } from "../../Services/FooterService";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
-    const [email, setEmail] = useState("");
-    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
+    const handleSubmit = async () => {
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true)
-        try {
-            const res = await sendEmailFooter(email);
-
-            if (res.status === 200) {
-                toast.success("Sending email successfully! You will be announced when we have new products.")
-            } else {
-                toast.warning("Sending email failed! Please try again.");
-            }
-            console.log(email)
-        } catch (error) {
-            console.log(error)
-            toast.warning("Sending email failed! Please try again.")
-        } finally {
-            setLoading(false);
-        }
+        navigate("/login")
 
     };
 
@@ -70,27 +52,12 @@ const Footer = () => {
                                 <p className={` small mb-3 ${isShopPage ? "text-light" : "text-dark"}`}>
                                     For eco-friendly lifestyle tips, new sustainable designs & special member offers.
                                 </p>
-                                <form onSubmit={handleSubmit}>
-                                    <div className="input-group mb-3">
-                                        <input
-                                            type="email"
-                                            className="form-control"
-                                            placeholder="Your email"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            disabled={loading}
-                                            required
-                                        />
-                                        <button
-                                            className="btn btn-outline-secondary"
-                                            type="submit"
-                                            style={{ fontSize: "20px" }}
-                                            disabled={loading}
-                                        >
-                                            {loading ? <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> : '→'}
-                                        </button>
-                                    </div>
-                                </form>
+
+                                <div className="input-group mb-3" style={{ cursor: "pointer", textDecoration: "underline" }}>
+                                    <span onClick={handleSubmit} style={{ textDecoration: "curosr" }}> Sign up to recieve Tis.lab new Products <i class="bi bi-bell"></i></span>
+
+                                </div>
+
                             </div>
                         </div>
                         <div className="row">

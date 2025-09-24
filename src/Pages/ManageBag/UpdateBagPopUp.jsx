@@ -76,12 +76,11 @@ const UpdateBagPopUp = ({ onClose, onSubmit, bag }) => {
         e.preventDefault();
         try {
             const formDataToSend = new FormData();
-
-            // Danh sách ảnh cũ bị xóa
+    
             const removeIds = bag.bagImages
                 ?.filter(img => !formData.bagImages.find(f => f.id === img.id))
                 .map(img => img.id) || [];
-
+    
             // Dữ liệu chính
             const bagsData = {
                 name: formData.name,
@@ -94,12 +93,14 @@ const UpdateBagPopUp = ({ onClose, onSubmit, bag }) => {
                 type: formData.type,
                 removeIds
             };
-
+    
+            console.log("👉 bagsData (JSON):", bagsData);
+    
             formDataToSend.append(
                 "bags",
                 new Blob([JSON.stringify(bagsData)], { type: "application/json" })
             );
-
+    
             // Append chỉ file mới
             formData.bagImages.forEach(img => {
                 if (!img.file) return; // bỏ qua ảnh cũ
@@ -110,9 +111,24 @@ const UpdateBagPopUp = ({ onClose, onSubmit, bag }) => {
                 }
                 formDataToSend.append("imageBagRequest", fileToSend);
             });
-
+    
+            console.log("👉 FormData gửi lên:");
+            for (let [key, value] of formDataToSend.entries()) {
+                if (value instanceof File) {
+                    console.log(
+                        `${key}: File -> name=${value.name}, type=${value.type}, size=${value.size}`
+                    );
+                } else if (value instanceof Blob) {
+                    value.text().then(text => {
+                        console.log(`${key}: Blob(JSON) ->`, JSON.parse(text));
+                    });
+                } else {
+                    console.log(`${key}:`, value);
+                }
+            }
+    
             const token = localStorage.getItem("token");
-
+    
             const response = await axios.put(
                 `http://103.110.87.196/api/bags/${bag.id}`,
                 formDataToSend,
@@ -123,15 +139,17 @@ const UpdateBagPopUp = ({ onClose, onSubmit, bag }) => {
                     }
                 }
             );
-
+    
             toast.success("Bag updated successfully!");
             onSubmit(response.data.data);
             onClose();
+            window.location.reload()
         } catch (error) {
-            console.error("Error updating bag:", error.response?.data || error.message);
+            console.error("❌ Error updating bag:", error.response?.data || error.message);
             toast.error("Update bag failed");
         }
     };
+    
 
 
 

@@ -1,0 +1,124 @@
+.welcome-titles {
+    font-size: 12rem;
+    font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 2px;
+    line-height: 1;
+    white-space: nowrap;
+    color: #caff01;
+    margin: 0;
+}
+
+.welcome-contents {
+    text-align: center;
+    color: white;
+}
+
+.centers {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+.wire-line-img {
+    max-width: 90%;
+    height: 120vh;
+    opacity: 0.9;
+}
+
+.about-description-section {
+    padding: 5rem 0;
+    background: black;
+    text-align: center;
+    color: white;
+}
+
+.location-text {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.separator-line {
+    width: 80px;
+    height: 2px;
+    background: #caff01;
+    margin: 1rem auto;
+}
+
+.description-text {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    font-weight: 300;
+}
+
+.content-box {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1.2rem 1.5rem;
+    border-radius: 10px;
+    max-width: 350px;
+    transition: transform 0.3s ease;
+}
+
+.content-box:hover {
+    transform: translateY(-5px);
+}
+
+.content-title {
+    color: #CAFF01;
+    font-size: 3rem;
+    font-weight: 600;
+    text-transform: lowercase;
+    margin-bottom: 1rem;
+}
+
+.content-text {
+    color: #e0e0e0;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 300;
+}
+
+.brand-story {
+    top: 18%;
+    left: 6%;
+}
+
+.vision-content {
+    top: 65%;
+    right: 10%;
+}
+
+.mission-content {
+    bottom: 12%;
+    left: 8%;
+}
+
+@media (max-width: 992px) {
+    .wire-line-img {
+        display: none;
+    }
+
+    .content-box {
+        position: relative !important;
+        margin: 2rem auto;
+        max-width: 100%;
+    }
+    .welcome-titles{
+        font-size: 3rem;
+    }
+}
+.contact-section {
+    margin-top: 4rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  
+  .contact-item {
+    margin: 0.3rem 0;
+  }
+  

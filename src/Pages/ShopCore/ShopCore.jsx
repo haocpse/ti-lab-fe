@@ -19,6 +19,7 @@ const ShopCore = () => {
             setCoreBag(res.content);
             setTotalPagesCore(res.totalPages);
             setPageCore(res.pageable.pageNumber);
+            window.scrollTo({ top: 0, behavior: "smooth" });
         } catch (error) {
             console.error("Error fetching core bags:", error);
         }
@@ -26,7 +27,8 @@ const ShopCore = () => {
     const fetchArtistBag = async () => {
         try {
             const res = await fetchArtistCollection(0, 12);
-            setArtistBag(res.content[0].bags);
+            const allBags = res.content.flatMap(collection => collection.bags);
+            setArtistBag(allBags);
         } catch (error) {
             console.error("Error fetching artist bags:", error);
         }
@@ -84,7 +86,7 @@ const ShopCore = () => {
                                                 style={{ width: "250px", height: "400px", objectFit: "cover", background: "#eee" }}
                                             />
                                             <div className="fw-semibold text-dark coreBagName" style={{ minHeight: "45px" }}>{product.name}</div>
-                                            <div className="coreBagPrice" style={{ fontSize: "1rem" }}>{product.price} VND</div>
+                                            <div className="coreBagPrice" style={{ fontSize: "1rem" }}>{product.price.toLocaleString()} VND</div>
                                         </div>
                                     </Link>
                                 </div>
@@ -129,7 +131,10 @@ const ShopCore = () => {
                                     <Link to={`/shop/artist-collection/${product.id}`} className="text-decoration-none">
                                         <div className="bg-white rounded p-3 text-center shopcore-artist-card h-100">
                                             <img
-                                                src={product.bagImages ? encodeURI(product.bagImages) : `https://picsum.photos/200/250?random=${product.id}`}
+                                                 src={product.bagImages && product.bagImages.length > 0
+                                                    ? encodeURI(product.bagImages[0].url)
+                                                    : `https://picsum.photos/300/250?random=${product.id}`
+                                                }
                                                 alt={product.name}
                                                 className="img-fluid rounded mb-2"
                                                 style={{ maxWidth: "300px", height: "400px", objectFit: "cover" }}

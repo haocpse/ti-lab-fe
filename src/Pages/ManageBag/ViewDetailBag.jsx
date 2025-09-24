@@ -76,10 +76,8 @@ const ViewDetailBag = () => {
                             <p className="bagDescription">Artwork by {(bag?.author || "HoangLong").toUpperCase()}.</p>
 
                             <div className="mb-2">
-                                <span className="fw-bold fs-1 text-dark bagNameDetail">{bag.price || "120.000"} VND</span>
-                                {/* {bag.oldPrice &&
-                                    <span className="text-decoration-line-through ms-3 text-secondary">{bag.oldPrice || "1200.000"} VND</span>
-                                } */}
+                                <span className="fw-bold fs-1 text-dark bagNameDetail">{bag?.price?.toLocaleString() || "120.000"} VND</span>
+                        
                             </div>
                             <div className="mb-2">
                                 <span className="text-danger">tí.lab’s Secret Price : <span className="fw-bold text-danger fs-5">{bag?.secretPrice || "Recieve more Vouchers"}</span></span>

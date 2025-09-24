@@ -169,6 +169,7 @@ const ManageBag = () => {
                 <AddBagPopUp
                     onClose={() => setShowAddModal(false)}
                     onSubmit={handleCreateNewBag}
+                    fetchBags
                 />
             )}
 
@@ -176,7 +177,7 @@ const ManageBag = () => {
                 <UpdateBagPopUp
                     bag={bagToEdit}
                     onClose={() => setShowUpdateModal(false)}
-                    onUpdate={handleEditClick}
+                    onSubmit={handleEditClick}
                 />
             )}
 

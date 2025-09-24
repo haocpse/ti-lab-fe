@@ -96,9 +96,10 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
             );
 
             console.log("Bag added:", response.data);
+            onClose();
             toast.success("Add new bag successfully")
             onSubmit(response.data.data);
-            onClose();
+         
         } catch (error) {
             console.error("Error adding bag:", error.response?.data || error.message);
             toast.warn("Add new bag failed")

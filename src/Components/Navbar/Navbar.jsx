@@ -12,7 +12,8 @@ const Navbar = () => {
     const isMembershipPage = location.pathname === "/membership" ||
         location.pathname === "/login" ||
         location.pathname === "/signup" ||
-        location.pathname === "/customer/profile";
+        location.pathname === "/customer/profile" ||
+        location.pathname === "/about";
 
     useEffect(() => {
         let prevScrollY = window.scrollY;
@@ -65,7 +66,7 @@ const Navbar = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("role");
         window.location.reload();
-      
+
     };
 
     return (

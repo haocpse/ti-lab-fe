@@ -20,17 +20,20 @@ const Shop = () => {
         try {
             const coreBags = await fetchCoreCollection(0, 12);
             setBag(coreBags.content)
-
-            const artistBags = await fetchArtistCollection();
-            setArtistBag(artistBags.content[0].bags)
+    
+            const artistCollections = await fetchArtistCollection();
+            const allArtistBags = artistCollections.content.flatMap(c => c.bags || []);
+            setArtistBag(allArtistBags);
+            
             console.log(coreBags);
-            console.log(artistBags);
+            console.log(artistCollections);
         } catch (error) {
             console.error(error)
         } finally {
             setLoading(false)
         }
     }
+    
 
 
 
@@ -107,7 +110,7 @@ const Shop = () => {
                                                         {product.name}
                                                     </h5>
                                                     <p className="card-text text-dark fw-bold mb-0 fs-6">
-                                                        {product.price} VND
+                                                        {product.price.toLocaleString()} VND
                                                     </p>
                                                 </div>
                                             </div>
@@ -126,7 +129,7 @@ const Shop = () => {
                                 <div className="row align-items-start">
                                     <div className="col-12 col-lg-8">
                                         <div className="row g-4">
-                                            {artistBag.slice(0, 2).map((product, index) => (
+                                            {artistBag.slice(1, 3).map((product, index) => (
                                                 <div key={product.id} className={index === 0 ? "col-5" : "col-5"}>
                                                     {index === 1 && (
                                                         <div className="mb-3">
@@ -140,7 +143,11 @@ const Shop = () => {
                                                     <Link to={`/shop/artist-collection/${product.id}`} className="text-decoration-none">
                                                         <div className="artist-image-container position-relative">
                                                             <img
-                                                                src={product.bagImages ? encodeURI(product.bagImages) : `https://picsum.photos/300/250?random=${product.id}`}
+                                                                 src={
+                                                                    product.bagImages && product.bagImages.length > 0
+                                                                        ? encodeURI(product.bagImages[0].url)
+                                                                        : `https://picsum.photos/300/250?random=${product.id}`
+                                                                }
                                                                 alt={product.name}
                                                                 className="img-fluid w-100 rounded artist-image"
                                                                 style={{
@@ -151,7 +158,7 @@ const Shop = () => {
                                                             <div className="artist-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-end p-3">
                                                                 <div className="text-white">
                                                                     <h6 className="fw-bold mb-1">{product.name}</h6>
-                                                                    <p className="mb-0 small">{product.price} VND</p>
+                                                                    <p className="mb-0 small">{product.price.toLocaleString()} VND</p>
                                                                 </div>
                                                             </div>
                                                         </div>

@@ -19,6 +19,8 @@ import ManageCollection from "./Pages/ManageCollection/ManageCollection";
 import ViewDetailCollection from "./Pages/ManageCollection/ViewDetailCollection";
 import ManageCustomer from "./Pages/ManageCustomer/ManageCustomer";
 import ViewDetailCustomer from "./Pages/ManageCustomer/ViewDetailCustomer";
+import ManageOrder from "./Pages/ManageOrder/ManageOrder";
+import AboutUs from "./Pages/AboutUs/AboutUs";
 function App() {
   return (
     <Router>
@@ -27,6 +29,7 @@ function App() {
 
 
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutUs />} />
         <Route path="/membership" element={<Membership />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
@@ -47,6 +50,7 @@ function App() {
             <Route path="manage-collection/view/:id" element={<ViewDetailCollection />} />
             <Route path="manage-customer" element={<ManageCustomer />} />
             <Route path="manage-customer/view/:id" element={<ViewDetailCustomer />} />
+            <Route path="manage-order" element={<ManageOrder />} />
           </Route>
         </Route>
 

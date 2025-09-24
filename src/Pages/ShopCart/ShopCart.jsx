@@ -320,7 +320,6 @@ const ShopCart = () => {
                                                             placeholder="Phone"
                                                             value={profile1?.phone || ''}
                                                             onChange={(e) => setProfile1({ ...profile1, phone: e.target.value })}
-                                                            disabled
                                                             style={{
                                                                 backgroundColor: '#f8f9fa',
                                                                 borderRadius: '8px',
@@ -472,20 +471,30 @@ const ShopCart = () => {
                                     <strong>Total</strong>
                                     <strong>{total.toLocaleString()} VND</strong>
                                 </div>
-                                <button
-                                    className={`textDmSan btn w-100 ${currentTab === 1 ? 'btn-primary' : 'btn-success'}`}
-                                    onClick={() => {
-                                        if (currentTab === 1) setCurrentTab(2);
-                                        else creatingOrder();
-                                    }}
-                                    disabled={currentTab === 1 && cart.length === 0}
-                                    style={{
-                                        backgroundColor: currentTab === 1 && cart.length === 0 ? '#6c757d' : '',
-                                        borderColor: currentTab === 1 && cart.length === 0 ? '#6c757d' : '',
-                                    }}
-                                >
-                                    {currentTab === 1 ? 'Checkout Now' : 'Order'}
-                                </button>
+                                <div className="d-flex gap-2">
+                                    {currentTab === 2 && (
+                                        <button
+                                            className="btn btn-outline-secondary w-50 textDmSan"
+                                            onClick={() => setCurrentTab(1)}
+                                        >
+                                            Back
+                                        </button>
+                                    )}
+                                    <button
+                                        className={`textDmSan btn w-100 ${currentTab === 1 ? 'btn-primary' : 'btn-success'}`}
+                                        onClick={() => {
+                                            if (currentTab === 1) setCurrentTab(2);
+                                            else creatingOrder();
+                                        }}
+                                        disabled={currentTab === 1 && cart.length === 0}
+                                        style={{
+                                            backgroundColor: currentTab === 1 && cart.length === 0 ? '#6c757d' : '',
+                                            borderColor: currentTab === 1 && cart.length === 0 ? '#6c757d' : '',
+                                        }}
+                                    >
+                                        {currentTab === 1 ? 'Checkout Now' : 'Order'}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     )}
