@@ -390,5 +390,9 @@
     font-weight: bold;
     color: #000;
     margin-top: 5px;
-    flex-shrink: 0; 
+    flex-shrink: 0;
+}
+
+.nameTier {
+    font-family: 'DM Sans', sans-serif;
 }

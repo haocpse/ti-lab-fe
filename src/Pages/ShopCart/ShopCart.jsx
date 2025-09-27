@@ -14,6 +14,7 @@ const ShopCart = () => {
     const [currentTab, setCurrentTab] = useState(1);
     const [profile, setProfile] = useState(null);
     const [profile1, setProfile1] = useState(null);
+    const [qrUrl, setQrUrl] = useState(null);
 
 
     const fetchCart = async (page = 0, size = 12) => {
@@ -105,13 +106,22 @@ const ShopCart = () => {
 
             const response = await AxiosSetup.post("/orders", orderPayload);
             console.log("Order created:", response.data);
-
-            setCurrentTab(3);
+            if (orderPayload.method === "CARD") {
+                const paymentId = response.data.data.paymentResponse.paymentId;
+                const paymentRes = await AxiosSetup.post(
+                    `/payments?paymentId=${paymentId}&amount=${orderPayload.total}`
+                );
+                setQrUrl(paymentRes.data.data.urlQR);
+                setCurrentTab(3);
+            } else {
+                setCurrentTab(4);
+            }
 
         } catch (error) {
             console.log("Error creating order:", error);
         }
     };
+
 
 
 
@@ -147,10 +157,16 @@ const ShopCart = () => {
                         Checkout details
                     </div>
 
-                    <div className={`border-bottom border-2 ${currentTab >= 3 ? 'text-dark fw-bold border-dark' : 'text-muted'}`}  >
+                    <div className={`me-5 border-bottom border-2 ${currentTab >= 3 ? 'text-dark fw-bold border-dark' : 'text-muted'}`} >
                         <span className={`badge ${currentTab >= 3 ? 'bg-success' : 'bg-secondary'} me-2`}>3</span>
-                        Order complete
+                        QR Pay
                     </div>
+
+                    <div className={`border-bottom border-2 ${currentTab >= 4 ? 'text-dark fw-bold border-dark' : 'text-muted'}`}  >
+                        <span className={`badge ${currentTab >= 4 ? 'bg-success' : 'bg-secondary'} me-2`}>4</span>
+                        Order completed
+                    </div>
+
                 </div>
 
 
@@ -388,7 +404,7 @@ const ShopCart = () => {
 
                     </div>
                     {/*complete */}
-                    {currentTab === 3 && (
+                    {currentTab === 4 && (
                         <div className="container d-flex align-items-center justify-content-center">
                             <div className="row justify-content-center w-100 textDmSan">
                                 <div className="col-lg-6 col-md-8 col-sm-10">
@@ -419,6 +435,23 @@ const ShopCart = () => {
                             </div>
                         </div>
                     )}
+
+                    {/*QR */}
+                    {currentTab === 3 && qrUrl && (
+                        <div className="container d-flex align-items-center justify-content-center">
+                            <div className="card shadow-sm p-4 text-center">
+                                <h4>Quét mã QR để thanh toán</h4>
+                                <img src={qrUrl} alt="QR Payment" style={{ width: "300px", margin: "20px auto" }} />
+                                <button
+                                    className="btn btn-success mt-3"
+                                    onClick={() => setCurrentTab(4)}
+                                >
+                                    Tôi đã thanh toán
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
 
 
 

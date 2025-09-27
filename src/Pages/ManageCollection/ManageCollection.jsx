@@ -11,6 +11,7 @@ const ManageCollection = () => {
     const [totalElements, setTotalElements] = useState(0);
     const [loading, setLoading] = useState(false);
     const [showAddModal, setShowAddModal] = useState(false);
+    // const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [searchFunction, setSearchFunction] = useState("");
     const navigate = useNavigate();
 
@@ -41,6 +42,18 @@ const ManageCollection = () => {
     const handleViewClick = (id) => {
         navigate(`/admin/manage-collection/view/${id}`);
     };
+
+
+    const hadleDelteClick = async (id) => {
+        const confirmDelete = window.confirm("Are you sure when deleting this?");
+        if (!confirmDelete) return;
+        try {
+            await AxiosSetup.delete(`/collections/${id}`);
+            fetchCollection(page);
+        } catch (error) {
+            console.error("There was an error deleting the collection!", error);
+        }
+    }
 
     useEffect(() => {
         fetchCollection(page);
@@ -122,7 +135,7 @@ const ManageCollection = () => {
                                             </button>
                                             <button
                                                 className="btn btn-sm btn-danger d-flex align-items-center justify-content-center"
-                                                // onClick={() => hadleDelteClick(bag.id)}
+                                                onClick={() => hadleDelteClick(collection.id)}
                                                 title="Delete"
                                             >
                                                 <i class="bi bi-trash3"></i>

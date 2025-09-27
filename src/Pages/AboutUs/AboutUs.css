@@ -1,7 +1,7 @@
 .welcome-titles {
     font-size: 12rem;
     font-weight: 700;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Platform', 'Inter', sans-serif;
     letter-spacing: 2px;
     line-height: 1;
     white-space: nowrap;
@@ -39,6 +39,7 @@
     font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 1rem;
+    font-family: 'DM Sans', sans-serif;
 }
 
 .separator-line {
@@ -54,6 +55,7 @@
     font-size: 1.2rem;
     line-height: 1.8;
     font-weight: 300;
+    font-family: 'Platform', 'Inter', sans-serif;
 }
 
 .content-box {
@@ -74,6 +76,7 @@
     font-weight: 600;
     text-transform: lowercase;
     margin-bottom: 1rem;
+    font-family: 'Platform', 'Inter', sans-serif;
 }
 
 .content-text {
@@ -81,6 +84,7 @@
     font-size: 1rem;
     line-height: 1.5;
     font-weight: 300;
+    font-family: 'DM Sans', sans-serif;
 }
 
 .brand-story {
@@ -108,17 +112,18 @@
         margin: 2rem auto;
         max-width: 100%;
     }
-    .welcome-titles{
+
+    .welcome-titles {
         font-size: 3rem;
     }
 }
+
 .contact-section {
     margin-top: 4rem;
     font-size: 1.2rem;
     font-weight: 500;
-  }
-  
-  .contact-item {
+}
+
+.contact-item {
     margin: 0.3rem 0;
-  }
-  
+}

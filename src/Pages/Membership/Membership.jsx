@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './Membership.css';
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
@@ -15,8 +15,33 @@ import icon2 from "../../assets/Vector-1.png";
 import icon3 from "../../assets/Vector-2.png";
 import arrow from "../../assets/arrow.png";
 import { Link } from "react-router-dom";
+import { fetchProfileCustomer } from "../../Services/Profile";
 
 const Membership = () => {
+
+    const [user, setUser] = useState(null);
+    const [isLogined, setIsLogined] = useState(false);
+
+
+    const fetchUserInfor = async () => {
+
+        const response = await fetchProfileCustomer();
+        setUser(response);
+        console.log(user)
+    }
+
+    useEffect(() => {
+        fetchUserInfor();
+    }, [])
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            setIsLogined(true);
+        }
+    }, []);
+
+
     return (
         <>
             <Navbar />
@@ -40,7 +65,7 @@ const Membership = () => {
                         </div>
                         <div className="center">
                             <div className="welcome-content">
-                                <h1 className="welcome-title">Welcome to <span style={{ fontWeight: "bold", color:"#CAFF01" }}>tí.lab</span></h1>
+                                <h1 className="welcome-title">Welcome to <span style={{ fontWeight: "bold", color: "#CAFF01" }}>tí.lab</span></h1>
                                 <div className="welcome-buttons">
                                     <Link to="/login" className="btn-simple">LOGIN</Link>
                                     <Link to="/signup" className="btn-simple">SIGN UP</Link>
@@ -50,9 +75,69 @@ const Membership = () => {
                     </div>
                 </div>
             </div>
-
             <section className="membership-plans text-white py-5" style={{ backgroundColor: "black" }}>
                 <div className="container">
+                    {isLogined && (
+                        <div className="user-tier-section mb-5">
+                            <div className="container">
+                                <div className="row justify-content-center">
+                                    <div className="col-lg-8 col-md-10">
+                                        <h2
+                                            className="text-center mb-4 nameTier"
+                                            style={{ color: "#CAFF01", fontSize: "2.5rem", fontWeight: "400" }}
+                                        >
+                                            {user?.fullName}'s membership tier
+                                        </h2>
+                                        <div className="tier-card bg-white rounded-4 p-4">
+                                            <div className="d-flex justify-content-between align-items-center mb-4">
+                                                <div className="d-flex align-items-center">
+                                                    <div className="tier-icon me-3">
+                                                        <img src={logo1} alt="Seed tier" style={{ width: "40px", height: "40px" }} />
+                                                    </div>
+                                                    <span className="tier-name h4 mb-0 text-dark">seed</span>
+                                                </div>
+                                                <div className="points-display">
+                                                    <span className="fw-bold text-dark h4 mb-0">35 POINTS</span>
+                                                </div>
+                                            </div>
+                                            <div className="progress-section">
+                                                <div className="d-flex justify-content-between mb-2">
+                                                    <span className="text-muted small">seed</span>
+                                                    <span className="text-muted small">grow</span>
+                                                </div>
+                                                <div className="progress mb-3" style={{ height: "8px", backgroundColor: "#e9ecef" }}>
+                                                    <div
+                                                        className="progress-bar"
+                                                        role="progressbar"
+                                                        style={{
+                                                            width: "35%",
+                                                            backgroundColor: "#007bff",
+                                                            borderRadius: "4px"
+                                                        }}
+                                                        aria-valuenow="35"
+                                                        aria-valuemin="0"
+                                                        aria-valuemax="100"
+                                                    ></div>
+                                                </div>
+                                                <div className="text-center">
+                                                    <p className="text-muted mb-1 small">
+                                                        You're just <strong>65 POINTS</strong> away from leveling up!
+                                                    </p>
+                                                    <p className="text-muted mb-1 small">
+                                                        Redeeming rewards won't affect your progress toward the next level.
+                                                    </p>
+                                                    <p className="text-muted mb-0 small">
+                                                        Use your POINTS now to claim special offers!
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
                     <div className="text-center mb-5">
                         <h2 className="display-4 fw-bold mb-3" style={{ color: "#CAFF01" }}>
                             <span className="brand-highlight">tí.lab</span> MEMBERSHIP

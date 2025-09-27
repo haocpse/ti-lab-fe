@@ -21,6 +21,10 @@ import ManageCustomer from "./Pages/ManageCustomer/ManageCustomer";
 import ViewDetailCustomer from "./Pages/ManageCustomer/ViewDetailCustomer";
 import ManageOrder from "./Pages/ManageOrder/ManageOrder";
 import AboutUs from "./Pages/AboutUs/AboutUs";
+import Blog from "./Pages/Blog/Blog";
+import Custom from "./Pages/Custom/Custom";
+import ManageStaff from "./Pages/ManageStaff/ManageStaff";
+import ViewDetailStaff from "./Pages/ManageStaff/ViewDetailStaff";
 function App() {
   return (
     <Router>
@@ -34,6 +38,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/custom" element={<Custom />} />
         <Route path="/shop/core-collection" element={<ShopCore />} />
         <Route path="/shop/core-collection/:id" element={<ShopViewDetail />} />
         <Route path="/shop/artist-collection" element={<ShopArtist />} />
@@ -48,6 +54,8 @@ function App() {
             <Route path="manage-bag/view/:id" element={<ViewDetailBag />} />
             <Route path="manage-collection" element={<ManageCollection />} />
             <Route path="manage-collection/view/:id" element={<ViewDetailCollection />} />
+            <Route path="manage-staff" element={<ManageStaff />} />
+            <Route path="manage-staff/view/:id" element={<ViewDetailStaff />} />
             <Route path="manage-customer" element={<ManageCustomer />} />
             <Route path="manage-customer/view/:id" element={<ViewDetailCustomer />} />
             <Route path="manage-order" element={<ManageOrder />} />

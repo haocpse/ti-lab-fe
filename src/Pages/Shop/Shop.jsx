@@ -8,7 +8,7 @@ import detail1 from "../../assets/shopdetail1.png"
 import detail2 from "../../assets/shopdetail2.png"
 import detail3 from "../../assets/shopdetail3.png"
 import detail4 from "../../assets/shopdetail4.png"
-import { fetchCoreCollection, fetchArtistCollection } from "../../Services/ShopService";
+import { fetchCoreCollection, fetchCollection } from "../../Services/ShopService";
 
 const Shop = () => {
     const [bag, setBag] = useState([]);
@@ -20,11 +20,10 @@ const Shop = () => {
         try {
             const coreBags = await fetchCoreCollection(0, 12);
             setBag(coreBags.content)
-    
-            const artistCollections = await fetchArtistCollection();
-            const allArtistBags = artistCollections.content.flatMap(c => c.bags || []);
-            setArtistBag(allArtistBags);
-            
+
+            const artistCollections = await fetchCollection();
+            setArtistBag(artistCollections);
+
             console.log(coreBags);
             console.log(artistCollections);
         } catch (error) {
@@ -33,7 +32,7 @@ const Shop = () => {
             setLoading(false)
         }
     }
-    
+
 
 
 
@@ -143,22 +142,17 @@ const Shop = () => {
                                                     <Link to={`/shop/artist-collection/${product.id}`} className="text-decoration-none">
                                                         <div className="artist-image-container position-relative">
                                                             <img
-                                                                 src={
-                                                                    product.bagImages && product.bagImages.length > 0
-                                                                        ? encodeURI(product.bagImages[0].url)
-                                                                        : `https://picsum.photos/300/250?random=${product.id}`
-                                                                }
+                                                                src={product.urlThumbnail || `https://picsum.photos/400/300?random=${product.id}`}
                                                                 alt={product.name}
                                                                 className="img-fluid w-100 rounded artist-image"
                                                                 style={{
                                                                     height: index === 0 ? "500px" : "400px",
-                                                                    objectFit: "cover"
+                                                                    objectFit: "cover",
                                                                 }}
                                                             />
                                                             <div className="artist-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-end p-3">
                                                                 <div className="text-white">
                                                                     <h6 className="fw-bold mb-1">{product.name}</h6>
-                                                                    <p className="mb-0 small">{product.price.toLocaleString()} VND</p>
                                                                 </div>
                                                             </div>
                                                         </div>

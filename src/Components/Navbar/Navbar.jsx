@@ -13,7 +13,9 @@ const Navbar = () => {
         location.pathname === "/login" ||
         location.pathname === "/signup" ||
         location.pathname === "/customer/profile" ||
-        location.pathname === "/about";
+        location.pathname === "/about" ||
+        location.pathname === "/blog" ||
+        location.pathname === "/custom";
 
     useEffect(() => {
         let prevScrollY = window.scrollY;

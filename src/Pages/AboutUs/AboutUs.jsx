@@ -102,10 +102,10 @@ const AboutUs = () => {
                                     </p>
                                 </div>
                                 <div className="contact-section mt-5 pt-4 text-start" style={{ marginLeft: "800px" }}>
-                                    <p className="contact-item">Contact</p>
+                                    <h1 className="contact-item">Contact</h1>
                                     <p className="contact-item"> +84 707804907</p>
-                                    <p className="contact-item"> tilab.green@gmail.com</p>
-                                    <p className="contact-item"> @tilab.green</p>
+                                    <p className="contact-item"><i class="bi bi-envelope-open-heart-fill"></i>  tilab.green@gmail.com</p>
+                                    <p className="contact-item"><i class="bi bi-instagram"></i> @tilab.green</p>
                                 </div>
                             </div>
                         </div>

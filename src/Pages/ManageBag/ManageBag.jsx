@@ -56,6 +56,8 @@ const ManageBag = () => {
     };
 
     const hadleDelteClick = async (id) => {
+        const confirmDelete = window.confirm("Are you sure when deleting this?");
+        if (!confirmDelete) return;
         try {
             const response = await AxiosSetup(`/bag/${id}`)
             console.log(response)

@@ -3,19 +3,15 @@ import AxiosSetup from "../../Services/AxiosSetup";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 
-const AddCollectionPopUp = ({ onClose, onSuccess }) => {
+const AddCollectionPopUp = ({ onClose, onSubmit}) => {
     const [formData, setFormData] = useState({
         name: "",
         thumbnail: null,
         addBagIds: []
     });
-
-    // State bags
     const [availableBags, setAvailableBags] = useState([]);
     const [loadingBags, setLoadingBags] = useState(false);
     const [searchBagTerm, setSearchBagTerm] = useState("");
-
-    // State loading và preview
     const [loading, setLoading] = useState(false);
     const [thumbnailPreview, setThumbnailPreview] = useState(null);
 
@@ -128,7 +124,7 @@ const AddCollectionPopUp = ({ onClose, onSuccess }) => {
 
             if (response.data.code === 200 || response.data.code === 201) {
                 toast.success("Successfully")
-                onSuccess && onSuccess();
+                onSubmit && onSubmit();
                 onClose();
             } else {
                 alert("Fail: " + response.data.message);

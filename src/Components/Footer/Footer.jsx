@@ -85,7 +85,7 @@ const Footer = () => {
                 </div>
 
                 {/* phan ban quyen */}
-                <hr className="my-4" style={{ color: "white" }} />
+                <hr className={`my-4 row align-items-center ${isShopPage ? "text-light" : "text-dark"}`} style={{ color: "white" }} />
                 <div className={`row align-items-center ${isShopPage ? "text-light" : "text-dark"}`}>
                     <div className="col-md-6">
                         <p className="small mb-0">
@@ -93,10 +93,10 @@ const Footer = () => {
                         </p>
                     </div>
                     <div className="col-md-6 text-md-end">
-                        <a href="/privacy" className={`text-decoration-none small me-3 ${isShopPage ? "text-light" : "text-dark"}`}>
+                        <a className={`text-decoration-none small me-3 ${isShopPage ? "text-light" : "text-dark"}`}>
                             Privacy Policy
                         </a>
-                        <a href="/terms" className={`text-decoration-none small me-3 ${isShopPage ? "text-light" : "text-dark"}`}>
+                        <a className={`text-decoration-none small me-3 ${isShopPage ? "text-light" : "text-dark"}`}>
                             Terms of Use
                         </a>
                     </div>

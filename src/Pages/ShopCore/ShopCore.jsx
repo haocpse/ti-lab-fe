@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Footer from "../../Components/Footer/Footer";
 import Navbar from "../../Components/Navbar/Navbar";
-import { fetchCoreCollection, fetchArtistCollection } from "../../Services/ShopService";
+import { fetchCoreCollection, fetchCollection } from "../../Services/ShopService";
 import './ShopCore.css';
 import { Link } from "react-router-dom";
 
@@ -26,9 +26,8 @@ const ShopCore = () => {
     }
     const fetchArtistBag = async () => {
         try {
-            const res = await fetchArtistCollection(0, 12);
-            const allBags = res.content.flatMap(collection => collection.bags);
-            setArtistBag(allBags);
+            const artistCollections = await fetchCollection();
+            setArtistBag(artistCollections);
         } catch (error) {
             console.error("Error fetching artist bags:", error);
         }
@@ -131,10 +130,7 @@ const ShopCore = () => {
                                     <Link to={`/shop/artist-collection/${product.id}`} className="text-decoration-none">
                                         <div className="bg-white rounded p-3 text-center shopcore-artist-card h-100">
                                             <img
-                                                 src={product.bagImages && product.bagImages.length > 0
-                                                    ? encodeURI(product.bagImages[0].url)
-                                                    : `https://picsum.photos/300/250?random=${product.id}`
-                                                }
+                                                src={product.urlThumbnail || `https://picsum.photos/400/300?random=${product.id}`}
                                                 alt={product.name}
                                                 className="img-fluid rounded mb-2"
                                                 style={{ maxWidth: "300px", height: "400px", objectFit: "cover" }}

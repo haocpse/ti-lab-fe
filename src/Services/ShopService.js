@@ -19,3 +19,13 @@ export const fetchArtistCollection = async (page = 0, size = 12) => {
         throw error;
     }
 };
+
+export const fetchCollection = async (page = 0) => {
+    try {
+        const response = await AxiosSetup.get(`/collections?page=${page}&size=8`);
+        return response.data.data.content;
+
+    } catch (error) {
+        console.log("Lỗi khi fetch dữ liệu:", error);
+    }
+};
