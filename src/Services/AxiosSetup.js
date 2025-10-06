@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const AxiosSetup = axios.create({
-    baseURL: "http://103.110.87.196/api",
+    baseURL: "https://tilab.com.vn/api",
     headers: {
         "Content-Type": "application/json",
     },
