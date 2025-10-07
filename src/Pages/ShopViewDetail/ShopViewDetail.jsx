@@ -84,7 +84,7 @@ const ShopViewDetail = () => {
         <>
             <Navbar />
             <div className="py-4">
-                <div className="container bg-white rounded p-4">
+                <div className="container bg-white rounded p-4 mt-5">
                     <div className="row">
                         <div className="col-12 col-lg-6 d-flex flex-column align-items-center">
                             <img

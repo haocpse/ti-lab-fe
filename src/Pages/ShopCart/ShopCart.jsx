@@ -159,32 +159,31 @@ const ShopCart = () => {
         <>
             <Navbar />
             <div className="container my-5">
-
                 <h2
                     style={{ textAlign: "center", fontWeight: "bold" }}
-                    className="py-4 textPlatForm"
+                    className="py-5 textPlatForm"
                 >
                     {currentTab === 2 ? "CHECKOUT" : currentTab === 3 ? "COMPLETE !!" : "CART"}
                 </h2>
 
                 <div className="d-flex justify-content-center mb-5">
                     <div className={`me-5 textDmSan border-bottom border-2 pb-1 ${currentTab >= 1 ? 'text-dark fw-bold border-dark' : 'text-muted'}`} >
-                        <span className={`badge ${currentTab >= 1 ? 'bg-success' : 'bg-secondary'} me-2`}>1</span>
+                        <span className={`badge ${currentTab >= 1 ? 'bg-primary' : 'bg-secondary'} me-2`}>1</span>
                         Shopping cart
                     </div>
 
                     <div className={`me-5 border-bottom border-2 ${currentTab >= 2 ? 'text-dark fw-bold border-dark' : 'text-muted'}`} >
-                        <span className={`badge ${currentTab >= 2 ? 'bg-success' : 'bg-secondary'} me-2`}>2</span>
+                        <span className={`badge ${currentTab >= 2 ? 'bg-primary' : 'bg-secondary'} me-2`}>2</span>
                         Checkout details
                     </div>
 
                     <div className={`me-5 border-bottom border-2 ${currentTab >= 3 ? 'text-dark fw-bold border-dark' : 'text-muted'}`} >
-                        <span className={`badge ${currentTab >= 3 ? 'bg-success' : 'bg-secondary'} me-2`}>3</span>
+                        <span className={`badge ${currentTab >= 3 ? 'bg-primary' : 'bg-secondary'} me-2`}>3</span>
                         QR Pay
                     </div>
 
                     <div className={`border-bottom border-2 ${currentTab >= 4 ? 'text-dark fw-bold border-dark' : 'text-muted'}`}  >
-                        <span className={`badge ${currentTab >= 4 ? 'bg-success' : 'bg-secondary'} me-2`}>4</span>
+                        <span className={`badge ${currentTab >= 4 ? 'bg-primary' : 'bg-secondary'} me-2`}>4</span>
                         Order completed
                     </div>
 
@@ -461,13 +460,14 @@ const ShopCart = () => {
                     {currentTab === 3 && qrUrl && (
                         <div className="container d-flex align-items-center justify-content-center">
                             <div className="card shadow-sm p-4 text-center">
-                                <h4>Quét mã QR để thanh toán</h4>
+                                <h4>Scan QR Code to pay</h4>
                                 <img src={qrUrl} alt="QR Payment" style={{ width: "300px", margin: "20px auto" }} />
                                 <button
-                                    className="btn btn-success mt-3"
+                                    className="btn mt-3 fw-bold"
                                     onClick={checkPaymentStatus}
+                                    style={{ backgroundColor: "#0168EB", color: "white" }}
                                 >
-                                    Tôi đã thanh toán
+                                    Checkout Transaction
                                 </button>
                             </div>
                         </div>
@@ -535,19 +535,19 @@ const ShopCart = () => {
                                         </button>
                                     )}
                                     <button
-                                        className={`textDmSan btn w-100 ${currentTab === 1 ? 'btn-primary' : 'btn-success'}`}
+                                        className={`textDmSan btn w-100 ${currentTab === 1 ? 'btn-primary' : 'btn-primary'}`}
                                         onClick={() => {
                                             if (currentTab === 1) {
-                                              setCurrentTab(2);
+                                                setCurrentTab(2);
                                             } else {
-                                              if (!profile1?.address?.trim() || !profile1?.phone?.trim()) {
-                                                toast.warn("Please enter address and phone!");
-                                                return;
-                                              }
-                                        
-                                              creatingOrder();
+                                                if (!profile1?.address?.trim() || !profile1?.phone?.trim()) {
+                                                    toast.warn("Please enter address and phone!");
+                                                    return;
+                                                }
+
+                                                creatingOrder();
                                             }
-                                          }}
+                                        }}
                                         disabled={currentTab === 1 && cart.length === 0}
                                         style={{
                                             backgroundColor: currentTab === 1 && cart.length === 0 ? '#6c757d' : '',

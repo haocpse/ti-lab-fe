@@ -45,7 +45,7 @@ const Shop = () => {
     return (
         <>
             <Navbar />
-            <div className="backgroundShop">
+            <div className="backgroundShop mt-5">
                 <div className="backgoundImg mb-5 d-none d-lg-block">
                     <img src={bgg} alt="" style={{ width: "400px", marginTop: "180px" }} />
                     <p style={{ lineHeight: "1.2" }}>Reimagining <br />the traditional<br />shopping bag</p>

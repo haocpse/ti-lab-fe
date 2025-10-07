@@ -45,7 +45,7 @@ const Membership = () => {
     return (
         <>
             <Navbar />
-            <div className="membership-hero">
+            <div className="membership-hero mt-5">
                 <div className="container-fluid h-100 p-0">
                     <div className="membership-container">
                         <div className="bag-layer layer-1">

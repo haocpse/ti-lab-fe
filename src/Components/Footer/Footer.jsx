@@ -2,18 +2,7 @@ import './Footer.css'
 import logo from "../../assets/LogoMain.png";
 import { ToastContainer } from "react-toastify";
 import logo1 from "../../assets/Tilab1.png";
-import { useNavigate } from "react-router-dom";
-
 const Footer = () => {
-    const navigate = useNavigate();
-
-    const handleSubmit = async () => {
-
-        navigate("/login")
-
-    };
-
-
     const isShopPage = location.pathname === "/shop" ||
         location.pathname.startsWith("/shop/artist-collection/") ||
         location.pathname.startsWith("/shop/core-collection/") ||
@@ -52,16 +41,20 @@ const Footer = () => {
                                 <p className={` small mb-3 ${isShopPage ? "text-light" : "text-dark"}`}>
                                     For eco-friendly lifestyle tips, new sustainable designs & special member offers.
                                 </p>
-
-                                <div className="input-group mb-3" style={{ cursor: "pointer", textDecoration: "underline" }}>
-                                    <span onClick={handleSubmit} style={{ textDecoration: "curosr" }}> Sign up to recieve Tis.lab new Products <i class="bi bi-bell"></i></span>
-
-                                </div>
-
                             </div>
                         </div>
                         <div className="row">
-                            <div className={`col-md-6 mb-3 ${isShopPage ? "text-light" : "text-dark"}`}>
+                            <div className={`col-12 mb-3 ${isShopPage ? "text-light" : "text-dark"}`}>
+                                <h6 className="fw-bold mb-3">Social</h6>
+                                <div className="d-flex flex-wrap gap-3">
+                                    <a href="#" className={`text-decoration-none ${isShopPage ? "text-light" : "text-dark"}`}>Facebook</a>
+                                    <a href="#" className={`text-decoration-none ${isShopPage ? "text-light" : "text-dark"}`}>Instagram</a>
+                                    <a href="#" className={`text-decoration-none ${isShopPage ? "text-light" : "text-dark"}`}>Youtube</a>
+                                    <a href="#" className={`text-decoration-none ${isShopPage ? "text-light" : "text-dark"}`}>Tiktok</a>
+                                </div>
+                            </div>
+
+                            <div className={`col-12 mb-3 ${isShopPage ? "text-light" : "text-dark"}`}>
                                 <h6 className="fw-bold mb-3">Menu</h6>
                                 <div className="d-flex flex-wrap gap-3">
                                     <a href="/shop" className={`text-decoration-none ${isShopPage ? "text-light" : "text-dark"}`}>Shop</a>
@@ -69,15 +62,6 @@ const Footer = () => {
                                     <a href="/custom" className={`text-decoration-none ${isShopPage ? "text-light" : "text-dark"}`}>Custom</a>
                                     <a href="/blog" className={`text-decoration-none ${isShopPage ? "text-light" : "text-dark"}`}>Blog</a>
                                     <a href="/membership" className={`text-decoration-none ${isShopPage ? "text-light" : "text-dark"}`}>Membership</a>
-                                </div>
-                            </div>
-                            <div className={`col-md-6 mb-3 ${isShopPage ? "text-light" : "text-dark"}`}>
-                                <h6 className="fw-bold mb-3">Social</h6>
-                                <div className="d-flex flex-wrap gap-3">
-                                    <a href="#" className={`text-decoration-none ${isShopPage ? "text-light" : "text-dark"}`}>Facebook</a>
-                                    <a href="#" className={`text-decoration-none ${isShopPage ? "text-light" : "text-dark"}`}>Instagram</a>
-                                    <a href="#" className={`text-decoration-none ${isShopPage ? "text-light" : "text-dark"}`}>Youtube</a>
-                                    <a href="#" className={`text-decoration-none ${isShopPage ? "text-light" : "text-dark"}`}>Tiktok</a>
                                 </div>
                             </div>
                         </div>

@@ -25,12 +25,26 @@ import Blog from "./Pages/Blog/Blog";
 import Custom from "./Pages/Custom/Custom";
 import ManageStaff from "./Pages/ManageStaff/ManageStaff";
 import ViewDetailStaff from "./Pages/ManageStaff/ViewDetailStaff";
+import LoadingPage from "./Pages/LoadingPage/LoadingPage";
+import { useEffect, useState } from "react";
 function App() {
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3500);
+    return () => clearTimeout(timer);
+  }, []);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <Router>
       <ScrollToTop />
       <Routes>
-
 
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutUs />} />

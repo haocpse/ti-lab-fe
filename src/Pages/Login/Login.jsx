@@ -67,7 +67,7 @@ const Login = () => {
     return (
         <>
             <Navbar />
-            <div className="membership-hero" style={{ position: "relative" }}>
+            <div className="membership-hero mt-5" style={{ position: "relative" }}>
                 {/* Background */}
                 <div className="container-fluid h-100 p-0" style={{ filter: "blur(5px)" }}>
                     <div className="membership-container">

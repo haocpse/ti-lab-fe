@@ -93,8 +93,8 @@
 }
 
 .vision-content {
-    top: 65%;
-    right: 10%;
+    top: 35%;
+    right: 1%;
 }
 
 .mission-content {
@@ -126,4 +126,91 @@
 
 .contact-item {
     margin: 0.3rem 0;
+}
+
+/* Giữ nguyên phần desktop như bạn có, chỉ bổ sung thêm phần dưới đây */
+
+@media (max-width: 992px) {
+    .wire-line-img {
+        display: none;
+    }
+
+    .membership-container {
+        height: auto !important;
+    }
+
+    .centers {
+        top: 60%;
+    }
+
+    .welcome-titles {
+        font-size: 3rem;
+        line-height: 1.2;
+        white-space: normal;
+        padding: 0 1rem;
+    }
+
+    .content-box {
+        position: relative !important;
+        margin: 1.5rem auto;
+        max-width: 90%;
+        text-align: center;
+    }
+
+    .content-title {
+        font-size: 2rem;
+    }
+
+    .content-text {
+        font-size: 0.95rem;
+    }
+
+    .brand-story,
+    .vision-content,
+    .mission-content {
+        position: relative !important;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+    }
+
+    .contact-section {
+        margin: 3rem auto;
+        text-align: center;
+        font-size: 1rem;
+        margin-left: 0 !important;
+    }
+
+    .contact-item {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .welcome-titles {
+        font-size: 2.2rem;
+    }
+
+    .description-text {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+
+    .about-description-section {
+        padding: 3rem 1rem;
+    }
+
+    .content-title {
+        font-size: 1.8rem;
+    }
+
+    .content-text {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .contact-section {
+        margin-top: 2rem;
+    }
 }

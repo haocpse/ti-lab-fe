@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import './Navbar.css'
 import logo from "../../assets/Logo.png";
 import logoGreen from "../../assets/tí.lab_logo-05.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 const Navbar = () => {
@@ -18,30 +18,13 @@ const Navbar = () => {
         location.pathname === "/custom";
 
     useEffect(() => {
-        let prevScrollY = window.scrollY;
-        const navbar = document.querySelector('.navbar');
-
-        const handleScroll = () => {
-            if (!navbar) return;
-            if (window.scrollY < prevScrollY) {
-                navbar.style.top = '0';
-            } else {
-                navbar.style.top = '-100px';
-            }
-            prevScrollY = window.scrollY;
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-
-    useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
             setIsLogined(true);
         }
     }, []);
+
+
 
     function getRoleFromToken() {
         const token = localStorage.getItem('token');
@@ -71,8 +54,17 @@ const Navbar = () => {
 
     };
 
+    const getActiveColor = (path) => {
+        if (path === "/about" || path === "/custom" || path === "/blog" || path === "/membership") {
+            return "#CAFF01";
+        }
+        return "#0168EB";
+    };
+
+
+
     return (
-        <nav className={`navbar navbar-expand-lg px-4 ${isMembershipPage ? "bg-black navbar-dark" : "bg-white"}`}>
+        <nav className={`navbar fixed-top navbar-expand-lg px-4 ${isMembershipPage ? "navbar-dark" : "navbar-light"} ${(isMembershipPage ? "bg-black" : "bg-white")}`}>
             <div className="container-fluid">
 
                 <button className="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -80,85 +72,111 @@ const Navbar = () => {
                 </button>
 
                 <div className="navbar-brand">
-                    <Link to="/">
+                    <NavLink to="/">
                         <img src={isMembershipPage ? logoGreen : logo} alt="Logo" height={isMembershipPage ? "45px" : "60px"} />
-                    </Link>
+                    </NavLink>
                 </div>
 
                 <div className="d-flex gap-4 d-lg-none">
                     {isLogined ? (
                         <>
-                            <Link onClick={(e) => { e.preventDefault(); handleClickProfile(); }} style={{
+                            <NavLink onClick={(e) => { e.preventDefault(); handleClickProfile(); }} style={{
                                 color: isMembershipPage ? "white" : "black", textDecoration: "none"
                             }}>
                                 <i className="fa-solid fa-user"></i>
-                            </Link>
-                            <Link onClick={handleLogout} style={{
+                            </NavLink>
+                            <NavLink onClick={handleLogout} style={{
                                 color: isMembershipPage ? "white" : "black",
                                 textDecoration: "none"
                             }}>
                                 <i className="fa-solid fa-right-from-bracket"></i>
-                            </Link>
+                            </NavLink>
                         </>
                     ) : (
-                        <Link to="/login" style={{ color: isMembershipPage ? "white" : "black" }}>
+                        <NavLink to="/login" style={{ color: isMembershipPage ? "white" : "black" }}>
                             <i className="fa-solid fa-user"></i>
-                        </Link>
+                        </NavLink>
                     )}
-                    <Link to="/" style={{ color: isMembershipPage ? "white" : "black" }}>
+                    <NavLink to="/" style={{ color: isMembershipPage ? "white" : "black" }}>
                         <i className="fa-solid fa-magnifying-glass"></i>
-                    </Link>
-                    <Link to="/shop/cart" style={{ color: isMembershipPage ? "white" : "black" }}>
+                    </NavLink>
+                    <NavLink to="/shop/cart" style={{ color: isMembershipPage ? "white" : "black" }}>
                         <i className="fa-solid fa-cart-shopping"></i>
-                    </Link>
+                    </NavLink>
                 </div>
 
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav me-auto">
                         <li className="nav-item">
-                            <Link className={`nav-link ${isMembershipPage ? "text-white" : "text-dark"}`} to="/shop">SHOP</Link>
+                            <NavLink to="/shop" className={({ isActive }) => `nav-link ${isActive ? "active-tab" : (isMembershipPage ? "text-white" : "text-dark")}`}
+                                style={({ isActive }) => ({
+                                    color: isActive ? getActiveColor("/shop") : undefined
+                                })}>
+                                SHOP
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link ${isMembershipPage ? "text-white" : "text-dark"}`} to="/about">ABOUT</Link>
+                            <NavLink to="/about" className={({ isActive }) => `nav-link ${isActive ? "active-tab" : (isMembershipPage ? "text-white" : "text-dark")}`}
+                                style={({ isActive }) => ({
+                                    color: isActive ? getActiveColor("/about") : undefined
+                                })}>
+                                ABOUT
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link ${isMembershipPage ? "text-white" : "text-dark"}`} to="/custom">CUSTOM</Link>
+                            <NavLink to="/custom" className={({ isActive }) => `nav-link ${isActive ? "active-tab" : (isMembershipPage ? "text-white" : "text-dark")}`}
+                                style={({ isActive }) => ({
+                                    color: isActive ? getActiveColor("/custom") : undefined
+                                })}>
+                                CUSTOM
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link ${isMembershipPage ? "text-white" : "text-dark"}`} to="/blog">BLOG</Link>
+                            <NavLink to="/blog" className={({ isActive }) => `nav-link ${isActive ? "active-tab" : (isMembershipPage ? "text-white" : "text-dark")}`}
+                                style={({ isActive }) => ({
+                                    color: isActive ? getActiveColor("/blog") : undefined
+                                })}>
+                                BLOG
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link ${isMembershipPage ? "text-white" : "text-dark"}`} to="/membership">MEMBERSHIP</Link>
+                            <NavLink to="/membership" className={({ isActive }) => `nav-link ${isActive ? "active-tab" : (isMembershipPage ? "text-white" : "text-dark")}`}
+                                style={({ isActive }) => ({
+                                    color: isActive ? getActiveColor("/membership") : undefined
+                                })}>
+                                MEMBERSHIP
+                            </NavLink>
                         </li>
                     </ul>
+
 
                     {/*desktop */}
                     <div className="d-none d-lg-flex gap-4">
                         {isLogined ? (
                             <>
-                                <Link onClick={(e) => { e.preventDefault(); handleClickProfile(); }} style={{
+                                <NavLink onClick={(e) => { e.preventDefault(); handleClickProfile(); }} style={{
                                     color: isMembershipPage ? "white" : "black", textDecoration: "none"
                                 }}>
                                     <i className="fa-solid fa-user"></i>
-                                </Link>
-                                <Link onClick={handleLogout} style={{
+                                </NavLink>
+                                <NavLink onClick={handleLogout} style={{
                                     color: isMembershipPage ? "white" : "black",
                                     textDecoration: "none"
                                 }}>
                                     <i className="fa-solid fa-right-from-bracket"></i>
-                                </Link>
+                                </NavLink>
                             </>
                         ) : (
-                            <Link to="/login" style={{ color: isMembershipPage ? "white" : "black" }}>
+                            <NavLink to="/login" style={{ color: isMembershipPage ? "white" : "black" }}>
                                 <i className="fa-solid fa-user"></i>
-                            </Link>
+                            </NavLink>
                         )}
-                        <Link to="/" style={{ color: isMembershipPage ? "white" : "black" }}>
+                        <NavLink to="/" style={{ color: isMembershipPage ? "white" : "black" }}>
                             <i className="fa-solid fa-magnifying-glass"></i>
-                        </Link>
-                        <Link to="/shop/cart" style={{ color: isMembershipPage ? "white" : "black" }}>
+                        </NavLink>
+                        <NavLink to="/shop/cart" style={{ color: isMembershipPage ? "white" : "black" }}>
                             <i className="fa-solid fa-cart-shopping"></i>
-                        </Link>
+                        </NavLink>
                     </div>
                 </div>
             </div>

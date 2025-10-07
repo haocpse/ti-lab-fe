@@ -68,7 +68,7 @@ const Profile = () => {
             <Navbar />
             <div className="text-light min-vh-100 py-5" style={{ backgroundColor: "black" }}>
                 <div className="container">
-                    <h2 className="text-center mb-4" style={{ color: "#caff01", fontSize: "2.5rem", fontWeight: 500 }}>YOUR ACCOUNT</h2>
+                    <h2 className="text-center mb-4 mt-5" style={{ color: "#caff01", fontSize: "2.5rem", fontWeight: 500 }}>YOUR ACCOUNT</h2>
 
                     <div className="d-flex justify-content-center mb-5">
                         <div

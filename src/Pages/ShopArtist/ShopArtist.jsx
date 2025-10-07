@@ -43,8 +43,8 @@ const ShopArtist = () => {
             <Navbar />
             <div className="shopcore-bg py-4">
                 <div className="container bg-white p-4 rounded">
-                    <div className="d-flex justify-content-between align-items-center mb-3">
-                        <h2 className="mb-0 h2core" style={{ fontSize: "2.5rem" }}>ARTIST COLLECTION</h2>
+                    <div className="d-flex justify-content-between align-items-center mb-3 shopcore-controls">
+                        <h2 className="mb-0 h2core mt-5" style={{ fontSize: "2.5rem" }}>ARTIST COLLECTION</h2>
                         <div className="d-flex align-items-center gap-2">
                             <input
                                 type="text"
