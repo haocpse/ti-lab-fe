@@ -6,10 +6,8 @@ import { fetchProfileCustomer, fetchProfileOrder } from "../../Services/Profile"
 
 const Profile = () => {
     const [profile, setProfile] = useState(null);
-    const [order, setOrder] = useState(null);
+    const [order, setOrder] = useState([]);
     const [profile1, setProfile1] = useState(null);
-    const [page, setPage] = useState(0);
-    const [totalPages, setTotalPages] = useState(0);
     const [currentTab, setCurrentTab] = useState("account");
     const statusColors = {
         PREPARING: "#ffc107",
@@ -21,6 +19,10 @@ const Profile = () => {
         RETURNED: "#fd7e14",
         REFUNDED: "#20c997"
     };
+
+    const itemsPerPage = 6;
+    const [page, setPage] = useState(0);
+
     const fetchProfile = async () => {
         try {
             const data = await fetchProfileCustomer();
@@ -35,9 +37,11 @@ const Profile = () => {
     const fetchOrder = async (page) => {
         try {
             const data = await fetchProfileOrder(page);
-            setOrder(data.content)
-            setTotalPages(data.totalPages);
-            setPage(data.number);
+            const sortedOrders = data.content.sort(
+                (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+            );
+            setOrder(sortedOrders)
+
             window.scrollTo(0, 0);
         } catch (error) {
             console.log(error)
@@ -47,11 +51,16 @@ const Profile = () => {
 
     useEffect(() => {
         fetchProfile();
-    }, [])
+        fetchOrder();
+    }, []);
 
-    useEffect(() => {
-        fetchOrder(page);
-    }, [page]);
+
+    const totalPages = Math.ceil(order.length / itemsPerPage);
+
+    const displayedOrders = order.slice(
+        page * itemsPerPage,
+        page * itemsPerPage + itemsPerPage
+    );
 
 
     return (
@@ -132,14 +141,18 @@ const Profile = () => {
                                     <span style={{ color: "#caff01", fontWeight: 500 }}>Price</span>
                                 </div>
                             </div>
-                            {order && order.length > 0 ? (
-                                order.map((orderItem, index) => (
+                            {displayedOrders && displayedOrders.length > 0 ? (
+                                displayedOrders.map((orderItem, index) => (
                                     <div key={index} className="row mb-3 py-3" style={{ borderBottom: "1px solid rgba(202, 255, 1, 0.2)" }}>
                                         <div className="col-3">
                                             <span style={{ color: "#caff01" }}>#{orderItem.orderId}</span>
                                         </div>
                                         <div className="col-3">
-                                            <span>{orderItem.orderDate ? orderItem.orderDate : "N/A"}</span>
+                                            <span>
+                                                {orderItem.createdAt
+                                                    ? `${new Date(orderItem.createdAt).toLocaleDateString("en-GB")} ${new Date(orderItem.createdAt).toLocaleTimeString("en-GB")}`
+                                                    : "N/A"}
+                                            </span>
                                         </div>
                                         <div className="col-3">
                                             <span style={{ color: statusColors[orderItem.status] }}>

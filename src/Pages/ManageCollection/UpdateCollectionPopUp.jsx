@@ -1,185 +1,410 @@
 import React, { useState, useEffect } from "react";
 import AxiosSetup from "../../Services/AxiosSetup";
+import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 
-const UpdateCollectionPopUp = ({ collectionId, onClose, onSubmit }) => {
+const UpdateCollectionPopUp = ({ onClose, onSubmit, collectionId }) => {
   const [formData, setFormData] = useState({
     name: "",
-    addBagIds: [],
-    deleteBagIds: []
+    thumbnail: null,
+    addBagIds: []
   });
   const [availableBags, setAvailableBags] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [loadingBags, setLoadingBags] = useState(false);
+  const [searchBagTerm, setSearchBagTerm] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [thumbnailPreview, setThumbnailPreview] = useState(null);
+  const [currentThumbnail, setCurrentThumbnail] = useState(null);
+  const [originalBagIds, setOriginalBagIds] = useState([]);
+
 
   useEffect(() => {
-    fetchCollection();
-    fetchBags();
+    if (collectionId) {
+      fetchCollection();
+      fetchBags();
+    }
   }, [collectionId]);
 
   const fetchCollection = async () => {
     try {
+      setLoading(true);
       const res = await AxiosSetup.get(`/collections/${collectionId}`);
-      if (res.data?.data) {
-        const collection = res.data.data;
+      if (res.data.code === 200) {
+        const data = res.data.data;
+        const initialBagIds = data.bags ? data.bags.map(b => b.id) : [];
         setFormData({
-          name: collection.name,
-          addBagIds: [], // khi thêm mới sẽ push vào
-          deleteBagIds: []
+          name: data.name || "",
+          addBagIds: initialBagIds,
+          thumbnail: null
         });
+        setOriginalBagIds(initialBagIds);
+        setCurrentThumbnail(data.urlThumbnail || null);
       }
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to load collection details!");
+    } catch (error) {
+      console.error("Lỗi khi fetch collection:", error);
+      toast.error("Không thể tải dữ liệu collection!");
+    } finally {
+      setLoading(false);
     }
   };
 
   const fetchBags = async () => {
     try {
       setLoadingBags(true);
-      const res = await AxiosSetup.get("/bags?page=0&size=500");
-      setAvailableBags(res.data.data.content || res.data.data);
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to load bags list!");
+      const response = await AxiosSetup.get("/bags?page=0&size=500");
+      if (response.data.code === 200) {
+        setAvailableBags(response.data.data.content || response.data.data);
+      }
+    } catch (error) {
+      console.error("Lỗi khi fetch bags:", error);
+      toast.error("Không thể tải danh sách bags!");
     } finally {
       setLoadingBags(false);
     }
   };
 
-  const handleToggleBag = (bagId, alreadyInCollection) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleThumbnailChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFormData(prev => ({
+        ...prev,
+        thumbnail: file
+      }));
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setThumbnailPreview(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleRemoveThumbnail = () => {
+    setFormData(prev => ({
+      ...prev,
+      thumbnail: null
+    }));
+    setThumbnailPreview(null);
+  };
+
+  const handleToggleBag = (bagId) => {
     setFormData(prev => {
-      if (alreadyInCollection) {
-        // Nếu bag đã có sẵn trong collection => cho phép xóa
-        const isMarkedForDelete = prev.deleteBagIds.includes(bagId);
+      const isSelected = prev.addBagIds.includes(bagId);
+      if (isSelected) {
         return {
           ...prev,
-          deleteBagIds: isMarkedForDelete
-            ? prev.deleteBagIds.filter(id => id !== bagId)
-            : [...prev.deleteBagIds, bagId]
+          addBagIds: prev.addBagIds.filter(id => id !== bagId)
         };
       } else {
-        // Nếu bag chưa có => cho phép add
-        const isMarkedForAdd = prev.addBagIds.includes(bagId);
         return {
           ...prev,
-          addBagIds: isMarkedForAdd
-            ? prev.addBagIds.filter(id => id !== bagId)
-            : [...prev.addBagIds, bagId]
+          addBagIds: [...prev.addBagIds, bagId]
         };
       }
     });
   };
 
-  const handleSubmit = async e => {
+  const filteredBags = availableBags.filter(bag =>
+    bag.name?.toLowerCase().includes(searchBagTerm.toLowerCase()) ||
+    bag.id?.toString().includes(searchBagTerm)
+  );
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
-      const token = localStorage.getItem("token");
-
-      const payload = {
+  
+      const addBagIds = formData.addBagIds.filter(id => !originalBagIds.includes(id));
+      const deleteBagIds = originalBagIds.filter(id => !formData.addBagIds.includes(id));
+  
+      const formDataToSend = new FormData();
+      const collectionData = {
         name: formData.name,
-        addBagIds: formData.addBagIds.map(String),
-        deleteBagIds: formData.deleteBagIds.map(String)
+        status: "ON_SALE",
+        addBagIds: addBagIds.map(id => id.toString()),
+        deleteBagIds: deleteBagIds.map(id => id.toString())
       };
-
-      const res = await AxiosSetup.put(`/collections/${collectionId}`, payload, {
-        headers: {
-          Authorization: token ? `Bearer ${token}` : undefined
+  
+      console.log("Dữ liệu gửi đi:", collectionData);
+  
+      const collectionBlob = new Blob(
+        [JSON.stringify(collectionData)],
+        { type: "application/json" }
+      );
+      formDataToSend.append("collection", collectionBlob);
+  
+      if (formData.thumbnail) {
+        formDataToSend.append("thumbnail", formData.thumbnail);
+        console.log("File thumbnail gửi đi:", formData.thumbnail.name);
+      }
+  
+      const token = localStorage.getItem("token");
+  
+      const response = await axios.put(
+        `https://tilab.com.vn/api/collections/${collectionId}`,
+        formDataToSend,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : undefined,
+          }
         }
-      });
-
-      if (res.data.code === 200) {
-        toast.success("Collection updated successfully!");
+      );
+  
+      if (response.data.code === 200) {
+        toast.success("Update successful!");
         onSubmit && onSubmit();
         onClose();
       } else {
         toast.error("Update failed!");
       }
-    } catch (err) {
-      console.error(err);
-      toast.error("Error updating collection!");
+    } catch (error) {
+      console.error("Lỗi khi update:", error);
+      toast.error("Update failed!");
     } finally {
       setLoading(false);
     }
   };
+  
+
+
 
   return (
-    <div className="popup-overlay">
-      <ToastContainer />
-      <div className="card shadow-lg p-4">
-        <h5 className="fw-bold mb-3">Update Collection</h5>
-        <form onSubmit={handleSubmit}>
-          {/* Name */}
-          <div className="form-floating mb-3">
-            <input
-              type="text"
-              className="form-control"
-              name="name"
-              value={formData.name}
-              onChange={e => setFormData({ ...formData, name: e.target.value })}
-              required
-            />
-            <label>Collection Name</label>
-          </div>
+    <div className="popup-overlay" style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0,0,0,0.5)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 9999
+    }}>
+      <div className="container">
+        <ToastContainer position="top-right" autoClose={5000} />
+        <div className="row justify-content-center">
+          <div className="col-lg-10 col-md-12">
+            <div className="card shadow-lg" style={{ borderRadius: "15px", maxHeight: '90vh', overflowY: 'auto' }}>
+              <div className="card-body p-4">
+                {/* Header */}
+                <div className="d-flex justify-content-between align-items-center mb-4">
+                  <h5 className="fw-semibold mb-0">
+                    <i className="fas fa-edit text-primary"></i> Update Collection
+                  </h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    onClick={onClose}
+                    disabled={loading}
+                  ></button>
+                </div>
 
-          {/* Bag list */}
-          <div className="mb-3">
-            <h6>Select Bags</h6>
-            <div
-              className="border rounded p-2"
-              style={{ maxHeight: 300, overflowY: "auto" }}
-            >
-              {loadingBags ? (
-                <p>Loading bags...</p>
-              ) : (
-                availableBags.map(bag => {
-                  const alreadyInCollection =
-                    bag.collectionId === collectionId; // tùy backend có trả về quan hệ hay không
-                  const selected =
-                    alreadyInCollection
-                      ? formData.deleteBagIds.includes(bag.id)
-                      : formData.addBagIds.includes(bag.id);
+                <form onSubmit={handleSubmit}>
+                  <div className="row">
+                    <div className="col-md-6">
+                      {/* Tên Collection */}
+                      <div className="form-floating mb-3">
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="name"
+                          placeholder="Tên collection"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          required
+                          disabled={loading}
+                        />
+                        <label htmlFor="name">
+                          <i className="fas fa-tag"></i> Collection Name *
+                        </label>
+                      </div>
 
-                  return (
-                    <div
-                      key={bag.id}
-                      className={`d-flex align-items-center mb-2 p-2 border rounded ${
-                        selected ? "bg-warning bg-opacity-25" : ""
-                      }`}
-                      onClick={() => handleToggleBag(bag.id, alreadyInCollection)}
-                      style={{ cursor: "pointer" }}
-                    >
-                      <input
-                        type="checkbox"
-                        className="form-check-input me-2"
-                        checked={selected}
-                        readOnly
-                      />
-                      <span>{bag.name}</span>
-                      <small className="ms-auto text-muted">ID: {bag.id}</small>
+                      {/* Upload Thumbnail */}
+                      <div className="mb-3">
+                        <label className="form-label fw-semibold">
+                          <i className="fas fa-image"></i> Thumbnail
+                        </label>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleThumbnailChange}
+                          className="form-control"
+                          disabled={loading}
+                        />
+                      </div>
+
+                      {/* Hiển thị Thumbnail hiện tại hoặc preview */}
+                      {(thumbnailPreview || currentThumbnail) && (
+                        <div className="mb-3">
+                          <div className="position-relative d-inline-block">
+                            <img
+                              src={thumbnailPreview || currentThumbnail}
+                              alt="Preview"
+                              style={{
+                                width: "200px",
+                                height: "150px",
+                                objectFit: "cover",
+                                borderRadius: "8px",
+                                border: "2px solid #dee2e6"
+                              }}
+                            />
+                            <button
+                              type="button"
+                              onClick={handleRemoveThumbnail}
+                              className="btn btn-sm btn-danger position-absolute top-0 end-0"
+                              style={{
+                                borderRadius: "50%",
+                                padding: "4px 8px",
+                                transform: "translate(25%, -25%)"
+                              }}
+                              disabled={loading}
+                            >
+                              <i className="fas fa-times"></i>
+                            </button>
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="alert alert-info">
+                        <i className="fas fa-info-circle"></i>
+                        <strong> Selected: {formData.addBagIds.length} bags</strong>
+                      </div>
                     </div>
-                  );
-                })
-              )}
+
+                    {/* Cột phải - Chọn bags */}
+                    <div className="col-md-6">
+                      <div className="mb-3">
+                        <label className="form-label fw-semibold">
+                          <i className="fas fa-shopping-bag"></i> Select Bags
+                        </label>
+
+                        <div className="mb-3">
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Searching bags by Name or ID..."
+                            value={searchBagTerm}
+                            onChange={(e) => setSearchBagTerm(e.target.value)}
+                            disabled={loadingBags}
+                          />
+                        </div>
+
+                        <div
+                          className="border rounded p-2"
+                          style={{
+                            height: '400px',
+                            overflowY: 'auto',
+                            backgroundColor: '#f8f9fa'
+                          }}
+                        >
+                          {loadingBags ? (
+                            <div className="text-center py-4">
+                              <div className="spinner-border text-primary" role="status">
+                                <span className="visually-hidden">Loading bags...</span>
+                              </div>
+                            </div>
+                          ) : filteredBags.length > 0 ? (
+                            <div className="row g-2">
+                              {filteredBags.map(bag => (
+                                <div key={bag.id} className="col-12">
+                                  <div
+                                    className={`card h-100 cursor-pointer ${formData.addBagIds.includes(bag.id)
+                                      ? 'border-primary bg-primary bg-opacity-10'
+                                      : 'border-light'
+                                      }`}
+                                    onClick={() => handleToggleBag(bag.id)}
+                                    style={{ cursor: 'pointer' }}
+                                  >
+                                    <div className="card-body p-2">
+                                      <div className="d-flex align-items-center">
+                                        <input
+                                          type="checkbox"
+                                          className="form-check-input me-2"
+                                          checked={formData.addBagIds.includes(bag.id)}
+                                          onChange={() => handleToggleBag(bag.id)}
+                                        />
+                                        {bag.bagImages?.length > 0 && (
+                                          <img
+                                            src={bag.bagImages[0].url}
+                                            alt={bag.name}
+                                            style={{
+                                              width: '40px',
+                                              height: '40px',
+                                              objectFit: 'cover',
+                                              borderRadius: '4px'
+                                            }}
+                                            className="me-2"
+                                          />
+                                        )}
+                                        <div className="flex-grow-1">
+                                          <h6 className="card-title mb-1 text-truncate">
+                                            {bag.name || `Bag #${bag.id}`}
+                                          </h6>
+                                          <small className="text-muted">
+                                            ID: {bag.id}
+                                          </small>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="text-center py-4 text-muted">
+                              <i className="fas fa-search fa-2x mb-2"></i>
+                              <p>
+                                {searchBagTerm ? "Không tìm thấy bag nào!" : "Không có bags nào!"}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="d-flex justify-content-end gap-2 pt-3 border-top">
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={onClose}
+                      disabled={loading}
+                    >
+                      <i className="fas fa-times"></i> Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      disabled={loading}
+                    >
+                      {loading ? (
+                        <>
+                          <div className="spinner-border spinner-border-sm me-2" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                          </div>
+                          Updating...
+                        </>
+                      ) : (
+                        <>
+                          <i className="fas fa-save"></i> Save Changes
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-
-          {/* Buttons */}
-          <div className="d-flex justify-content-end gap-2 border-top pt-3">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={onClose}
-              disabled={loading}
-            >
-              Cancel
-            </button>
-            <button type="submit" className="btn btn-primary" disabled={loading}>
-              {loading ? "Updating..." : "Update"}
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   );

@@ -127,7 +127,7 @@ const ShopCore = () => {
                         <div className="row mt-3">
                             {artistBag && [...artistBag].sort(() => 0.5 - Math.random()).slice(0, 3).map((product) => (
                                 <div className="col-12 col-md-4 mb-4" key={product.id}>
-                                    <Link to={`/shop/artist-collection/${product.id}`} className="text-decoration-none">
+                                    <Link to={`/shop/artist-collection`} className="text-decoration-none">
                                         <div className="bg-white rounded p-3 text-center shopcore-artist-card h-100">
                                             <img
                                                 src={product.urlThumbnail || `https://picsum.photos/400/300?random=${product.id}`}

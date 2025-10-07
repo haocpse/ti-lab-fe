@@ -104,7 +104,7 @@ const AddCollectionPopUp = ({ onClose, onSubmit}) => {
 
             const collectionData = {
                 name: formData.name,
-                status: "ACTIVE",
+                status: "COMING_SOON",
                 addBagIds: formData.addBagIds.map(id => id.toString())
             };
 
@@ -116,7 +116,7 @@ const AddCollectionPopUp = ({ onClose, onSubmit}) => {
             console.log("Gửi dữ liệu:", collectionData, formData.thumbnail);
 
             const token = localStorage.getItem("token");
-            const response = await axios.post("http://103.110.87.196/api/collections", formDataToSend, {
+            const response = await axios.post("https://tilab.com.vn/api/collections", formDataToSend, {
                 headers: {
                     Authorization: token ? `Bearer ${token}` : undefined,
                 }

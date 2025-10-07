@@ -6,6 +6,8 @@ import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { fetchProfileCustomer } from "../../Services/Profile";
 import './ShopCart.css';
+import { Toast } from "bootstrap";
+import { toast } from "react-toastify";
 
 const ShopCart = () => {
     const [cart, setCart] = useState([]);
@@ -15,6 +17,7 @@ const ShopCart = () => {
     const [profile, setProfile] = useState(null);
     const [profile1, setProfile1] = useState(null);
     const [qrUrl, setQrUrl] = useState(null);
+    const [paymentId, setPaymentId] = useState(null);
 
 
     const fetchCart = async (page = 0, size = 12) => {
@@ -108,9 +111,8 @@ const ShopCart = () => {
             console.log("Order created:", response.data);
             if (orderPayload.method === "CARD") {
                 const paymentId = response.data.data.paymentResponse.paymentId;
-                const paymentRes = await AxiosSetup.post(
-                    `/payments?paymentId=${paymentId}&amount=${orderPayload.total}`
-                );
+                setPaymentId(paymentId);
+                const paymentRes = await AxiosSetup.post(`/payments?paymentId=${paymentId}&amount=${orderPayload.total}`);
                 setQrUrl(paymentRes.data.data.urlQR);
                 setCurrentTab(3);
             } else {
@@ -121,6 +123,25 @@ const ShopCart = () => {
             console.log("Error creating order:", error);
         }
     };
+
+    const checkPaymentStatus = async () => {
+        try {
+            if (!paymentId) return;
+
+            const res = await AxiosSetup.get(`/payments/${paymentId}/check-status`);
+            const status = res.data?.data?.status
+
+            if (status === "PAID" || status === true) {
+                setCurrentTab(4);
+            } else {
+                alert("Thanh toán chưa được xác nhận. Vui lòng thử lại sau!");
+            }
+        } catch (error) {
+            console.log(error);
+            alert("Có lỗi xảy ra khi kiểm tra trạng thái thanh toán!");
+        }
+    };
+
 
 
 
@@ -196,8 +217,8 @@ const ShopCart = () => {
                                                         <div className="d-flex align-items-center">
                                                             <img
                                                                 src={
-                                                                    item.bagResponse.images
-                                                                        ? encodeURI(item.bagResponse.images)
+                                                                    item.bagResponse.bagImages[0].url
+                                                                        ? encodeURI(item.bagResponse.bagImages[0].url)
                                                                         : `https://picsum.photos/300/250?`
                                                                 }
                                                                 alt={item.bagResponse.name}
@@ -444,7 +465,7 @@ const ShopCart = () => {
                                 <img src={qrUrl} alt="QR Payment" style={{ width: "300px", margin: "20px auto" }} />
                                 <button
                                     className="btn btn-success mt-3"
-                                    onClick={() => setCurrentTab(4)}
+                                    onClick={checkPaymentStatus}
                                 >
                                     Tôi đã thanh toán
                                 </button>
@@ -516,9 +537,17 @@ const ShopCart = () => {
                                     <button
                                         className={`textDmSan btn w-100 ${currentTab === 1 ? 'btn-primary' : 'btn-success'}`}
                                         onClick={() => {
-                                            if (currentTab === 1) setCurrentTab(2);
-                                            else creatingOrder();
-                                        }}
+                                            if (currentTab === 1) {
+                                              setCurrentTab(2);
+                                            } else {
+                                              if (!profile1?.address?.trim() || !profile1?.phone?.trim()) {
+                                                toast.warn("Please enter address and phone!");
+                                                return;
+                                              }
+                                        
+                                              creatingOrder();
+                                            }
+                                          }}
                                         disabled={currentTab === 1 && cart.length === 0}
                                         style={{
                                             backgroundColor: currentTab === 1 && cart.length === 0 ? '#6c757d' : '',

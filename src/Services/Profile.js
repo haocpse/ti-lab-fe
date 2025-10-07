@@ -10,7 +10,7 @@ export const fetchProfileCustomer = async () => {
 
 }
 
-export const fetchProfileOrder = async (page = 0, size = 8) => {
+export const fetchProfileOrder = async (page = 0, size = 1000000) => {
     try {
         const response = await AxiosSetup.get(`/customers/me/orders?page=${page}&size=${size}`);
         return response.data.data;

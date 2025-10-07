@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import AxiosSetup from "../../Services/AxiosSetup";
 import AddCollectionPopUp from "./AddCollectionPopUp";
 import { useNavigate } from "react-router-dom";
+import UpdateCollectionPopUp from "./UpdateCollectionPopUp";
 
 const ManageCollection = () => {
     const [collections, setCollections] = useState([]);
@@ -11,8 +12,10 @@ const ManageCollection = () => {
     const [totalElements, setTotalElements] = useState(0);
     const [loading, setLoading] = useState(false);
     const [showAddModal, setShowAddModal] = useState(false);
-    // const [showUpdateModal, setShowUpdateModal] = useState(false);
+    const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [searchFunction, setSearchFunction] = useState("");
+    const [selectedCollection, setSelectedCollection] = useState(null);
+
     const navigate = useNavigate();
 
     const fetchCollection = async (page = 0) => {
@@ -54,6 +57,11 @@ const ManageCollection = () => {
             console.error("There was an error deleting the collection!", error);
         }
     }
+    const handleEditClick = (id) => {
+        const collectionToEdit = collections.find((c) => c.id === id);
+        setSelectedCollection(collectionToEdit);
+        setShowUpdateModal(true);
+    };
 
     useEffect(() => {
         fetchCollection(page);
@@ -128,7 +136,7 @@ const ManageCollection = () => {
                                             </button>
                                             <button
                                                 className="btn btn-sm btn-warning d-flex align-items-center justify-content-center"
-                                                // onClick={() => handleEditClick(bag)}
+                                                onClick={() => handleEditClick(collection.id)}
                                                 title="Edit"
                                             >
                                                 <i class="bi bi-pencil"></i>
@@ -150,6 +158,17 @@ const ManageCollection = () => {
                             <AddCollectionPopUp
                                 onClose={() => setShowAddModal(false)}
                                 onSubmit={handleCreateNewCollection}
+                            />
+                        )}
+
+                        {showUpdateModal && selectedCollection && (
+                            <UpdateCollectionPopUp
+                                onClose={() => setShowUpdateModal(false)}
+                                onSubmit={() => {
+                                    setShowUpdateModal(false);
+                                    fetchCollection(page);
+                                }}
+                                collectionId={selectedCollection?.id}
                             />
                         )}
 

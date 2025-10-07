@@ -105,34 +105,28 @@ const AdminSideBar = () => {
                 </li>
             </ul>
             <hr />
-            <div className="dropdown">
-                <a
-                    href="#"
-                    className="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                    id="dropdownUser1"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                >
+            <div className="d-flex align-items-center justify-content-between text-white">
+                <div className="d-flex align-items-center">
                     <img
                         src={avt}
-                        alt=""
+                        alt="avatar"
                         width="32"
                         height="32"
                         className="rounded-circle me-2"
                     />
                     <strong>Tí.lab Admin</strong>
-                </a>
-                <ul
-                    className="dropdown-menu dropdown-menu-dark text-small shadow"
-                    aria-labelledby="dropdownUser1"
+                </div>
+
+                <button
+                    className="btn btn-outline-light btn-sm ms-3"
+                    onClick={handleLogout}
                 >
-                    <li>
-                        <button className="dropdown-item" onClick={handleLogout}>
-                            Log Out
-                        </button>
-                    </li>
-                </ul>
+                    Log Out
+                </button>
             </div>
+
+
+
         </div>
     );
 };

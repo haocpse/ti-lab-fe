@@ -66,10 +66,17 @@ const Membership = () => {
                         <div className="center">
                             <div className="welcome-content">
                                 <h1 className="welcome-title">Welcome to <span style={{ fontWeight: "bold", color: "#CAFF01" }}>tí.lab</span></h1>
-                                <div className="welcome-buttons">
-                                    <Link to="/login" className="btn-simple">LOGIN</Link>
-                                    <Link to="/signup" className="btn-simple">SIGN UP</Link>
-                                </div>
+                                {isLogined ? (
+                                    <div className="welcome-buttons">
+                                        <Link to="/shop" className="btn-simple">SHOP NOW</Link>
+                                        <Link to="/about" className="btn-simple">ABOUT</Link>
+                                    </div>
+                                ) : (
+                                    <div className="welcome-buttons">
+                                        <Link to="/login" className="btn-simple">LOGIN</Link>
+                                        <Link to="/signup" className="btn-simple">SIGN UP</Link>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -97,7 +104,7 @@ const Membership = () => {
                                                     <span className="tier-name h4 mb-0 text-dark">seed</span>
                                                 </div>
                                                 <div className="points-display">
-                                                    <span className="fw-bold text-dark h4 mb-0">35 POINTS</span>
+                                                    <span className="fw-bold text-dark h4 mb-0">36 POINTS</span>
                                                 </div>
                                             </div>
                                             <div className="progress-section">

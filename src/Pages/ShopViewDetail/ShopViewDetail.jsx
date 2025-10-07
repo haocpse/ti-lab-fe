@@ -66,7 +66,7 @@ const ShopViewDetail = () => {
                 toast.warning("Add to cart fail! Please try again ^^")
             }
             else {
-                navigate("/login")
+                navigate("/login", { state: { from: `/shop/core-collection/${id}` } });
             }
 
         }

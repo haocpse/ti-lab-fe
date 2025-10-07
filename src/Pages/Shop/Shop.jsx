@@ -139,7 +139,7 @@ const Shop = () => {
                                                         </div>
                                                     )}
 
-                                                    <Link to={`/shop/artist-collection/${product.id}`} className="text-decoration-none">
+                                                    <Link to={`/shop/artist-collection`} className="text-decoration-none">
                                                         <div className="artist-image-container position-relative">
                                                             <img
                                                                 src={product.urlThumbnail || `https://picsum.photos/400/300?random=${product.id}`}

@@ -50,8 +50,10 @@ const ViewDetailCollection = () => {
                     <span className="badge bg-success px-3 py-2">
                         Active Collection
                     </span>
+
                 </div>
             </div>
+
 
             <h4 className="mb-3">Bags in this Collection</h4>
             <div className="row">

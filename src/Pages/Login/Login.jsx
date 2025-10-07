@@ -6,7 +6,7 @@ import bag2 from "../../assets/membership2.png";
 import bag3 from "../../assets/membership3.png";
 import bag4 from "../../assets/membership4.png";
 import bag5 from "../../assets/membership5.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import "./Login.css";
 import { login as loginService } from "../../Services/LoginService";
@@ -16,7 +16,10 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
 
+    console.log(location.state)
+    console.log(location.state?.from)
 
     function getRoleFromToken() {
         const token = localStorage.getItem('token');
@@ -38,12 +41,14 @@ const Login = () => {
 
             localStorage.setItem('token', data.data.accessToken);
 
+            const redirectPath = location.state?.from || "/";
+
             const roles = getRoleFromToken();
             console.log(roles);
             if (roles === "ADMIN" || roles === "STAFF") {
                 navigate('/admin')
             } else if (roles === "CUSTOMER") {
-                navigate('/')
+                navigate(redirectPath, { replace: true });
             } else {
                 navigate('/');
             }
