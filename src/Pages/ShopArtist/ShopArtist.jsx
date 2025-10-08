@@ -23,8 +23,7 @@ const ShopArtist = () => {
     const fetchArtistBag = async (page = 0) => {
         try {
             const res = await fetchArtistCollection(page, 12);
-            const allBags = res.content.flatMap(collection => collection.bags);
-            setArtistBag(allBags);
+            setArtistBag(res.content);
             setTotalPagesCore(res.totalPages);
             setPageCore(res.pageable.pageNumber);
             window.scrollTo({ top: 0, behavior: "smooth" });
@@ -70,26 +69,61 @@ const ShopArtist = () => {
                     {/* artist bag */}
                     <div className="row">
                         {artistBag && artistBag
-                            .filter(product => product.name.toLowerCase().includes(searchFunction.toLowerCase()))
-                            .map((product) => (
-                                <div className="col-6 col-md-4 col-lg-3 mb-4" key={product.id}>
-                                    <Link to={`/shop/artist-collection/${product.id}`} className="text-decoration-none">
-                                        <div className="bg-white h-100 p-2 text-center shopcore-card">
-                                            <img
-                                                src={product.bagImages && product.bagImages.length > 0
-                                                    ? encodeURI(product.bagImages[0].url)
-                                                    : `https://picsum.photos/300/250?random=${product.id}`
-                                                }
-                                                alt={product.name}
-                                                className="img-fluid rounded mb-2"
-                                                style={{ width: "250px", height: "400px", objectFit: "cover", background: "#eee" }}
-                                            />
-                                            <div className="fw-semibold text-dark coreBagName" style={{ minHeight: "45px" }}>{product.name}</div>
-                                            <div className="coreBagPrice" style={{ fontSize: "1rem" }}>{product.price.toLocaleString()} VND</div>
-                                        </div>
-                                    </Link>
+                            .filter(collection =>
+                                collection.bags && collection.bags.some(
+                                    bag => bag.name.toLowerCase().includes(searchFunction.toLowerCase())
+                                )
+                            )
+                            .map((collection, i) => (
+                                <div key={i} className="mb-5">
+                                    <h3 className="text-center mb-4 fw-medium name-collection" style={{ fontSize: "1.8rem" }}>
+                                        "{collection.name.toUpperCase()}"
+                                    </h3>
+                                    <div className="row">
+                                        {collection.bags &&
+                                            collection.bags
+                                                .filter(bag =>
+                                                    bag.name.toLowerCase().includes(searchFunction.toLowerCase())
+                                                )
+                                                .map((product) => (
+                                                    <div className="col-6 col-md-4 col-lg-3 mb-4" key={product.id}>
+                                                        <Link
+                                                            to={`/shop/artist-collection/${product.id}`}
+                                                            className="text-decoration-none"
+                                                        >
+                                                            <div className="bg-white h-100 p-2 text-center shopcore-card">
+                                                                <img
+                                                                    src={
+                                                                        product.bagImages && product.bagImages.length > 0
+                                                                            ? encodeURI(product.bagImages[0].url)
+                                                                            : `https://picsum.photos/300/250?random=${product.id}`
+                                                                    }
+                                                                    alt={product.name}
+                                                                    className="img-fluid rounded mb-2"
+                                                                    style={{
+                                                                        width: "250px",
+                                                                        height: "400px",
+                                                                        objectFit: "cover",
+                                                                        background: "#eee",
+                                                                    }}
+                                                                />
+                                                                <div
+                                                                    className="fw-semibold text-dark coreBagName"
+                                                                    style={{ minHeight: "45px" }}
+                                                                >
+                                                                    {product.name}
+                                                                </div>
+                                                                <div className="coreBagPrice" style={{ fontSize: "1rem" }}>
+                                                                    {product.price.toLocaleString()} VND
+                                                                </div>
+                                                            </div>
+                                                        </Link>
+                                                    </div>
+                                                ))}
+                                    </div>
                                 </div>
                             ))}
+
                     </div>
 
                     {/* paging */}
@@ -130,7 +164,7 @@ const ShopArtist = () => {
                                     <Link to={`/shop/core-collection/${product.id}`} className="text-decoration-none">
                                         <div className="bg-white rounded p-3 text-center shopcore-artist-card h-100">
                                             <img
-                                                 src={product.bagImages && product.bagImages.length > 0
+                                                src={product.bagImages && product.bagImages.length > 0
                                                     ? encodeURI(product.bagImages[0].url)
                                                     : `https://picsum.photos/300/250?random=${product.id}`
                                                 }
