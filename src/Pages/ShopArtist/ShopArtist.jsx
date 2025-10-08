@@ -76,9 +76,15 @@ const ShopArtist = () => {
                             )
                             .map((collection, i) => (
                                 <div key={i} className="mb-5">
-                                    <h3 className="text-center mb-4 fw-medium name-collection" style={{ fontSize: "1.8rem" }}>
+                                    <h3 className="text-center fw-medium name-collection" style={{ fontSize: "1.8rem" }}>
                                         "{collection.name.toUpperCase()}"
                                     </h3>
+                                    <p
+                                        className="text-secondary text-center mb-4 name-collection"
+                                        style={{ fontSize: "1.1rem", marginTop: "-5px" }}
+                                    >
+                                        Artist Collection
+                                    </p>
                                     <div className="row">
                                         {collection.bags &&
                                             collection.bags
