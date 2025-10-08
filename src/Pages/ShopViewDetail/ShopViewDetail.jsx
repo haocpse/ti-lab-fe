@@ -59,6 +59,7 @@ const ShopViewDetail = () => {
                 totalPrice: bag.price * quantity
             })
             toast.success("Add to cart successfully!")
+            window.dispatchEvent(new Event("cartUpdated"));
         } catch (error) {
             console.log(error)
             const token = localStorage.getItem("token");

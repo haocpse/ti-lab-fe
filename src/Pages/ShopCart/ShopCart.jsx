@@ -216,10 +216,10 @@ const ShopCart = () => {
                                                         <div className="d-flex align-items-center">
                                                             <img
                                                                 src={
-                                                                    item.bagResponse.bagImages[0].url
-                                                                        ? encodeURI(item.bagResponse.bagImages[0].url)
-                                                                        : `https://picsum.photos/300/250?`
-                                                                }
+                                                                    item.bagResponse?.bagImages?.[0]?.url
+                                                                      ? encodeURI(item.bagResponse.bagImages[0].url)
+                                                                      : "https://picsum.photos/300/250?"
+                                                                  }
                                                                 alt={item.bagResponse.name}
                                                                 style={{ width: "60px", marginRight: "10px" }}
                                                             />

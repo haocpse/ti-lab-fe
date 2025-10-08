@@ -4,9 +4,11 @@ import logo from "../../assets/Logo.png";
 import logoGreen from "../../assets/tí.lab_logo-05.png";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { fetchCartNumber } from "../../Services/CartService";
 
 const Navbar = () => {
     const [isLogined, setIsLogined] = useState(false);
+    const [cartCount, setCartCount] = useState(0);
     const navigate = useNavigate();
 
     const isMembershipPage = location.pathname === "/membership" ||
@@ -21,9 +23,31 @@ const Navbar = () => {
         const token = localStorage.getItem("token");
         if (token) {
             setIsLogined(true);
+            loadCartNumber();
         }
     }, []);
 
+    const loadCartNumber = async () => {
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) return;
+            const number = await fetchCartNumber();
+            setCartCount(number);
+            console.log("Cart number response:", number);
+        } catch (error) {
+            console.error("Error fetching cart number:", error);
+        }
+    };
+    
+
+
+    useEffect(() => {
+        const handleCartUpdate = () => {
+            loadCartNumber();
+        };
+        window.addEventListener("cartUpdated", handleCartUpdate);
+        return () => window.removeEventListener("cartUpdated", handleCartUpdate);
+    }, []);
 
 
     function getRoleFromToken() {
@@ -62,8 +86,11 @@ const Navbar = () => {
     };
 
 
+    console.log("Cart count state in Navbar:", cartCount);
+    console.log("Cart count state in Navbar:", cartCount);
 
     return (
+        
         <nav className={`navbar fixed-top navbar-expand-lg px-4 ${isMembershipPage ? "navbar-dark" : "navbar-light"} ${(isMembershipPage ? "bg-black" : "bg-white")}`}>
             <div className="container-fluid">
 
@@ -174,9 +201,14 @@ const Navbar = () => {
                         <NavLink to="/" style={{ color: isMembershipPage ? "white" : "black" }}>
                             <i className="fa-solid fa-magnifying-glass"></i>
                         </NavLink>
-                        <NavLink to="/shop/cart" style={{ color: isMembershipPage ? "white" : "black" }}>
-                            <i className="fa-solid fa-cart-shopping"></i>
-                        </NavLink>
+                        <div className="cart-icon-wrapper">
+                            <NavLink to="/shop/cart" style={{ color: isMembershipPage ? "white" : "black" }}>
+                                <i className="fa-solid fa-cart-shopping"></i>
+                            </NavLink>
+                            {cartCount > 0 && (
+                                <span className="cart-count-badge">{cartCount}</span>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
