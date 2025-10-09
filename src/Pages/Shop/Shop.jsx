@@ -128,7 +128,7 @@ const Shop = () => {
                                 <div className="row align-items-start">
                                     <div className="col-12 col-lg-8">
                                         <div className="row g-4">
-                                            {artistBag.slice(1, 3).map((product, index) => (
+                                            {artistBag.map((product, index) => (
                                                 <div key={product.id} className={index === 0 ? "col-5" : "col-5"}>
                                                     {index === 1 && (
                                                         <div className="mb-3">
