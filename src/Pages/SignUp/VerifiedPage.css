@@ -1,0 +1,117 @@
+:root {
+  --tilab-green: #b9ff00;
+  --tilab-blue: #1e88e5;
+  --tilab-gray: #444;
+  --tilab-light: #f7f8fa;
+}
+
+/* Layout tổng */
+.verified-wrapper {
+  background-color: var(--tilab-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Thẻ card chính */
+.card {
+  background-color: #fff;
+  width: 100%;
+  max-width: 440px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.5s ease;
+}
+
+/* Hiệu ứng xuất hiện */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 28px;
+  background-color: var(--tilab-blue);
+  color: white;
+}
+
+.logo-text {
+  height: 64px;
+}
+
+/* Nội dung */
+.content {
+  padding: 36px 30px;
+  color: var(--tilab-gray);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.content h2 {
+  font-size: 22px;
+  margin-top: 0;
+  margin-bottom: 14px;
+  color: var(--tilab-blue);
+}
+
+.content h2.fail {
+  color: #e53935;
+}
+
+.content p {
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0 0 22px;
+  max-width: 380px;
+}
+
+/* Button */
+a.btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 10px 26px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: 0.25s;
+}
+
+.btn-blue {
+  background-color: var(--tilab-blue);
+  color: #fff;
+}
+
+.btn-blue:hover {
+  background-color: #1871c9;
+  transform: translateY(-1px);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 16px 0 20px;
+  background-color: var(--tilab-light);
+  font-size: 13px;
+  color: #777;
+}
+
+.footer span {
+  color: var(--tilab-green);
+  font-weight: 600;
+}
