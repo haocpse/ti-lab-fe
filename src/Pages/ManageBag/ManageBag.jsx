@@ -60,16 +60,13 @@ const ManageBag = () => {
         if (!confirmDelete) return;
         try {
             const response = await AxiosSetup.delete(`/bags/${id}`)
+            fetchBags(page)
             console.log(response)
         } catch (error) {
             console.log(error)
         }
     }
     
-    useEffect(() => {
-        fetchBags(page);
-    }, [page]);
-
 
     const filteredBags = bags.filter((bag) =>
         bag.name.toLowerCase().includes(searchFunction.toLowerCase()) ||
