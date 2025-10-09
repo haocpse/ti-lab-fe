@@ -27,6 +27,7 @@ import ManageStaff from "./Pages/ManageStaff/ManageStaff";
 import ViewDetailStaff from "./Pages/ManageStaff/ViewDetailStaff";
 import LoadingPage from "./Pages/LoadingPage/LoadingPage";
 import { useEffect, useState } from "react";
+import VerifiedPage from "./Pages/SignUp/VerifiedPage";
 function App() {
 
   const [isLoading, setIsLoading] = useState(true);
@@ -60,6 +61,7 @@ function App() {
         <Route path="/shop/artist-collection/:id" element={<ShopViewDetail />} />
         <Route path="/shop/cart" element={<ShopCart />} />
         <Route path="/customer/profile" element={<Profile />} />
+        <Route path="/verified" element={<VerifiedPage />} />
 
 
         <Route element={<ProtectedRoutesAdmin />}>
