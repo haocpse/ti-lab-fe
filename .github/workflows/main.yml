@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main  # Tự động deploy khi push lên main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
