@@ -130,7 +130,7 @@ const UpdateBagPopUp = ({ onClose, onSubmit, bag }) => {
             const token = localStorage.getItem("token");
     
             const response = await axios.put(
-                `http://103.110.87.196/api/bags/${bag.id}`,
+                `https://tilab.com.vn/api/bags/${bag.id}`,
                 formDataToSend,
                 {
                     headers: {

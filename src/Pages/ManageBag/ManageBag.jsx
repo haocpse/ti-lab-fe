@@ -59,12 +59,17 @@ const ManageBag = () => {
         const confirmDelete = window.confirm("Are you sure when deleting this?");
         if (!confirmDelete) return;
         try {
-            const response = await AxiosSetup(`/bag/${id}`)
+            const response = await AxiosSetup.delete(`/bags/${id}`)
             console.log(response)
         } catch (error) {
             console.log(error)
         }
     }
+    
+    useEffect(() => {
+        fetchBags(page);
+    }, [page]);
+
 
     const filteredBags = bags.filter((bag) =>
         bag.name.toLowerCase().includes(searchFunction.toLowerCase()) ||

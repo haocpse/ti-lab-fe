@@ -57,6 +57,7 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
         e.preventDefault();
         try {
             const formDataToSend = new FormData();
+            const mainIndex = formData.bagImages.findIndex(img => img.id === formData.mainImageId);
 
             const bagData = {
                 name: formData.name,
@@ -67,6 +68,7 @@ const AddBagPopUp = ({ onClose, onSubmit }) => {
                 length: parseFloat(formData.length),
                 weight: parseFloat(formData.weight),
                 type: formData.type,
+                mainPosition: mainIndex >= 0 ? mainIndex : 0,
             };
 
             formDataToSend.append("bags", new Blob([JSON.stringify(bagData)], { type: "application/json" }));
