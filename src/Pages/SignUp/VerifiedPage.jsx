@@ -39,7 +39,7 @@ export default function VerifiedPage() {
         </div>
 
         <div className="tvl-footer">
-          © 2025 <span>TiLab</span> — Recreate for a Greener Planet
+          © 2025 <span>TiLab</span> — Reduce plastic, flex your drip.
         </div>
       </div>
     </div>
