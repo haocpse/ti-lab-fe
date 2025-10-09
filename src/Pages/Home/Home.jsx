@@ -9,7 +9,7 @@ const Home = () => {
     return (
         <>
             <Navbar />
-            <div className="backgroundHome">
+            <div className="backgroundHome mt-5">
                 <div className="backgoundImg mb-5">
                     <img 
                         src={bgg} 
