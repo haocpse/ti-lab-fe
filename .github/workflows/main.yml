@@ -3,51 +3,48 @@ name: Deploy Frontend (ReactJS) to VPS
 on:
   push:
     branches:
-      - main  # Tự động deploy khi push lên main
-  workflow_dispatch:  # 👈 Cho phép chạy thủ công từ tab Actions
+      - main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 10 # ⏱ Dừng nếu quá 10 phút
 
     steps:
-      # 🧩 1. Lấy source code
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      # ⚡ 2. Cài Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # 📦 3. Cài dependencies (cache để build nhanh hơn)
       - name: Install dependencies
         run: npm ci
         env:
           CI: false
 
-      # 🏗️ 4. Build production
       - name: Build React app
         run: npm run build
 
-      # 🚀 5. Triển khai build folder lên VPS
       - name: Deploy build folder to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
           host: tilab.com.vn
           username: root
           key: ${{ secrets.VPS_SSH_KEY }}
-          source: "dist/*" # 👉 Nếu dùng CRA, đổi thành "build/*"
+          source: "dist/*"
           target: "/var/www/tilab-frontend/build"
           strip_components: 1
+          timeout: 60s  # ép dừng sau 60s nếu lỗi treo
 
-      # 🔄 6. Reload Nginx (để áp dụng phiên bản mới)
       - name: Reload Nginx
         uses: appleboy/ssh-action@v1.1.0
         with:
           host: tilab.com.vn
           username: root
           key: ${{ secrets.VPS_SSH_KEY }}
+          script_stop: true
           script: |
             sudo systemctl reload nginx
