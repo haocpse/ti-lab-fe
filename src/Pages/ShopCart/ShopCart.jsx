@@ -19,6 +19,7 @@ const ShopCart = () => {
     const [qrUrl, setQrUrl] = useState(null);
     const [paymentId, setPaymentId] = useState(null);
     const [phone, setPhone] = useState("");
+    const [loading, setLoading] = useState(false);
 
 
     const fetchCart = async (page = 0, size = 12) => {
@@ -92,6 +93,7 @@ const ShopCart = () => {
     };
 
     const creatingOrder = async () => {
+        setLoading(true)
         try {
             const orderPayload = {
                 address: profile1?.address || '',
@@ -123,6 +125,8 @@ const ShopCart = () => {
 
         } catch (error) {
             console.log("Error creating order:", error);
+        } finally {
+            setLoading(false)
         }
     };
 
@@ -555,8 +559,20 @@ const ShopCart = () => {
                                             backgroundColor: currentTab === 1 && cart.length === 0 ? '#6c757d' : '',
                                             borderColor: currentTab === 1 && cart.length === 0 ? '#6c757d' : '',
                                         }}
-                                    >
-                                        {currentTab === 1 ? 'Checkout Now' : 'Order'}
+                                    > {loading ? (
+                                        <>
+                                            <span
+                                                className="spinner-border spinner-border-sm me-2"
+                                                role="status"
+                                                aria-hidden="true"
+                                            ></span>
+                                            Processing...
+                                        </>
+                                    ) : currentTab === 1 ? (
+                                        "Checkout Now"
+                                    ) : (
+                                        "Order"
+                                    )}
                                     </button>
                                 </div>
                             </div>
