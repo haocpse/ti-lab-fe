@@ -18,6 +18,7 @@ const ShopCart = () => {
     const [profile1, setProfile1] = useState(null);
     const [qrUrl, setQrUrl] = useState(null);
     const [paymentId, setPaymentId] = useState(null);
+    const [phone, setPhone] = useState("");
 
 
     const fetchCart = async (page = 0, size = 12) => {
@@ -98,6 +99,7 @@ const ShopCart = () => {
                 subTotal: subTotal,
                 feeOfDelivery: 0,
                 total: total,
+                phone: phone,
                 method: document.querySelector('input[name="paymentMethod"]:checked')?.value || 'COD',
                 createDetailRequests: cart.map(item => ({
                     cartId: item.cartId,
@@ -217,9 +219,9 @@ const ShopCart = () => {
                                                             <img
                                                                 src={
                                                                     item.bagResponse?.bagImages?.[0]?.url
-                                                                      ? encodeURI(item.bagResponse.bagImages[0].url)
-                                                                      : "https://picsum.photos/300/250?"
-                                                                  }
+                                                                        ? encodeURI(item.bagResponse.bagImages[0].url)
+                                                                        : "https://picsum.photos/300/250?"
+                                                                }
                                                                 alt={item.bagResponse.name}
                                                                 style={{ width: "60px", marginRight: "10px" }}
                                                             />
@@ -354,8 +356,8 @@ const ShopCart = () => {
                                                             className="form-control form-control-lg"
                                                             id="phone"
                                                             placeholder="Phone"
-                                                            value={profile1?.phone || ''}
-                                                            onChange={(e) => setProfile1({ ...profile1, phone: e.target.value })}
+                                                            value={phone}
+                                                            onChange={(e) => setPhone(e.target.value)}
                                                             style={{
                                                                 backgroundColor: '#f8f9fa',
                                                                 borderRadius: '8px',
@@ -540,7 +542,7 @@ const ShopCart = () => {
                                             if (currentTab === 1) {
                                                 setCurrentTab(2);
                                             } else {
-                                                if (!profile1?.address?.trim() || !profile1?.phone?.trim()) {
+                                                if (!profile1?.address?.trim() || !phone?.trim()) {
                                                     toast.warn("Please enter address and phone!");
                                                     return;
                                                 }

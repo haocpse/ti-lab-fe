@@ -10,6 +10,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import "./Login.css";
 import { login as loginService } from "../../Services/LoginService";
+import { toast, ToastContainer } from "react-toastify";
 
 const Login = () => {
     const [account, setAccount] = useState('');
@@ -55,6 +56,12 @@ const Login = () => {
         } catch (error) {
             console.error(error);
 
+            if (error.response && error.response.status === 401) {
+                toast.warn("Incorrect username or password!");
+            } else {
+                toast.warn("Incorrect username or password.");
+            }
+
         } finally {
             setIsLoading(false);
         }
@@ -67,6 +74,7 @@ const Login = () => {
     return (
         <>
             <Navbar />
+            <ToastContainer position="top-right" autoClose={3000} />
             <div className="membership-hero mt-5" style={{ position: "relative" }}>
                 {/* Background */}
                 <div className="container-fluid h-100 p-0" style={{ filter: "blur(5px)" }}>
