@@ -228,7 +228,7 @@ const ShopViewDetail = () => {
                                         <Link to={`/shop/core-collection/${product.id}`} className="text-decoration-none">
                                             <div className="bg-white rounded p-3 text-center shopcore-artist-card h-100">
                                                 <img
-                                                    src={product.bagImages ? encodeURI(product.bagImages[0].url) : `https://picsum.photos/200/250?random=${product.id}`}
+                                                    src={product.bagImages ? encodeURI(product.bagImages) : `https://picsum.photos/200/250?random=${product.id}`}
                                                     alt={product.name}
                                                     className="img-fluid rounded mb-2"
                                                     style={{ maxWidth: "300px", height: "400px", objectFit: "cover" }}
@@ -262,7 +262,7 @@ const ShopViewDetail = () => {
                                         <Link to={`/shop/core-collection/${product.id}`} className="text-decoration-none">
                                             <div className="bg-white rounded p-3 text-center shopcore-artist-card h-100">
                                                 <img
-                                                    src={product.bagImages ? encodeURI(product.bagImages[0].url) : `https://picsum.photos/200/250?random=${product.id}`}
+                                                    src={product.bagImages ? encodeURI(product.bagImages) : `https://picsum.photos/200/250?random=${product.id}`}
                                                     alt={product.name}
                                                     className="img-fluid rounded mb-2"
                                                     style={{ maxWidth: "300px", height: "400px", objectFit: "cover" }}
