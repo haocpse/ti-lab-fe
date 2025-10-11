@@ -20,7 +20,7 @@ const Footer = () => {
                             style={{ color: isShopPage ? "#CAFF01" : "#0d6efd" }}
                         >
                             Little things<br />
-                            make a<br />
+                            make an<br />
                             impact.
                         </h2>
                         <div className="arrow-icon" style={{ color: isShopPage ? "#fff" : "#0d6efd" }}>
