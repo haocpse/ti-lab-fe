@@ -34,15 +34,15 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 2800);
-  //   return () => clearTimeout(timer);
-  // }, []);
-  // if (isLoading) {
-  //   return <LoadingPage />;
-  // }
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2800);
+    return () => clearTimeout(timer);
+  }, []);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <I18nextProvider i18n={i18n}>
