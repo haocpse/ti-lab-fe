@@ -9,8 +9,11 @@ import detail2 from "../../assets/shopdetail2.png"
 import detail3 from "../../assets/shopdetail3.png"
 import detail4 from "../../assets/shopdetail4.png"
 import { fetchCoreCollection, fetchCollection } from "../../Services/ShopService";
+import { useTranslation } from "react-i18next";
+
 
 const Shop = () => {
+    const { t } = useTranslation();
     const [bag, setBag] = useState([]);
     const [artistBag, setArtistBag] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -48,9 +51,9 @@ const Shop = () => {
             <div className="backgroundShop mt-5">
                 <div className="backgoundImg mb-5 d-none d-lg-block">
                     <img src={bgg} alt="" style={{ width: "400px", marginTop: "180px" }} />
-                    <p style={{ lineHeight: "1.2" }}>Reimagining <br />the traditional<br />shopping bag</p>
+                    <p style={{ lineHeight: "1.2" }}>{t("shop.reimagining")} <br />{t("shop.reimagining1")}<br />{t("shop.reimagining2")}</p>
                     <Link to="/shop/artist-collection" className=" text-dark fw-meidum" style={{ marginLeft: "60px" }}>
-                        Buy now →
+                        {t("shop.buyNow")}
                     </Link>
                 </div>
             </div>
@@ -59,10 +62,10 @@ const Shop = () => {
                     <div className="col-12 col-xl-10">
                         <div className="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-2">
 
-                            <h2 className="fw-bold fs-1 mb-0 text-dark">CORE COLLECTION</h2>
+                            <h2 className="fw-bold fs-1 mb-0 text-dark">{t("shop.core")}</h2>
 
                             <Link to="/shop/core-collection" className="text-decoration-none text-dark fw-medium">
-                                See more →
+                                {t("shop.seeMore")}
                             </Link>
                         </div>
                         <div className="row g-4">
@@ -119,7 +122,7 @@ const Shop = () => {
                             ) : (
                                 <div className="col-12">
                                     <div className="text-center py-5">
-                                        <p className="fs-5 text-muted">No product found</p>
+                                        <p className="fs-5 text-muted">  {t("shop.noProduct")}</p>
                                     </div>
                                 </div>
                             )}
@@ -133,7 +136,7 @@ const Shop = () => {
                                                     {index === 1 && (
                                                         <div className="mb-3">
                                                             <h2 className="fw-bold fs-1 mb-0 text-dark lh-1">
-                                                                ARTIST<br />COLLECTION
+                                                                {t("shop.artist")}<br />  {t("shop.artist1")}
                                                             </h2>
 
                                                         </div>
@@ -165,7 +168,7 @@ const Shop = () => {
                                     <div className="col-12 col-lg-4">
                                         <div className="d-flex justify-content-end mt-2">
                                             <Link to="/shop/artist-collection" className="text-decoration-none text-dark fw-medium see-more-link">
-                                                See more →
+                                                {t("shop.seeMore")}
                                             </Link>
                                         </div>
                                         <div className="ps-lg-4 mt-4 mt-lg-0">
@@ -173,9 +176,7 @@ const Shop = () => {
                                                 "POST-CIVILIZATION"
                                             </h3>
                                             <p className="text-muted lh-lg fs-6">
-                                                In a post-modern world eroded by overconsumption,
-                                                waste, and climate change, whimsical lost souls begin to
-                                                appear — both endearing and melancholic.
+                                                {t("shop.artistDesc")}
                                             </p>
                                         </div>
                                     </div>
@@ -190,7 +191,7 @@ const Shop = () => {
             <div className="details-bg text-white" style={{ color: "#CAFF01" }}>
                 <div className="text-center py-5">
                     <h1 className="display-1 fw-bold text-successs mb-0" style={{ letterSpacing: '2px' }}>
-                        Details
+                        {t("shop.details")}
                     </h1>
                 </div>
 
@@ -200,23 +201,18 @@ const Shop = () => {
                             <img src={detail1} alt="Materials" className="img-fluid rounded shadow" />
                         </div>
                         <div className="col-lg-8">
-                            <h2 className="display-4 text-successs mb-4" style={{ color: "#CAFF01" }}>materials</h2>
+                            <h2 className="display-4 text-successs mb-4" style={{ color: "#CAFF01" }}> {t("shop.materials")}</h2>
                             <p className="text-light fs-6 lh-lg">
-                                100 % recycled woven PP — tightly interlaced polypropylene yarns that carry ≈ 20 kg without stretching, surviving 10 000+ folds.
-                                Matte lamination — water-repellent, stain-resistant; wipes clean in seconds.
-                                UV-shield coating — keeps prints vibrant even under frequent sunlight.
-                                Double cotton handles — four-fold box-stitching, soft on the shoulder, tensile strength ≥ 60 N.
+                                {t("shop.materialsDesc")}
                             </p>
                         </div>
                     </div>
 
                     <div className="row align-items-center py-5">
                         <div className="col-lg-8 order-lg-1 order-2">
-                            <h2 className="display-4 text-successs mb-4">design</h2>
+                            <h2 className="display-4 text-successs mb-4"> {t("shop.design")}</h2>
                             <p className="text-light fs-6 lh-lg">
-                                Eye-catching, vivid graphics that stand out in any crowd.
-                                Purpose-driven storytelling artwork to spark sustainable living inspiration.
-                                Rigid box silhouette that stands upright yet folds flat for easy storage when not in use.
+                                {t("shop.designDesc")}
                             </p>
                         </div>
                         <div className="col-lg-4 order-lg-2 order-1 mb-4 mb-lg-0">
@@ -229,21 +225,18 @@ const Shop = () => {
                             <img src={detail3} alt="Experience" className="img-fluid rounded shadow" />
                         </div>
                         <div className="col-lg-8">
-                            <h2 className="display-4 text-successs mb-4">experience</h2>
+                            <h2 className="display-4 text-successs mb-4"> {t("shop.experience")}</h2>
                             <p className="text-light fs-6 lh-lg">
-                                #GrowWithYourBag kit — every bag ships with marigold seeds + coco-pellet; plant it, scan the bamboo QR tag and track your bag-and-plant journey online.
-                                Feather-light yet sturdy; perfect for errands, gym, or weekend trips.
+                                {t("shop.experienceDesc")}
                             </p>
                         </div>
                     </div>
 
                     <div className="row align-items-center py-5">
                         <div className="col-lg-8 order-lg-1 order-2">
-                            <h2 className="display-4 text-successs mb-4">environment impact</h2>
+                            <h2 className="display-4 text-successs mb-4">{t("shop.environment")}</h2>
                             <p className="text-light fs-6 lh-lg">
-                                1 kg of ocean-bound plastic removed from Vietnamese beaches for every purchase — progress visible on your personal dashboard.
-                                “5 ↔ 1” regeneration scheme — return any 5 used bags and get 1 fresh ReBag plus 10 % off your next order.
-                                Replaces hundreds of single-use plastic bags over its multi-year lifespan.
+                                {t("shop.environmentDesc")}
                             </p>
                         </div>
                         <div className="col-lg-4 order-lg-2 order-1 mb-4 mb-lg-0">

@@ -28,21 +28,24 @@ import ViewDetailStaff from "./Pages/ManageStaff/ViewDetailStaff";
 import LoadingPage from "./Pages/LoadingPage/LoadingPage";
 import { useEffect, useState } from "react";
 import VerifiedPage from "./Pages/SignUp/VerifiedPage";
+import i18n from "./i18n/i18n";
+import { I18nextProvider } from "react-i18next";
 function App() {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2800);
-    return () => clearTimeout(timer);
-  }, []);
-  if (isLoading) {
-    return <LoadingPage />;
-  }
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 2800);
+  //   return () => clearTimeout(timer);
+  // }, []);
+  // if (isLoading) {
+  //   return <LoadingPage />;
+  // }
 
   return (
+    <I18nextProvider i18n={i18n}>
     <Router>
       <ScrollToTop />
       <Routes>
@@ -82,6 +85,7 @@ function App() {
 
       </Routes>
     </Router >
+    </I18nextProvider>
   );
 }
 

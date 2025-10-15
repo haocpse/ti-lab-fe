@@ -4,8 +4,10 @@ import Navbar from "../../Components/Navbar/Navbar";
 import { fetchCoreCollection, fetchCollection } from "../../Services/ShopService";
 import './ShopCore.css';
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ShopCore = () => {
+    const { t } = useTranslation();
     const [coreBag, setCoreBag] = useState([])
     const [artistBag, setArtistBag] = useState([])
     const [pageCore, setPageCore] = useState(0);
@@ -44,7 +46,7 @@ const ShopCore = () => {
             <div className="shopcore-bg py-4">
                 <div className="container bg-white p-4 rounded">
                     <div className="d-flex justify-content-between align-items-center mb-3 shopcore-controls">
-                        <h2 className="mb-0 h2core mt-5" style={{ fontSize: "2.5rem" }}>CORE COLLECTION</h2>
+                        <h2 className="mb-0 h2core mt-5" style={{ fontSize: "2.5rem" }}>{t("shopcore.title")}</h2>
                         <div className="d-flex align-items-center gap-2">
                             <input
                                 type="text"
@@ -54,12 +56,12 @@ const ShopCore = () => {
                                 onChange={(e) => setSearchFunction(e.target.value)}
                                 style={{ width: "200px" }}
                             />
-                            <span>Sort By</span>
+                            <span>{t("shopcore.sortBy")}</span>
                             <select className="form-select form-select-sm" style={{ width: "140px" }}>
-                                <option>Best Sellers</option>
-                                <option>Newest</option>
-                                <option>Price: Low to High</option>
-                                <option>Price: High to Low</option>
+                                <option>{t("shopcore.sort.bestSellers")}</option>
+                                <option>{t("shopcore.sort.newest")}</option>
+                                <option>{t("shopcore.sort.priceLowHigh")}</option>
+                                <option>{t("shopcore.sort.priceHighLow")}</option>
                             </select>
                         </div>
 
@@ -108,19 +110,19 @@ const ShopCore = () => {
                     </nav>
 
 
-                    <h4 className="artistH4" style={{ fontSize: "2.5rem" }}>YOU MAY ALSO LIKE</h4>
+                    <h4 className="artistH4" style={{ fontSize: "2.5rem" }}> {t("shopcore.youMayAlsoLike")}</h4>
                     <hr className="custom-divider" />
                     <div className="mb-4">
                         <div className="row">
                             <div className="col-12">
                                 <div className="d-flex flex-column flex-md-row align-items-md-end justify-content-center">
                                     <div>
-                                        <h5 className="mb-4 mt-4 artistH5" style={{ fontSize: "2rem" }}>ARTIST COLLECTION</h5>
+                                        <h5 className="mb-4 mt-4 artistH5" style={{ fontSize: "2rem" }}>{t("shopcore.artistCollection")}</h5>
                                     </div>
 
                                 </div>
                                 <div className="mb-2 d-flex flex-column flex-md-row justify-content-center">
-                                    <Link to="/shop/artist-collection" className="seeMore" style={{ fontSize: "1rem" }}>See more</Link>
+                                    <Link to="/shop/artist-collection" className="seeMore" style={{ fontSize: "1rem" }}>{t("shopcore.seeMore")}</Link>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +138,7 @@ const ShopCore = () => {
                                                 style={{ maxWidth: "300px", height: "400px", objectFit: "cover" }}
                                             />
                                             <div className="fw-semibold text-dark artistName">{product.name}</div>
-                                            <div className="text-secondary artistName" style={{ fontSize: "0.95rem" }}>Artist Collection</div>
+                                            <div className="text-secondary artistName" style={{ fontSize: "0.95rem" }}>{t("shopcore.artistCollection")}</div>
                                         </div>
                                     </Link>
                                 </div>

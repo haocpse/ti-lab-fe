@@ -3,8 +3,10 @@ import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import avt from "../../assets/hinhdaidien.jpg";
 import { fetchProfileCustomer, fetchProfileOrder } from "../../Services/Profile";
+import { useTranslation } from "react-i18next";
 
 const Profile = () => {
+    const { t } = useTranslation();
     const [profile, setProfile] = useState(null);
     const [order, setOrder] = useState([]);
     const [profile1, setProfile1] = useState(null);
@@ -68,7 +70,7 @@ const Profile = () => {
             <Navbar />
             <div className="text-light min-vh-100 py-5" style={{ backgroundColor: "black" }}>
                 <div className="container">
-                    <h2 className="text-center mb-4 mt-5" style={{ color: "#caff01", fontSize: "2.5rem", fontWeight: 500 }}>YOUR ACCOUNT</h2>
+                    <h2 className="text-center mb-4 mt-5" style={{ color: "#caff01", fontSize: "2.5rem", fontWeight: 500 }}> {t("profile.title")}</h2>
 
                     <div className="d-flex justify-content-center mb-5">
                         <div
@@ -81,7 +83,7 @@ const Profile = () => {
                             }}
                             onClick={() => setCurrentTab("account")}
                         >
-                            Account Information
+                            {t("profile.accountInfo")}
                         </div>
                         <div
                             className={`pb-1 ${currentTab === "orders" ? "border-bottom border-2" : ""}`}
@@ -93,7 +95,7 @@ const Profile = () => {
                             }}
                             onClick={() => setCurrentTab("orders")}
                         >
-                            Latest List
+                            {t("profile.latestList")}
                         </div>
                     </div>
                     {currentTab === "account" ? (
@@ -108,19 +110,19 @@ const Profile = () => {
                             </div>
                             <div className="col-12 col-md-6">
                                 <div className="mb-3 d-flex">
-                                    <span className="me-3" style={{ width: 130, color: "#caff01" }}>Full name:</span>
+                                    <span className="me-3" style={{ width: 130, color: "#caff01" }}>{t("profile.fullName")}:</span>
                                     <span>{(profile?.fullName || "Name").toUpperCase()}</span>
                                 </div>
                                 <div className="mb-3 d-flex">
-                                    <span className="me-3" style={{ width: 130, color: "#caff01" }}>Date of birth:</span>
+                                    <span className="me-3" style={{ width: 130, color: "#caff01" }}> {t("profile.dob")}:</span>
                                     <span> {profile?.dob ? new Date(profile.dob).toLocaleDateString("en-GB") : "Birth"}</span>
                                 </div>
                                 <div className="mb-3 d-flex">
-                                    <span className="me-3" style={{ width: 130, color: "#caff01" }}>Phone number:</span>
+                                    <span className="me-3" style={{ width: 130, color: "#caff01" }}> {t("profile.phone")}:</span>
                                     <span>{profile1?.phone || "Phone"}</span>
                                 </div>
                                 <div className="mb-3 d-flex">
-                                    <span className="me-3" style={{ width: 130, color: "#caff01" }}>Email:</span>
+                                    <span className="me-3" style={{ width: 130, color: "#caff01" }}> {t("profile.email")}:</span>
                                     <span>{profile1?.email || "Gmail"}</span>
                                 </div>
                             </div>
@@ -129,16 +131,16 @@ const Profile = () => {
                         <div className="col-12 col-lg-10">
                             <div className="row mb-3 pb-2 border-bottom" style={{ borderColor: "#caff01 !important" }}>
                                 <div className="col-3">
-                                    <span style={{ color: "#caff01", fontWeight: 500 }}>Number ID</span>
+                                    <span style={{ color: "#caff01", fontWeight: 500 }}>{t("profile.orderId")}</span>
                                 </div>
                                 <div className="col-3">
-                                    <span style={{ color: "#caff01", fontWeight: 500 }}>Dates</span>
+                                    <span style={{ color: "#caff01", fontWeight: 500 }}>{t("profile.dates")}</span>
                                 </div>
                                 <div className="col-3">
-                                    <span style={{ color: "#caff01", fontWeight: 500 }}>Status</span>
+                                    <span style={{ color: "#caff01", fontWeight: 500 }}>{t("profile.status")}</span>
                                 </div>
                                 <div className="col-3">
-                                    <span style={{ color: "#caff01", fontWeight: 500 }}>Price</span>
+                                    <span style={{ color: "#caff01", fontWeight: 500 }}> {t("profile.price")}</span>
                                 </div>
                             </div>
                             {displayedOrders && displayedOrders.length > 0 ? (
@@ -164,7 +166,7 @@ const Profile = () => {
                                         </div>
                                     </div>
                                 ))
-                            ) : (<div>You dont have any orders.</div>)}
+                            ) : (<div>{t("profile.noOrders")}</div>)}
                             <nav>
                                 <ul className="pagination justify-content-center">
                                     <li className={`page-item ${page === 0 ? "disabled" : ""}`}>

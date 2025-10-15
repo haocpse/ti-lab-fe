@@ -1,0 +1,187 @@
+{
+  "home": {
+    "aboutLink": "Giới thiệu tí.lab",
+    "shopLink": "Mua sắm ngay"
+  },
+  "about": {
+    "title": "tí.lab",
+    "location": "Trụ sở tại TP. Hồ Chí Minh",
+    "description": "tí.lab là thương hiệu tiên phong biến túi mua sắm thông thường thành phụ kiện thời trang xanh: mỗi sản phẩm đều được làm từ vật liệu bền vững, mang phong cách Gen Z và lan tỏa thói quen sống xanh.",
+    "brandStoryTitle": "Câu chuyện thương hiệu",
+    "brandStoryText": "Khi thấy túi nhựa dùng một lần chất đống, chúng tôi đã biến túi mua sắm hàng ngày thành người bạn đồng hành có thể tái sử dụng. Mỗi chiếc túi tote được thiết kế nhỏ gọn, mang màu sắc đường phố Gen Z — một giải pháp thời trang giúp giảm thiểu rác thải.",
+    "visionTitle": "Tầm nhìn",
+    "visionText": "Trở thành biểu tượng xanh hàng đầu châu Á, nơi mỗi chiếc túi tái sử dụng khơi nguồn sáng tạo, gắn kết cộng đồng trẻ và góp phần xây dựng tương lai bền vững.",
+    "missionTitle": "Sứ mệnh",
+    "missionText": "Tái định nghĩa túi mua sắm truyền thống bằng thiết kế độc đáo và vật liệu bền vững, truyền cảm hứng tiêu dùng có trách nhiệm cho thế hệ trẻ.",
+    "contactTitle": "Liên hệ",
+    "phone": "+84 707804907",
+    "email": "tilab.green@gmail.com",
+    "instagram": "@tilab.green"
+  },
+  "membership": {
+    "welcome": "Chào mừng đến với",
+    "shopNow": "MUA SẮM NGAY",
+    "about": "GIỚI THIỆU",
+    "login": "ĐĂNG NHẬP",
+    "signup": "ĐĂNG KÝ",
+    "membershipTier": "cấp thành viên",
+    "pointsAway": "Bạn chỉ còn {{points}} điểm nữa để lên cấp!",
+    "redeemInfo1": "Đổi thưởng không ảnh hưởng đến tiến trình lên cấp.",
+    "redeemInfo2": "Hãy dùng điểm của bạn ngay để nhận ưu đãi đặc biệt!",
+    "title": "THÀNH VIÊN tí.lab",
+    "subtitle": " từng chiếc túi ý nghĩa.",
+    "subtitle1": "Tiến xa hơn",
+    "description": "Tham gia hành trình của tí.lab và nhận những phần thưởng đặc biệt khi bạn đồng hành cùng chúng tôi.",
+    "seed": "hạt mầm",
+    "seed1": "Phiếu quà tặng sinh nhật 5%",
+    "seed2": "Tiếp cận bộ sưu tập hợp tác cùng nghệ sĩ khi ra mắt công khai",
+    "seed3": "Nhận email giới thiệu bộ sưu tập mới của tí.lab",
+    "grow": "nảy mầm",
+    "grow1": "Phiếu quà tặng sinh nhật 10%",
+    "grow2": "Đặt trước bộ sưu tập hợp tác cùng nghệ sĩ sớm 24 giờ",
+    "grow3": "Nhận email bộ sưu tập mới của tí.lab",
+    "grow4": "Nhận bản tin hàng quý của tí.lab",
+    "glow": "toả sáng",
+    "glow1": "Phiếu quà tặng sinh nhật 15%",
+    "glow2": "Đặt trước bộ sưu tập hợp tác cùng nghệ sĩ sớm 48 giờ",
+    "glow3": "Nhận email bộ sưu tập mới của tí.lab",
+    "glow4": "Nhận bản tin hàng quý & được giới thiệu như tí.friend",
+    "glow5": "Nhận postcard hàng quý từ tí.lab",
+    "glow6": "Nhận quà sinh nhật bí mật từ tí.lab",
+    "simpleStart": "KHỞI ĐẦU GIẢN ĐƠN",
+    "simpleStart1": "Tham gia Membership tí.lab để nhận ngay những món quà độc quyền dành riêng cho bạn.",
+    "register": "đăng ký",
+    "register1": "Đăng nhập hoặc đăng ký bằng email để bắt đầu tích điểm.",
+    "earn": "tích điểm",
+    "earn1": "Thực hiện giao dịch và hoàn thành thử thách để gia tăng điểm thưởng của bạn.",
+    "level": "thăng hạng",
+    "level1": "Tích điểm nhiều hơn, lên hạng nhanh hơn!"
+  },
+  "shop": {
+    "reimagining": "Tái định nghĩa",
+    "reimagining1": "chiếc túi mua sắm ",
+    "reimagining2": "truyền thống",
+    "buyNow": "Mua ngay →",
+    "core": "BỘ SƯU TẬP NGUYÊN BẢN",
+    "seeMore": "Xem thêm →",
+    "noProduct": "Không có sản phẩm nào",
+    "artist": "BỘ SƯU TẬP",
+    "artist1": "NGHỆ SĨ",
+    "artistDesc": "Trong một thế giới hậu hiện đại bị bào mòn bởi sự tiêu thụ quá mức, rác thải và biến đổi khí hậu, những linh hồn lạc lối đầy kỳ thú dần xuất hiện — vừa đáng mến, vừa chất chứa nỗi buồn man mác.",
+    "details": "Đường nét tinh xảo  ",
+    "materials": "Chất liệu",
+    "materialsDesc": "100% sợi PP tái chế đan chặt — có thể chịu tải khoảng 20 kg mà không giãn, bền sau hơn 10.000 lần gấp. Lớp phủ mờ chống nước, chống bám bẩn; dễ dàng lau sạch. Lớp phủ chống tia UV giúp hình in luôn tươi sáng. Quai cotton gấp bốn, khâu hộp chắc chắn, mềm mại trên vai, độ bền kéo ≥ 60 N.",
+    "design": "Thiết kế",
+    "designDesc": "Đồ họa sống động, nổi bật giữa đám đông. Thiết kế mang thông điệp truyền cảm hứng sống bền vững. Dáng hộp cứng cáp, có thể đứng thẳng hoặc gấp phẳng để cất giữ dễ dàng.",
+    "experience": "Trải nghiệm",
+    "experienceDesc": "Bộ sưu tập #GrowWithYourBag — mỗi túi đi kèm hạt giống cúc vạn thọ và viên nén xơ dừa; trồng cây, quét mã QR tre trên túi và theo dõi hành trình túi-cây của bạn. Nhẹ nhưng bền, phù hợp cho việc đi chợ, tập gym hoặc dã ngoại cuối tuần.",
+    "environment": "Tác động môi trường",
+    "environmentDesc": "Mỗi sản phẩm mua giúp loại bỏ 1 kg rác nhựa khỏi các bãi biển Việt Nam — tiến trình được hiển thị trên bảng điều khiển cá nhân. Chương trình tái chế “5 ↔ 1” — đổi 5 túi đã qua sử dụng lấy 1 túi mới kèm ưu đãi 10%. Thay thế hàng trăm túi nhựa dùng một lần trong suốt vòng đời của sản phẩm."
+  },
+  "blog": {
+    "hero": {
+      "title1": "Từ phế liệu đến",
+      "title2": "Điều đặc biệt",
+      "subtitle": "Hành trình tạo nên túi tí.lab – nơi nhựa thừa",
+      "subtitle1": "trở thành thiết kế đầy ý nghĩa",
+      "readNow": "Đọc ngay"
+    },
+    "section1": {
+      "title": "phía sau chiếc túi",
+      "card1": {
+        "title1": "Từ phế liệu đến",
+        "title2": "Điều đặc biệt",
+        "desc": "Hành trình tạo nên túi tí.lab – nơi nhựa thừa được biến hóa thành thiết kế tinh tế."
+      },
+      "card2": {
+        "title1": "Khâu bằng tay,",
+        "title2": "Gửi cả sự chăm chút",
+        "desc": "Góc nhìn bên trong không gian làm việc của tí.lab và cách chúng tôi tạo nên từng chiếc túi có hồn."
+      },
+      "card3": {
+        "title1": "Vẻ đẹp của",
+        "title2": "Những điều còn sót lại",
+        "desc": "Lý do tí.lab chọn làm việc với rác nhựa và cách nó tạo nên sự độc đáo cho mỗi sản phẩm."
+      }
+    },
+    "section2": {
+      "title": "câu chuyện sống xanh",
+      "card1": {
+        "title1": "Một chiếc túi,",
+        "title2": "Trăm ngày mai",
+        "desc": "Bước khởi đầu của thay đổi – sử dụng túi tái sử dụng thay vì túi nhựa dùng một lần."
+      },
+      "card2": {
+        "title1": "Bắt đầu từ",
+        "title2": "Một điều xanh nhỏ bé",
+        "desc": "Chỉ một lựa chọn có ý thức – như chiếc túi của bạn – cũng đủ để thay đổi thói quen theo hướng tốt đẹp hơn."
+      },
+      "card3": {
+        "title1": "Quá nhiều túi,",
+        "title2": "Quá ít ý nghĩa",
+        "desc": "Về tình trạng sản xuất tràn lan túi tote và lý do tí.lab chọn làm ít nhưng chất lượng hơn."
+      }
+    },
+    "section3": {
+      "title": "túi & bạn",
+      "card1": {
+        "title1": "Một chiếc túi,",
+        "title2": "Trăm ngày mai",
+        "desc": "Bước khởi đầu của thay đổi – sử dụng túi tái sử dụng thay vì túi nhựa dùng một lần."
+      },
+      "card2": {
+        "title1": "Bắt đầu từ",
+        "title2": "Một điều xanh nhỏ bé",
+        "desc": "Chỉ một lựa chọn có ý thức – như chiếc túi của bạn – cũng đủ để thay đổi thói quen theo hướng tốt đẹp hơn."
+      },
+      "card3": {
+        "title1": "Quá nhiều túi,",
+        "title2": "Quá ít ý nghĩa",
+        "desc": "Về tình trạng sản xuất tràn lan túi tote và lý do tí.lab chọn làm ít nhưng chất lượng hơn."
+      }
+    }
+  },
+  "shopcore": {
+    "title": "BỘ SƯU TẬP NGUYÊN BẢN",
+    "searchPlaceholder": "Tìm kiếm theo tên...",
+    "sortBy": "Sắp xếp theo",
+    "sort": {
+      "bestSellers": "Bán chạy nhất",
+      "newest": "Mới nhất",
+      "priceLowHigh": "Giá: Thấp đến Cao",
+      "priceHighLow": "Giá: Cao đến Thấp"
+    },
+    "youMayAlsoLike": "CÓ THỂ BẠN SẼ THÍCH",
+    "artistCollection": "BỘ SƯU TẬP NGHỆ SĨ",
+    "seeMore": "Xem thêm"
+  },
+  "shopArtist": {
+    "artistCollection": "Bộ sưu tập Nghệ sĩ",
+    "coreCollection": "Bộ sưu tập Nguyên Bản",
+    "youMayAlsoLike": "Bạn cũng có thể thích",
+    "seeMore": "Xem thêm",
+    "searchPlaceholder": "Tìm theo tên...",
+    "sortBy": "Sắp xếp theo",
+    "sort": {
+      "bestSellers": "Bán chạy nhất",
+      "newest": "Mới nhất",
+      "lowToHigh": "Giá: Từ thấp đến cao",
+      "highToLow": "Giá: Từ cao đến thấp"
+    }
+  },
+  "profile": {
+    "title": "Tài khoản của bạn",
+    "accountInfo": "Thông tin tài khoản",
+    "latestList": "Danh sách đơn hàng",
+    "fullName": "Họ và tên",
+    "dob": "Ngày sinh",
+    "birth": "Sinh nhật",
+    "phone": "Số điện thoại",
+    "email": "Email",
+    "orderId": "Mã đơn hàng",
+    "dates": "Ngày đặt",
+    "status": "Trạng thái",
+    "price": "Giá",
+    "noOrders": "Bạn chưa có đơn hàng nào."
+  }
+}

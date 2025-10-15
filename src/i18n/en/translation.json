@@ -1,0 +1,187 @@
+{
+  "home": {
+    "aboutLink": "About tí.lab",
+    "shopLink": "Shop Now"
+  },
+  "about": {
+    "title": "About tí.lab",
+    "location": "Base in Ho Chi Minh City",
+    "description": "tí.lab is a trailblazer that reimagines the humble shopping bag into a green-lifestyle fashion accessory: every piece is made from sustainable materials, styled for Gen Z, and sparks eco-friendly habits.",
+    "brandStoryTitle": "Brand Story",
+    "brandStoryText": "When we saw single-use plastic bags piling up, we turned the everyday shopping bag into a reusable sidekick. We designed each tote bag into a pocket-size pouch finished in Gen Z-friendly street-style colors — a fashion fix that cuts waste.",
+    "visionTitle": "Vision",
+    "visionText": "To become Asia's leading green icon where every reusable bag sparks creativity, unites young communities, and helps build a sustainable future for the planet.",
+    "missionTitle": "Mission",
+    "missionText": "To reinvent the traditional shopping bag with distinctive design and sustainable materials, inspiring responsible consumption among the next generation.",
+    "contactTitle": "Contact",
+    "phone": "+84 707804907",
+    "email": "tilab.green@gmail.com",
+    "instagram": "@tilab.green"
+  },
+  "membership": {
+    "welcome": "Welcome to",
+    "shopNow": "SHOP NOW",
+    "about": "ABOUT",
+    "login": "LOGIN",
+    "signup": "SIGN UP",
+    "membershipTier": "membership tier",
+    "pointsAway": "You're just {{points}} POINTS away from leveling up!",
+    "redeemInfo1": "Redeeming rewards won't affect your progress toward the next level.",
+    "redeemInfo2": "Use your POINTS now to claim special offers!",
+    "title": "tí.lab MEMBERSHIP",
+    "subtitle": " one mindful bag at a time.",
+    "subtitle1": "Go futher",
+    "description": "Join tí.lab's journey and unlock thoughtful rewards as you grow with us.",
+    "seed": "seed",
+    "seed1": "Birthday voucher 5%",
+    "seed2": "Access artist collab collections at public launch",
+    "seed3": "Receive tí.lab new collection email",
+    "grow": "grow",
+    "grow1": "Birthday voucher 10%",
+    "grow2": "Pre-order artist collabs collection 24-hours early",
+    "grow3": "Receive tí.lab new collection email",
+    "grow4": "Receive tí.lab quarterly newsletter",
+    "glow": "glow",
+    "glow1": "Birthday voucher 15%",
+    "glow2": "Pre-order artist collabs collection 48-hours early",
+    "glow3": "Receive tí.lab new collection email",
+    "glow4": "Receive tí.lab quarterly newsletter & featured in as a tí.friend",
+    "glow5": "Receive tí.lab quarterly postcards",
+    "glow6": "Secret Birthday gift from tí.lab",
+    "simpleStart": "SIMPLE START",
+    "simpleStart1": "Redeem exclusive gifts by joining tí.lab's Membership program.",
+    "register": "register",
+    "register1": "Log in or sign up with your email to start earning points.",
+    "earn": "earn points",
+    "earn1": "Make purchases and complete missions to collect more points.",
+    "level": "level up",
+    "level1": "The more points you earn, the higher your tier."
+  },
+  "shop": {
+    "reimagining": "Reimagining",
+    "reimagining1": "the traditional",
+    "reimagining2": "shopping bag",
+    "buyNow": "Buy now →",
+    "core": "CORE COLLECTION",
+    "seeMore": "See more →",
+    "noProduct": "No product found",
+    "artist": "ARTIST",
+    "artist1": "COLLECTION",
+    "artistDesc": "In a post-modern world eroded by overconsumption, waste, and climate change, whimsical lost souls begin to appear — both endearing and melancholic.",
+    "details": "Details",
+    "materials": "materials",
+    "materialsDesc": "100% recycled woven PP — tightly interlaced polypropylene yarns that carry ≈ 20 kg without stretching, surviving 10,000+ folds. Matte lamination — water-repellent, stain-resistant; wipes clean in seconds. UV-shield coating — keeps prints vibrant even under frequent sunlight. Double cotton handles — four-fold box-stitching, soft on the shoulder, tensile strength ≥ 60 N.",
+    "design": "design",
+    "designDesc": "Eye-catching, vivid graphics that stand out in any crowd. Purpose-driven storytelling artwork to spark sustainable living inspiration. Rigid box silhouette that stands upright yet folds flat for easy storage when not in use.",
+    "experience": "experience",
+    "experienceDesc": "#GrowWithYourBag kit — every bag ships with marigold seeds + coco-pellet; plant it, scan the bamboo QR tag and track your bag-and-plant journey online. Feather-light yet sturdy; perfect for errands, gym, or weekend trips.",
+    "environment": "environment impact",
+    "environmentDesc": "1 kg of ocean-bound plastic removed from Vietnamese beaches for every purchase — progress visible on your personal dashboard. “5 ↔ 1” regeneration scheme — return any 5 used bags and get 1 fresh ReBag plus 10% off your next order. Replaces hundreds of single-use plastic bags over its multi-year lifespan."
+  },
+  "blog": {
+    "hero": {
+      "title1": "From Scraps to",
+      "title2": "Something Special",
+      "subtitle": "The making of tí.lab bag - how left over plastic",
+      "subtitle1": "becomes a thoughtful design",
+      "readNow": "Read now"
+    },
+    "section1": {
+      "title": "behind the bag",
+      "card1": {
+        "title1": "From Scraps to",
+        "title2": "Something Special",
+        "desc": "The making of a tí.lab bag – how leftover plastic becomes a thoughtful design."
+      },
+      "card2": {
+        "title1": "Stitched by Hand,",
+        "title2": "Held with Care",
+        "desc": "A glimpse into tí.lab's workspace and how we craft each meaningful bag."
+      },
+      "card3": {
+        "title1": "The Beauty of",
+        "title2": "What's Left Behind",
+        "desc": "Why tí.lab chooses to work with plastic waste and how it leads to unique creations."
+      }
+    },
+    "section2": {
+      "title": "green life stories",
+      "card1": {
+        "title1": "One Bag,",
+        "title2": "A Hundred Tomorrows",
+        "desc": "The first step of changing by showcasing a reusable bag over single-use plastic."
+      },
+      "card2": {
+        "title1": "Begin With",
+        "title2": "One Small Green Thing",
+        "desc": "How starting with one conscious choice—like your bag—can change habits for good."
+      },
+      "card3": {
+        "title1": "Too Many Bags,",
+        "title2": "Not Enough Meaning",
+        "desc": "On tote bag overproduction and why tí.lab focuses on making fewer, better bags."
+      }
+    },
+    "section3": {
+      "title": "bag & you",
+      "card1": {
+        "title1": "One Bag,",
+        "title2": "A Hundred Tomorrows",
+        "desc": "The first step of changing by showcasing a reusable bag over single-use plastic."
+      },
+      "card2": {
+        "title1": "Begin With",
+        "title2": "One Small Green Thing",
+        "desc": "How starting with one conscious choice—like your bag—can change habits for good."
+      },
+      "card3": {
+        "title1": "Too Many Bags,",
+        "title2": "Not Enough Meaning",
+        "desc": "On tote bag overproduction and why tí.lab focuses on making fewer, better bags."
+      }
+    }
+  },
+  "shopcore": {
+    "title": "CORE COLLECTION",
+    "searchPlaceholder": "Search by name...",
+    "sortBy": "Sort By",
+    "sort": {
+      "bestSellers": "Best Sellers",
+      "newest": "Newest",
+      "priceLowHigh": "Price: Low to High",
+      "priceHighLow": "Price: High to Low"
+    },
+    "youMayAlsoLike": "YOU MAY ALSO LIKE",
+    "artistCollection": "ARTIST COLLECTION",
+    "seeMore": "See more"
+  },
+  "shopArtist": {
+    "artistCollection": "Artist Collection",
+    "coreCollection": "Core Collection",
+    "youMayAlsoLike": "You May Also Like",
+    "seeMore": "See more",
+    "searchPlaceholder": "Search by name...",
+    "sortBy": "Sort By",
+    "sort": {
+      "bestSellers": "Best Sellers",
+      "newest": "Newest",
+      "lowToHigh": "Price: Low to High",
+      "highToLow": "Price: High to Low"
+    }
+  },
+  "profile": {
+    "title": "Your Account",
+    "accountInfo": "Account Information",
+    "latestList": "Latest List",
+    "fullName": "Full name",
+    "dob": "Date of birth",
+    "birth": "Birth",
+    "phone": "Phone number",
+    "email": "Email",
+    "orderId": "Number ID",
+    "dates": "Dates",
+    "status": "Status",
+    "price": "Price",
+    "noOrders": "You don't have any orders."
+  }
+}

@@ -16,12 +16,13 @@ import icon3 from "../../assets/Vector-2.png";
 import arrow from "../../assets/arrow.png";
 import { Link } from "react-router-dom";
 import { fetchProfileCustomer } from "../../Services/Profile";
+import { useTranslation } from "react-i18next";
 
 const Membership = () => {
 
     const [user, setUser] = useState(null);
     const [isLogined, setIsLogined] = useState(false);
-
+    const { t } = useTranslation();
 
     const fetchUserInfor = async () => {
 
@@ -65,16 +66,16 @@ const Membership = () => {
                         </div>
                         <div className="center">
                             <div className="welcome-content">
-                                <h1 className="welcome-title">Welcome to <span style={{ fontWeight: "bold", color: "#CAFF01" }}>tí.lab</span></h1>
+                                <h1 className="welcome-title">{t("membership.welcome")}{" "}<span style={{ fontWeight: "bold", color: "#CAFF01" }}>tí.lab</span></h1>
                                 {isLogined ? (
                                     <div className="welcome-buttons">
-                                        <Link to="/shop" className="btn-simple">SHOP NOW</Link>
-                                        <Link to="/about" className="btn-simple">ABOUT</Link>
+                                        <Link to="/shop" className="btn-simple">{t("membership.shopNow")}</Link>
+                                        <Link to="/about" className="btn-simple">{t("membership.about")}</Link>
                                     </div>
                                 ) : (
                                     <div className="welcome-buttons">
-                                        <Link to="/login" className="btn-simple">LOGIN</Link>
-                                        <Link to="/signup" className="btn-simple">SIGN UP</Link>
+                                        <Link to="/login" className="btn-simple">{t("membership.login")}</Link>
+                                        <Link to="/signup" className="btn-simple">{t("membership.signup")}</Link>
                                     </div>
                                 )}
                             </div>
@@ -93,7 +94,7 @@ const Membership = () => {
                                             className="text-center mb-4 nameTier"
                                             style={{ color: "#CAFF01", fontSize: "2.5rem", fontWeight: "400" }}
                                         >
-                                            {user?.fullName}'s membership tier
+                                            {user?.fullName}'s {t("membership.membershipTier")}
                                         </h2>
                                         <div className="tier-card bg-white rounded-4 p-4">
                                             <div className="d-flex justify-content-between align-items-center mb-4">
@@ -150,10 +151,10 @@ const Membership = () => {
                             <span className="brand-highlight">tí.lab</span> MEMBERSHIP
                         </h2>
                         <p className="lead text-light mb-2">
-                            Go further,<span style={{ fontWeight: "bold" }}> one mindful bag at a time.</span>
+                            {t("membership.subtitle1")},<span style={{ fontWeight: "bold" }}>{t("membership.subtitle")}{" "}</span>
                         </p>
                         <p className="text-light">
-                            Join tí.lab's journey and unlock thoughtful rewards as you grow with us.
+                            {t("membership.description")}{" "}
                         </p>
                     </div>
 
@@ -166,19 +167,19 @@ const Membership = () => {
                                     <div className="plan-icon mb-3">
                                         <img src={logo1} alt="Seed Plan Logo" className="plan-logo" />
                                     </div>
-                                    <h3 className="card-title plan-name">seed</h3>
+                                    <h3 className="card-title plan-name"> {t("membership.seed")}</h3>
                                     <ul className="list-unstyled text-start mt-3">
                                         <li className="d-flex align-items-start mb-2">
                                             <span className="check-icon me-2"> ✓</span>
-                                            <span>Birthday voucher 5%</span>
+                                            <span>{t("membership.seed1")}</span>
                                         </li>
                                         <li className="d-flex align-items-start mb-2">
                                             <span className="check-icon me-2"> ✓</span>
-                                            <span>Access artist collab collections at public launch</span>
+                                            <span>{t("membership.seed2")}</span>
                                         </li>
                                         <li className="d-flex align-items-start mb-2">
                                             <span className="check-icon me-2"> ✓</span>
-                                            <span>Receive tí.lab new collection email</span>
+                                            <span>{t("membership.seed3")}</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -192,23 +193,23 @@ const Membership = () => {
                                     <div className="plan-icon mb-3">
                                         <img src={logo2} alt="Seed Plan Logo" className="plan-logo" />
                                     </div>
-                                    <h3 className="card-title plan-name">grow</h3>
+                                    <h3 className="card-title plan-name">{t("membership.grow")}</h3>
                                     <ul className="list-unstyled text-start  mt-3">
                                         <li className="d-flex align-items-start mb-2">
                                             <span className="check-icon me-2">✓</span>
-                                            <span>Birthday voucher 10%</span>
+                                            <span>{t("membership.grow1")}</span>
                                         </li>
                                         <li className="d-flex align-items-start mb-2">
                                             <span className="check-icon me-2">✓</span>
-                                            <span>Pre-order artist collabs collection 24-hours early</span>
+                                            <span>{t("membership.grow2")}</span>
                                         </li>
                                         <li className="d-flex align-items-start mb-2">
                                             <span className="check-icon me-2">✓</span>
-                                            <span>Receive tí.lab new collection email</span>
+                                            <span>{t("membership.grow3")}</span>
                                         </li>
                                         <li className="d-flex align-items-start mb-2">
                                             <span className="check-icon me-2">✓</span>
-                                            <span>Receive tí.lab quarterly newsletter</span>
+                                            <span>{t("membership.grow4")}</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -222,31 +223,31 @@ const Membership = () => {
                                     <div className="plan-icon mb-3">
                                         <img src={logo3} alt="Seed Plan Logo" className="plan-logo" />
                                     </div>
-                                    <h3 className="card-title plan-name">glow</h3>
+                                    <h3 className="card-title plan-name">{t("membership.glow")}</h3>
                                     <ul className="list-unstyled text-start  mt-3">
                                         <li className="d-flex align-items-start mb-2">
                                             <span className="check-icon me-2">✓</span>
-                                            <span>Birthday voucher 15%</span>
+                                            <span>{t("membership.glow1")}</span>
                                         </li>
                                         <li className="d-flex align-items-start mb-2">
                                             <span className="check-icon me-2">✓</span>
-                                            <span>Pre-order artist collabs collection 48-hours early</span>
+                                            <span>{t("membership.glow2")}</span>
                                         </li>
                                         <li className="d-flex align-items-start mb-2">
                                             <span className="check-icon me-2">✓</span>
-                                            <span>Receive tí.lab new collection email</span>
+                                            <span>{t("membership.glow3")}</span>
                                         </li>
                                         <li className="d-flex align-items-start mb-2">
                                             <span className="check-icon me-2">✓</span>
-                                            <span>Receive tí.lab quarterly newsletter & featured in as a tí.friend</span>
+                                            <span>{t("membership.glow4")}</span>
                                         </li>
                                         <li className="d-flex align-items-start mb-2">
                                             <span className="check-icon me-2">✓</span>
-                                            <span>Receive tí.lab quarterly postcards</span>
+                                            <span>{t("membership.glow5")}</span>
                                         </li>
                                         <li className="d-flex align-items-start mb-2">
                                             <span className="check-icon me-2">✓</span>
-                                            <span>Secret Birthday gift from tí.lab</span>
+                                            <span>{t("membership.glow6")}</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -257,10 +258,10 @@ const Membership = () => {
                     {/* Phan simple */}
                     <div className="text-center">
                         <h2 className="display-4 fw-bold text-uppercase mb-3 simple-start-title" style={{ color: "#CAFF01" }}>
-                            SIMPLE START
+                            {t("membership.simpleStart")}
                         </h2>
                         <p className="lead text-light mb-5">
-                            Redeem exclusive gifts by joining tí.lab's Membership program.
+                            {t("membership.simpleStart1")}
                         </p>
 
                         <div className="row g-4 align-items-center justify-content-center">
@@ -269,9 +270,9 @@ const Membership = () => {
                                     <div className="step-icon mx-auto mb-3">
                                         <img src={icon1} alt="Seed Plan Logo" className="plan-logo" />
                                     </div>
-                                    <h4 className="h5 fw-bold mb-2">register</h4>
+                                    <h4 className="h5 fw-bold mb-2"> {t("membership.register")}</h4>
                                     <p className="small text-light">
-                                        Log in or sign up with your email to start earning points.
+                                        {t("membership.register1")}
                                     </p>
                                 </div>
                             </div>
@@ -287,9 +288,9 @@ const Membership = () => {
                                     <div className="step-icon mx-auto mb-3">
                                         <img src={icon2} alt="Seed Plan Logo" className="plan-logo" />
                                     </div>
-                                    <h4 className="h5 fw-bold mb-2">earn points</h4>
+                                    <h4 className="h5 fw-bold mb-2"> {t("membership.earn")}</h4>
                                     <p className="small text-light">
-                                        Make purchases and complete missions to collect more points.
+                                        {t("membership.earn1")}
                                     </p>
                                 </div>
                             </div>
@@ -305,9 +306,9 @@ const Membership = () => {
                                     <div className="step-icon mx-auto mb-3">
                                         <img src={icon3} alt="Seed Plan Logo" className="plan-logo" />
                                     </div>
-                                    <h4 className="h5 fw-bold mb-2">level up</h4>
+                                    <h4 className="h5 fw-bold mb-2"> {t("membership.level")}</h4>
                                     <p className="small text-light">
-                                        The more points you earn, the higher your tier.
+                                        {t("membership.level1")}
                                     </p>
                                 </div>
                             </div>

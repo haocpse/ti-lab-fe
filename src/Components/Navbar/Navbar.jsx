@@ -5,12 +5,22 @@ import logoGreen from "../../assets/tí.lab_logo-05.png";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { fetchCartNumber } from "../../Services/CartService";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
     const [isLogined, setIsLogined] = useState(false);
     const [cartCount, setCartCount] = useState(0);
     const navigate = useNavigate();
+    const { i18n } = useTranslation();
+    const [language, setLanguage] = useState(i18n.language || "vi");
 
+    const changeLanguage = () => {
+        const newLang = language === "vi" ? "en" : "vi";
+        i18n.changeLanguage(newLang);       
+        localStorage.setItem("lang", newLang);
+        setLanguage(newLang);
+      };
+      
     const isMembershipPage = location.pathname === "/membership" ||
         location.pathname === "/login" ||
         location.pathname === "/signup" ||
@@ -38,7 +48,7 @@ const Navbar = () => {
             console.error("Error fetching cart number:", error);
         }
     };
-    
+
 
 
     useEffect(() => {
@@ -90,7 +100,7 @@ const Navbar = () => {
     console.log("Cart count state in Navbar:", cartCount);
 
     return (
-        
+
         <nav className={`navbar fixed-top navbar-expand-lg px-4 ${isMembershipPage ? "navbar-dark" : "navbar-light"} ${(isMembershipPage ? "bg-black" : "bg-white")}`}>
             <div className="container-fluid">
 
@@ -209,6 +219,31 @@ const Navbar = () => {
                                 <span className="cart-count-badge">{cartCount}</span>
                             )}
                         </div>
+                        <div className="checkbox-wrapper-35">
+                            <input
+                                value="private"
+                                name="switch"
+                                id="switch"
+                                type="checkbox"
+                                className="switch"
+                                checked={language === "en"}
+                                onChange={changeLanguage}
+                            />
+                            <label htmlFor="switch">
+                                <span className="switch-x-text">
+                                    {i18n.language === "vi" ? "🇻🇳" : "🇬🇧"}
+                                </span>
+                                <span className="switch-x-toggletext">
+                                    <span className="switch-x-unchecked">
+                                        <span className="switch-x-hiddenlabel">Unchecked: </span>VI
+                                    </span>
+                                    <span className="switch-x-checked">
+                                        <span className="switch-x-hiddenlabel">Checked: </span>EN
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+
                     </div>
                 </div>
             </div>
