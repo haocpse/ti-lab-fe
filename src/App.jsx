@@ -46,45 +46,45 @@ function App() {
 
   return (
     <I18nextProvider i18n={i18n}>
-    <Router>
-      <ScrollToTop />
-      <Routes>
+      <Router>
+        <ScrollToTop />
+        <Routes>
 
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/membership" element={<Membership />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/custom" element={<Custom />} />
-        <Route path="/shop/core-collection" element={<ShopCore />} />
-        <Route path="/shop/core-collection/:id" element={<ShopViewDetail />} />
-        <Route path="/shop/artist-collection" element={<ShopArtist />} />
-        <Route path="/shop/artist-collection/:id" element={<ShopViewDetail />} />
-        <Route path="/shop/cart" element={<ShopCart />} />
-        <Route path="/customer/profile" element={<Profile />} />
-        <Route path="/verified" element={<VerifiedPage />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/membership" element={<Membership />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/custom" element={<Custom />} />
+          <Route path="/shop/core-collection" element={<ShopCore />} />
+          <Route path="/shop/core-collection/:id" element={<ShopViewDetail />} />
+          <Route path="/shop/artist-collection" element={<ShopArtist />} />
+          <Route path="/shop/artist-collection/:id" element={<ShopViewDetail />} />
+          <Route path="/shop/cart" element={<ShopCart />} />
+          <Route path="/customer/profile" element={<Profile />} />
+          <Route path="/verified" element={<VerifiedPage />} />
 
 
-        <Route element={<ProtectedRoutesAdmin />}>
-          <Route path='/admin' element={<LayoutAdmin />}>
-            <Route path="manage-bag" element={<ManageBag />} />
-            <Route path="manage-bag/view/:id" element={<ViewDetailBag />} />
-            <Route path="manage-collection" element={<ManageCollection />} />
-            <Route path="manage-collection/view/:id" element={<ViewDetailCollection />} />
-            <Route path="manage-staff" element={<ManageStaff />} />
-            <Route path="manage-staff/view/:id" element={<ViewDetailStaff />} />
-            <Route path="manage-customer" element={<ManageCustomer />} />
-            <Route path="manage-customer/view/:id" element={<ViewDetailCustomer />} />
-            <Route path="manage-order" element={<ManageOrder />} />
+          <Route element={<ProtectedRoutesAdmin />}>
+            <Route path='/admin' element={<LayoutAdmin />}>
+              <Route path="manage-bag" element={<ManageBag />} />
+              <Route path="manage-bag/view/:id" element={<ViewDetailBag />} />
+              <Route path="manage-collection" element={<ManageCollection />} />
+              <Route path="manage-collection/view/:id" element={<ViewDetailCollection />} />
+              <Route path="manage-staff" element={<ManageStaff />} />
+              <Route path="manage-staff/view/:id" element={<ViewDetailStaff />} />
+              <Route path="manage-customer" element={<ManageCustomer />} />
+              <Route path="manage-customer/view/:id" element={<ViewDetailCustomer />} />
+              <Route path="manage-order" element={<ManageOrder />} />
+            </Route>
           </Route>
-        </Route>
 
 
 
-      </Routes>
-    </Router >
+        </Routes>
+      </Router >
     </I18nextProvider>
   );
 }

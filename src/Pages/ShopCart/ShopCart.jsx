@@ -8,8 +8,10 @@ import { fetchProfileCustomer } from "../../Services/Profile";
 import './ShopCart.css';
 import { Toast } from "bootstrap";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const ShopCart = () => {
+    const { t } = useTranslation();
     const [cart, setCart] = useState([]);
     const [coupons, setCoupons] = useState([]);
     const [selectedCoupon, setSelectedCoupon] = useState(null);
@@ -169,28 +171,28 @@ const ShopCart = () => {
                     style={{ textAlign: "center", fontWeight: "bold" }}
                     className="py-5 textPlatForm"
                 >
-                    {currentTab === 2 ? "CHECKOUT" : currentTab === 3 ? "COMPLETE !!" : "CART"}
+                    {currentTab === 2 ? t("cart.checkoutTitle") : currentTab === 3 ? t("cart.completeTitle") : t("cart.cartTitle")}
                 </h2>
 
                 <div className="d-flex justify-content-center mb-5">
                     <div className={`me-5 textDmSan border-bottom border-2 pb-1 ${currentTab >= 1 ? 'text-dark fw-bold border-dark' : 'text-muted'}`} >
                         <span className={`badge ${currentTab >= 1 ? 'bg-primary' : 'bg-secondary'} me-2`}>1</span>
-                        Shopping cart
+                        {t("cart.shoppingCart")}
                     </div>
 
                     <div className={`me-5 border-bottom border-2 ${currentTab >= 2 ? 'text-dark fw-bold border-dark' : 'text-muted'}`} >
                         <span className={`badge ${currentTab >= 2 ? 'bg-primary' : 'bg-secondary'} me-2`}>2</span>
-                        Checkout details
+                        {t("cart.checkoutDetails")}
                     </div>
 
                     <div className={`me-5 border-bottom border-2 ${currentTab >= 3 ? 'text-dark fw-bold border-dark' : 'text-muted'}`} >
                         <span className={`badge ${currentTab >= 3 ? 'bg-primary' : 'bg-secondary'} me-2`}>3</span>
-                        QR Pay
+                        {t("cart.qrPay")}
                     </div>
 
                     <div className={`border-bottom border-2 ${currentTab >= 4 ? 'text-dark fw-bold border-dark' : 'text-muted'}`}  >
                         <span className={`badge ${currentTab >= 4 ? 'bg-primary' : 'bg-secondary'} me-2`}>4</span>
-                        Order completed
+                        {t("cart.orderCompleted")}
                     </div>
 
                 </div>
@@ -203,16 +205,16 @@ const ShopCart = () => {
                             <>
                                 {cart.length === 0 ? (
                                     <div className="text-center py-5 text-muted">
-                                        Please select something to buy in Tí.lab shop
+                                        {t("cart.emptyCart")}
                                     </div>
                                 ) : (
                                     <table className="table align-middle textDmSan">
                                         <thead>
                                             <tr>
-                                                <th>Product</th>
-                                                <th style={{ width: "150px" }}>Quantity</th>
-                                                <th>Total</th>
-                                                <th>Action</th>
+                                                <th> {t("cart.product")}</th>
+                                                <th style={{ width: "150px" }}>{t("cart.quantity")}</th>
+                                                <th>{t("cart.total")}</th>
+                                                <th>{t("cart.action")}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -277,7 +279,7 @@ const ShopCart = () => {
                                     </table>
                                 )}
                                 <Link to={"/shop"} className="btn btn-outline-dark mb-4 textDmSan">
-                                    Update Cart
+                                    {t("cart.updateCart")}
                                 </Link>
                             </>
                         )}
@@ -293,7 +295,7 @@ const ShopCart = () => {
 
                                                 {/* Contact */}
                                                 <div className="mb-4">
-                                                    <h5 className="fw-semibold mb-3">Contact</h5>
+                                                    <h5 className="fw-semibold mb-3">  {t("cart.contact")}</h5>
                                                     <div className="form-floating mb-3">
                                                         <input
                                                             type="email"
@@ -310,13 +312,13 @@ const ShopCart = () => {
                                                                 fontSize: '14px'
                                                             }}
                                                         />
-                                                        <label htmlFor="email" className="text-secondary">Email</label>
+                                                        <label htmlFor="email" className="text-secondary">{t("cart.email")}</label>
                                                     </div>
                                                 </div>
 
                                                 {/* Address */}
                                                 <div className="mb-4">
-                                                    <h5 className="fw-semibold mb-3">Shopping address</h5>
+                                                    <h5 className="fw-semibold mb-3">{t("cart.shoppingAddress")}</h5>
 
                                                     <div className="form-floating mb-3">
                                                         <input
@@ -334,7 +336,7 @@ const ShopCart = () => {
                                                                 fontSize: '14px'
                                                             }}
                                                         />
-                                                        <label htmlFor="fullName" className="text-secondary">Full Name</label>
+                                                        <label htmlFor="fullName" className="text-secondary">{t("cart.fullName")}</label>
                                                     </div>
 
                                                     <div className="form-floating mb-3">
@@ -351,7 +353,7 @@ const ShopCart = () => {
                                                                 border: '2px solid #dee2e6'
                                                             }}
                                                         />
-                                                        <label htmlFor="address" className="text-secondary">Address</label>
+                                                        <label htmlFor="address" className="text-secondary">{t("cart.address")}</label>
                                                     </div>
 
                                                     <div className="form-floating mb-3">
@@ -368,13 +370,13 @@ const ShopCart = () => {
                                                                 border: '2px solid #dee2e6'
                                                             }}
                                                         />
-                                                        <label htmlFor="phone" className="text-secondary">Phone</label>
+                                                        <label htmlFor="phone" className="text-secondary">{t("cart.phone")}</label>
                                                     </div>
                                                 </div>
 
                                                 {/* Payment */}
                                                 <div className="mb-3">
-                                                    <h5 className="fw-semibold mb-3">Pay</h5>
+                                                    <h5 className="fw-semibold mb-3">{t("cart.pay")}</h5>
 
                                                     <div className="mb-3">
                                                         <div className="card border-2" style={{ borderRadius: '8px', borderColor: '#dee2e6', backgroundColor: '#f8f9fa' }}>
@@ -389,7 +391,7 @@ const ShopCart = () => {
                                                                         style={{ accentColor: '#28a745' }}
                                                                     />
                                                                     <label className="form-check-label fw-normal" htmlFor="CARD">
-                                                                        Payment via VNPAY-QR
+                                                                        {t("cart.paymentVnpay")}
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -410,7 +412,7 @@ const ShopCart = () => {
                                                                         style={{ accentColor: '#28a745' }}
                                                                     />
                                                                     <label className="form-check-label fw-normal" htmlFor="COD">
-                                                                        Cash on Delivery (COD)
+                                                                        {t("cart.paymentCod")}
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -449,10 +451,10 @@ const ShopCart = () => {
 
                                             <div className="mb-4">
                                                 <h2 className="fw-light text-uppercase mb-0" style={{ letterSpacing: '2px', fontSize: '24px' }}>
-                                                    YOUR ORDER
+                                                    {t("cart.yourOrder")}
                                                 </h2>
                                                 <h2 className="fw-light text-uppercase" style={{ letterSpacing: '2px', fontSize: '24px' }}>
-                                                    HAS BEEN RECEIVED
+                                                    {t("cart.recieved")}
                                                 </h2>
                                             </div>
                                         </div>
@@ -466,14 +468,14 @@ const ShopCart = () => {
                     {currentTab === 3 && qrUrl && (
                         <div className="container d-flex align-items-center justify-content-center">
                             <div className="card shadow-sm p-4 text-center">
-                                <h4>Scan QR Code to pay</h4>
+                                <h4>{t("cart.scanQr")}</h4>
                                 <img src={qrUrl} alt="QR Payment" style={{ width: "300px", margin: "20px auto" }} />
                                 <button
                                     className="btn mt-3 fw-bold"
                                     onClick={checkPaymentStatus}
                                     style={{ backgroundColor: "#0168EB", color: "white" }}
                                 >
-                                    Checkout Transaction
+                                    {t("cart.checkoutTransaction")}
                                 </button>
                             </div>
                         </div>
@@ -485,7 +487,7 @@ const ShopCart = () => {
                     {(currentTab === 1 || currentTab === 2) && (
                         <div className="col-md-4">
                             <div className="border p-3 rounded textDmSan">
-                                <h6>Order Summary</h6>
+                                <h6>{t("cart.orderSummary")}</h6>
 
                                 {/* voucher */}
                                 <div className="d-flex mb-3">
@@ -499,10 +501,10 @@ const ShopCart = () => {
                                             setSelectedCoupon(chosen || null);
                                         }}
                                     >
-                                        <option value=""> Discount voucher </option>
+                                        <option value=""> {t("cart.discountVoucher")} </option>
                                         {coupons.map((coupon) => (
                                             <option key={coupon.couponId} value={coupon.couponId}>
-                                                {coupon.code} - Discount  {coupon.discount * 100}%
+                                                {coupon.code} - {t("cart.disc")}  {coupon.discount * 100}%
                                             </option>
                                         ))}
                                     </select>
@@ -519,16 +521,16 @@ const ShopCart = () => {
                                 )}
 
                                 <div className="d-flex justify-content-between mb-2">
-                                    <span>Delivery fee</span>
+                                    <span>{t("cart.deliveryFee")}</span>
                                     <span>0 VND</span>
                                 </div>
                                 <div className="d-flex justify-content-between mb-2">
-                                    <span>Sub Total</span>
+                                    <span>{t("cart.subTotal")}</span>
                                     <span>{subTotal.toLocaleString()} VND</span>
                                 </div>
                                 <hr />
                                 <div className="d-flex justify-content-between mb-3">
-                                    <strong>Total</strong>
+                                    <strong>{t("cart.total1")}</strong>
                                     <strong>{total.toLocaleString()} VND</strong>
                                 </div>
                                 <div className="d-flex gap-2">
@@ -537,7 +539,7 @@ const ShopCart = () => {
                                             className="btn btn-outline-secondary w-50 textDmSan"
                                             onClick={() => setCurrentTab(1)}
                                         >
-                                            Back
+                                            {t("cart.back")}
                                         </button>
                                     )}
                                     <button
@@ -566,12 +568,12 @@ const ShopCart = () => {
                                                 role="status"
                                                 aria-hidden="true"
                                             ></span>
-                                            Processing...
+                                            {t("cart.processing")}...
                                         </>
                                     ) : currentTab === 1 ? (
-                                        "Checkout Now"
+                                        t("cart.checkoutNow")
                                     ) : (
-                                        "Order"
+                                        t("cart.order")
                                     )}
                                     </button>
                                 </div>

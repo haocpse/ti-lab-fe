@@ -7,8 +7,10 @@ import { toast } from "react-toastify";
 import { fetchCoreCollection, fetchArtistCollection } from "../../Services/ShopService";
 import AxiosSetup from "../../Services/AxiosSetup";
 import { fetchViewDetailBag } from "../../Services/ShopViewDetail";
+import { useTranslation } from "react-i18next";
 
 const ShopViewDetail = () => {
+    const { t } = useTranslation();
     const [bag, setBag] = useState([])
     const { id } = useParams();
     const [quantity, setQuantity] = useState(1);
@@ -123,7 +125,7 @@ const ShopViewDetail = () => {
                             <h3 className="mt-3 mt-lg-0 mb-2 bagNameDetail">{bag?.name || "Túi xách 1"}</h3>
                             <hr className="custom-divider1" />
                             <p className="mb-2 bagDescription">{bag?.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc et tincidunt luctus, ligula arcu pulvinar purus, in fringilla nisl neque ut nisl. Curabitur vitae risus nec nulla ullamcorper tincidunt. Aenean eget sapien sit amet urna facilisis venenatis. Vivamus auctor, justo a dapibus posuere, magna lectus tincidunt libero, sit amet feugiat orci metus a justo. Phasellus eget erat a risus vehicula tincidunt."} </p>
-                            <p className="bagDescription">Artwork by {(bag?.author || "HoangLong").toUpperCase()}.</p>
+                            <p className="bagDescription">{t("shopDetail.artworkBy")}: {(bag?.author || "HoangLong").toUpperCase()}.</p>
 
                             <div className="mb-2">
                                 <span className="fw-bold fs-1 text-dark bagNameDetail">{bag?.price?.toLocaleString() || "120.000"} VND</span>
@@ -132,11 +134,11 @@ const ShopViewDetail = () => {
                                 } */}
                             </div>
                             <div className="mb-2">
-                                <span className="text-danger">tí.lab’s Secret Price : <span className="fw-bold text-danger fs-5">{bag?.secretPrice || "Recieve more Vouchers"}</span></span>
+                                <span className="text-danger"> {t("shopDetail.secretPrice")}: <span className="fw-bold text-danger fs-5">{bag?.secretPrice || t("shopDetail.moreVoucher")}</span></span>
                             </div>
                             <hr />
                             <div className="mb-3 text-secondary bagDescription">
-                                Measurements<br />
+                                {t("shopDetail.measurements")}<br />
                                 {bag?.length && bag?.weight ? `${bag?.length} cm (L) x ${bag?.weight} cm (W)` : "55cm (L) x 50cm (W)"}
                             </div>
 
@@ -161,64 +163,64 @@ const ShopViewDetail = () => {
                                     style={{ width: "600px" }}
                                     onClick={addToCart}
                                 >
-                                    ADD TO CART
+                                    {t("shopDetail.addToCart")}
                                 </button>
                             </div>
-                            <Link to="/shop/cart" className="btn w-100 mb-3" style={{ background: "#CAFF01", color: "#222", fontWeight: 600 }}> BUY IT NOW </Link>
+                            <Link to="/shop/cart" className="btn w-100 mb-3" style={{ background: "#CAFF01", color: "#222", fontWeight: 600 }}> {t("shopDetail.buyItNow")} </Link>
 
                             <div className="accordion" id="bagDetailAccordion">
                                 <div className="accordion-item">
                                     <h2 className="accordion-header" id="storyHeading">
                                         <button className="accordion-button bagDescription" type="button" data-bs-toggle="collapse" data-bs-target="#storyCollapse" aria-expanded="true" aria-controls="storyCollapse">
-                                            Story
+                                            {t("shopDetail.story")}
                                         </button>
                                     </h2>
                                     <div id="storyCollapse" className="accordion-collapse collapse show bagDescription" aria-labelledby="storyHeading" data-bs-parent="#bagDetailAccordion">
                                         <div className="accordion-body">
-                                            {bag?.story || "The bag is designed to be large and spacious so you can hold many items from documents to clothes or other miscellaneous things. A zipper at the top adds security, combined with handy internal pockets ensuring you don't have to scramble to find your keys. Versatile and fashionable design."}
+                                            {bag?.story || t("shopDetail.defaultStory")}
                                         </div>
                                     </div>
                                 </div>
                                 <div className="accordion-item">
                                     <h2 className="accordion-header" id="materialHeading">
                                         <button className="accordion-button collapsed bagDescription" type="button" data-bs-toggle="collapse" data-bs-target="#materialCollapse" aria-expanded="false" aria-controls="materialCollapse">
-                                            Material
+                                            {t("shopDetail.material")}
                                         </button>
                                     </h2>
                                     <div id="materialCollapse" className="accordion-collapse collapse bagDescription" aria-labelledby="materialHeading" data-bs-parent="#bagDetailAccordion">
                                         <div className="accordion-body">
-                                            {bag?.material || "High-quality canvas/cotton, sturdy & fashionable."}
+                                            {bag?.material || t("shopDetail.defaultMaterial")}
                                         </div>
                                     </div>
                                 </div>
                                 <div className="accordion-item">
                                     <h2 className="accordion-header" id="designHeading">
                                         <button className="accordion-button collapsed bagDescription" type="button" data-bs-toggle="collapse" data-bs-target="#designCollapse" aria-expanded="false" aria-controls="designCollapse">
-                                            Design
+                                            {t("shopDetail.design")}
                                         </button>
                                     </h2>
                                     <div id="designCollapse" className="accordion-collapse collapse bagDescription" aria-labelledby="designHeading" data-bs-parent="#bagDetailAccordion">
                                         <div className="accordion-body">
-                                            {bag?.design || "Unique design by artist."}
+                                            {bag?.design || t("shopDetail.defaultDesign")}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <h4 className="artistH4" style={{ fontSize: "2.5rem" }}>YOU MAY ALSO LIKE</h4>
+                        <h4 className="artistH4" style={{ fontSize: "2.5rem" }}>  {t("shopDetail.youMayLike")}</h4>
                         <hr className="custom-divider" />
                         <div className="mb-4">
                             <div className="row">
                                 <div className="col-12">
                                     <div className="d-flex flex-column flex-md-row align-items-md-end justify-content-center">
                                         <div>
-                                            <h5 className="mb-4 mt-4 artistH5" style={{ fontSize: "2rem" }}>CORE COLLECTION</h5>
+                                            <h5 className="mb-4 mt-4 artistH5" style={{ fontSize: "2rem" }}>  {t("shopDetail.coreCollection")}</h5>
                                         </div>
 
                                     </div>
                                     <div className="mb-2 d-flex flex-column flex-md-row justify-content-center">
-                                        <Link to="/shop/artist-collection" className="seeMore" style={{ fontSize: "1rem" }}>See more</Link>
+                                        <Link to="/shop/artist-collection" className="seeMore" style={{ fontSize: "1rem" }}> {t("shopDetail.seeMore")}</Link>
                                     </div>
                                 </div>
                             </div>
@@ -234,7 +236,7 @@ const ShopViewDetail = () => {
                                                     style={{ maxWidth: "300px", height: "400px", objectFit: "cover" }}
                                                 />
                                                 <div className="fw-semibold text-dark artistName">{product.name}</div>
-                                                <div className="text-secondary artistName" style={{ fontSize: "0.95rem" }}>Artist Collection</div>
+                                                <div className="text-secondary artistName" style={{ fontSize: "0.95rem" }}> {t("shopDetail.artistCollection")}</div>
                                             </div>
                                         </Link>
                                     </div>
@@ -247,12 +249,12 @@ const ShopViewDetail = () => {
                                 <div className="col-12">
                                     <div className="d-flex flex-column flex-md-row align-items-md-end justify-content-center">
                                         <div>
-                                            <h5 className="mb-4 mt-4 artistH5" style={{ fontSize: "2rem" }}>ARTIST COLLECTION</h5>
+                                            <h5 className="mb-4 mt-4 artistH5" style={{ fontSize: "2rem" }}>{t("shopDetail.artistCollection")}</h5>
                                         </div>
 
                                     </div>
                                     <div className="mb-2 d-flex flex-column flex-md-row justify-content-center">
-                                        <Link to="/shop/artist-collection" className="seeMore" style={{ fontSize: "1rem" }}>See more</Link>
+                                        <Link to="/shop/artist-collection" className="seeMore" style={{ fontSize: "1rem" }}>{t("shopDetail.seeMore")}</Link>
                                     </div>
                                 </div>
                             </div>
@@ -268,7 +270,7 @@ const ShopViewDetail = () => {
                                                     style={{ maxWidth: "300px", height: "400px", objectFit: "cover" }}
                                                 />
                                                 <div className="fw-semibold text-dark artistName">{product.name}</div>
-                                                <div className="text-secondary artistName" style={{ fontSize: "0.95rem" }}>Artist Collection</div>
+                                                <div className="text-secondary artistName" style={{ fontSize: "0.95rem" }}>{t("shopDetail.artistCollection")}</div>
                                             </div>
                                         </Link>
                                     </div>
