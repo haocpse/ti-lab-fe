@@ -6,11 +6,16 @@ import bag2 from "../../assets/membership2.png";
 import bag3 from "../../assets/membership3.png";
 import bag4 from "../../assets/membership4.png";
 import bag5 from "../../assets/membership5.png";
+import gg1 from "../../assets/gg1.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import "./Login.css";
 import { login as loginService } from "../../Services/LoginService";
 import { toast, ToastContainer } from "react-toastify";
+import AxiosSetup from "../../Services/AxiosSetup";
+import { GoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
+
 
 const Login = () => {
     const [account, setAccount] = useState('');
@@ -67,9 +72,36 @@ const Login = () => {
         }
     }
 
+    const handleGoogleLogin = async (tokenResponse  ) => {
+        try {
+            const token = tokenResponse.access_token;
+            const response = await AxiosSetup.post('/google-login', { token });
+            localStorage.setItem('token', response.data.data.token);
+
+            toast.success("Login Successfully");
+
+            const roles = getRoleFromToken();
+            if (roles === "ADMIN") {
+                navigate('/admin');
+            } else if (roles === "CUSTOMER") {
+                navigate('/');
+            } else {
+                navigate('/');
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("Google Login Failed");
+        }
+    };
+
     const handleClose = () => {
         navigate('/');
     }
+    const login = useGoogleLogin({
+        onSuccess: (credentialResponse) => handleGoogleLogin(credentialResponse),
+        onError: () => toast.error("Google Login Failed"),
+      });
+      
 
     return (
         <>
@@ -117,8 +149,8 @@ const Login = () => {
                             <button className="social-btn facebook-btn">
                                 <i className="fab fa-facebook-f"></i>
                             </button>
-                            <button className="social-btn google-btn">
-                                <i className="fab fa-google"></i>
+                            <button className="social-btn google-btn" onClick={() => login()}>
+                                <img src={gg1} alt="Google" style={{ width: 20, height: 20 }} />
                             </button>
                         </div>
 
