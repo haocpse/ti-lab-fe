@@ -52,7 +52,7 @@ const Shop = () => {
                 <div className="backgoundImg mb-5 d-none d-lg-block">
                     <img src={bgg} alt="" style={{ width: "400px", marginTop: "180px" }} />
                     <p style={{ lineHeight: "1.2" }}>{t("shop.reimagining")} <br />{t("shop.reimagining1")}<br />{t("shop.reimagining2")}</p>
-                    <Link to="/shop/artist-collection" className=" text-dark fw-meidum" style={{ marginLeft: "60px" }}>
+                    <Link to="/shop/artist-collection" className=" text-dark fw-meidum link-thin-underline" style={{ marginLeft: "60px" }}>
                         {t("shop.buyNow")}
                     </Link>
                 </div>
@@ -62,9 +62,9 @@ const Shop = () => {
                     <div className="col-12 col-xl-10">
                         <div className="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-2">
 
-                            <h2 className="fw-bold fs-1 mb-0 text-dark">{t("shop.core")}</h2>
+                            <h2 className="fs-1 mb-0 text-dark" style={{ fontWeight: "400" }}>{t("shop.core")}</h2>
 
-                            <Link to="/shop/core-collection" className="text-decoration-none text-dark fw-medium">
+                            <Link to="/shop/core-collection" className="text-dark link-thin-underline">
                                 {t("shop.seeMore")}
                             </Link>
                         </div>
@@ -99,7 +99,7 @@ const Shop = () => {
                                                 </div>
 
                                                 <div className="card-body text-start">
-                                                    <h5 className="card-title text-dark fw-semibold mb-2"
+                                                    <h5 className="card-title text-dark mb-2 cardd"
                                                         style={{
                                                             fontSize: "1rem",
                                                             lineHeight: "1.4",
@@ -107,11 +107,11 @@ const Shop = () => {
                                                             overflow: "hidden",
                                                             display: "-webkit-box",
                                                             WebkitLineClamp: "2",
-                                                            WebkitBoxOrient: "vertical"
+                                                            WebkitBoxOrient: "vertical",
                                                         }}>
                                                         {product.name}
                                                     </h5>
-                                                    <p className="card-text text-dark fw-bold mb-0 fs-6">
+                                                    <p className="card-text text-dark mb-0 fs-6 cardd1" style={{ fontWeight: "400" }}>
                                                         {product.price.toLocaleString()} VND
                                                     </p>
                                                 </div>
@@ -135,7 +135,7 @@ const Shop = () => {
                                                 <div key={product.id} className={index === 0 ? "col-5" : "col-5"}>
                                                     {index === 1 && (
                                                         <div className="mb-3">
-                                                            <h2 className="fw-bold fs-1 mb-0 text-dark lh-1">
+                                                            <h2 className="fs-1 mb-0 text-dark lh-1 artistt">
                                                                 {t("shop.artist")}<br />  {t("shop.artist1")}
                                                             </h2>
 
@@ -167,15 +167,15 @@ const Shop = () => {
 
                                     <div className="col-12 col-lg-4">
                                         <div className="d-flex justify-content-end mt-2">
-                                            <Link to="/shop/artist-collection" className="text-decoration-none text-dark fw-medium see-more-link">
+                                            <Link to="/shop/artist-collection" className="text-dark link-thin-underline">
                                                 {t("shop.seeMore")}
                                             </Link>
                                         </div>
                                         <div className="ps-lg-4 mt-4 mt-lg-0">
-                                            <h3 className="fw-bold fs-4 mb-4 text-dark" style={{ marginTop: "60px" }}>
+                                            <h3 className="fs-4 mb-4 text-dark postt" style={{ marginTop: "60px" }}>
                                                 "POST-CIVILIZATION"
                                             </h3>
-                                            <p className="text-muted lh-lg fs-6">
+                                            <p className="text-muted lh-lg fs-6 postt1">
                                                 {t("shop.artistDesc")}
                                             </p>
                                         </div>
@@ -190,7 +190,7 @@ const Shop = () => {
             {/*detail */}
             <div className="details-bg text-white" style={{ color: "#CAFF01" }}>
                 <div className="text-center py-5">
-                    <h1 className="display-1 fw-bold text-successs mb-0" style={{ letterSpacing: '2px' }}>
+                    <h1 className="display-1 text-successs fw-medium mb-0" style={{ letterSpacing: '2px' }}>
                         {t("shop.details")}
                     </h1>
                 </div>
@@ -201,8 +201,8 @@ const Shop = () => {
                             <img src={detail1} alt="Materials" className="img-fluid rounded shadow" />
                         </div>
                         <div className="col-lg-8">
-                            <h2 className="display-4 text-successs mb-4" style={{ color: "#CAFF01" }}> {t("shop.materials")}</h2>
-                            <p className="text-light fs-6 lh-lg">
+                            <h2 className="display-4 text-successs mb-4 dt1" style={{ color: "#CAFF01" }}> {t("shop.materials")}</h2>
+                            <p className="text-light fs-6 lh-lg dt2">
                                 {t("shop.materialsDesc")}
                             </p>
                         </div>
@@ -210,8 +210,8 @@ const Shop = () => {
 
                     <div className="row align-items-center py-5">
                         <div className="col-lg-8 order-lg-1 order-2">
-                            <h2 className="display-4 text-successs mb-4"> {t("shop.design")}</h2>
-                            <p className="text-light fs-6 lh-lg">
+                            <h2 className="display-4 text-successs mb-4 dt1"> {t("shop.design")}</h2>
+                            <p className="text-light fs-6 lh-lg dt2">
                                 {t("shop.designDesc")}
                             </p>
                         </div>
@@ -225,8 +225,8 @@ const Shop = () => {
                             <img src={detail3} alt="Experience" className="img-fluid rounded shadow" />
                         </div>
                         <div className="col-lg-8">
-                            <h2 className="display-4 text-successs mb-4"> {t("shop.experience")}</h2>
-                            <p className="text-light fs-6 lh-lg">
+                            <h2 className="display-4 text-successs mb-4 dt1"> {t("shop.experience")}</h2>
+                            <p className="text-light fs-6 lh-lg dt2">
                                 {t("shop.experienceDesc")}
                             </p>
                         </div>
@@ -234,8 +234,8 @@ const Shop = () => {
 
                     <div className="row align-items-center py-5">
                         <div className="col-lg-8 order-lg-1 order-2">
-                            <h2 className="display-4 text-successs mb-4">{t("shop.environment")}</h2>
-                            <p className="text-light fs-6 lh-lg">
+                            <h2 className="display-4 text-successs mb-4 dt1">{t("shop.environment")}</h2>
+                            <p className="text-light fs-6 lh-lg dt2">
                                 {t("shop.environmentDesc")}
                             </p>
                         </div>

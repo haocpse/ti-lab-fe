@@ -78,11 +78,11 @@ const ShopArtist = () => {
                             )
                             .map((collection, i) => (
                                 <div key={i} className="mb-5">
-                                    <h3 className="text-center fw-medium name-collection" style={{ fontSize: "1.8rem" }}>
+                                    <h3 className="text-center fw-bold name-collection" style={{ fontSize: "1.8rem" }}>
                                         "{collection.name.toUpperCase()}"
                                     </h3>
                                     <p
-                                        className="text-secondary text-center mb-4 name-collection"
+                                        className="text-dark text-center mb-4 name-collection fw-medium"
                                         style={{ fontSize: "1.1rem", marginTop: "-5px" }}
                                     >
                                         {t("shopArtist.artistCollection")}
@@ -157,7 +157,7 @@ const ShopArtist = () => {
                             <div className="col-12">
                                 <div className="d-flex flex-column flex-md-row align-items-md-end justify-content-center">
                                     <div>
-                                        <h5 className="mb-4 mt-4 artistH5" style={{ fontSize: "2rem" }}>    {t("shopArtist.coreCollection")}</h5>
+                                        <h5 className="mb-4 mt-4 artistH5" style={{ fontSize: "2.5rem" }}>    {t("shopArtist.coreCollection")}</h5>
                                     </div>
 
                                 </div>

@@ -21,18 +21,18 @@
 }
 
 .h2core {
-    font-family: 'Platform', 'Inter', sans-serif;
-    font-weight: 500;
+    font-family: 'Platform';
+    font-weight: 400;
 }
 
 .artistH5 {
-    font-family: 'Platform', 'Inter', sans-serif;
-    font-weight: 500;
+    font-family: 'Platform';
+    font-weight: 400;
 }
 
 .artistH4 {
-    font-family: 'Platform', 'Inter', sans-serif;
-    font-weight: 500;
+    font-family: 'Platform';
+    font-weight: 400;
 }
 
 .coreBagName {
@@ -76,28 +76,32 @@
 
     .shopcore-card img,
     .shopcore-artist-card img {
-        height: 180px !important; 
+        height: 180px !important;
         width: 80% !important;
         object-fit: cover;
-        max-width: 100%; 
+        max-width: 100%;
     }
 
     .h2core {
         font-size: 1.3rem !important;
     }
 
-    .artistH5, .artistH4 {
+    .artistH5,
+    .artistH4 {
         font-size: 1rem !important;
     }
 
-    .coreBagName, .coreBagPrice, .artistName {
+    .coreBagName,
+    .coreBagPrice,
+    .artistName {
         font-size: 0.95rem !important;
     }
+
     .seeMore {
         font-size: 0.95rem !important;
     }
 }
 
-.name-collection{
-    font-family: 'DM Sans', sans-serif; 
+.name-collection {
+    font-family: 'DM Sans';
 }

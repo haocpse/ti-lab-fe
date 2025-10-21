@@ -14,7 +14,7 @@
 
 .backgoundImg p {
     font-size: 50px;
-    font-family: 'Platform', 'Inter', sans-serif;
+    font-family: 'Platform';
     color: black;
     margin-left: 60px;
     margin-top: 90px;
@@ -112,7 +112,7 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     position: relative;
-    font-family: 'Platform', 'Inter', sans-serif;
+    font-family: 'Platform';
     background-color: #000000 !important;
 
 }
@@ -136,6 +136,9 @@
 
 .text-successs {
     color: #CAFF01;
+    font-family: 'Platform';
+    font-weight: 700;
+    
 }
 
 @media (max-width: 576px) {
@@ -156,4 +159,44 @@
     .details-bg {
         background-attachment: scroll;
     }
+}
+
+.link-thin-underline {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.cardd {
+    font-family: 'DM Sans';
+    font-weight: 600;
+}
+
+.cardd1 {
+    font-family: 'DM Sans';
+    font-weight: 400;
+}
+
+.artistt {
+    font-family: 'Platform';
+    font-weight: 400;
+}
+
+.postt {
+    font-family: 'DM Sans';
+    font-weight: 600;
+}
+
+.postt1 {
+    font-family: 'DM Sans';
+    font-weight: 400;
+}
+.dt1{
+    font-family: 'Platform';
+    font-weight: 400;
+    font-weight: medium;
+}
+.dt2{
+    font-family: 'DM Sans';
+    font-weight: 400;
 }

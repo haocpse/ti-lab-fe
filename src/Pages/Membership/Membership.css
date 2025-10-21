@@ -164,7 +164,7 @@
     font-size: 3.5rem;
     font-weight: 300;
     margin-bottom: 2rem;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'DM Sans';
     letter-spacing: 2px;
     line-height: 1.2;
 }
@@ -428,5 +428,5 @@
 }
 
 .nameTier {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'DM Sans';
 }

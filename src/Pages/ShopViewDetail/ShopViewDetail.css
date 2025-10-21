@@ -6,10 +6,11 @@
 }
 
 .bagNameDetail {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 30px;
+    font-family: 'DM Sans';
+    font-weight: 400;
 }
 
 .bagDescription {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'DM Sans';
+    font-weight: 300;
 }

@@ -8,6 +8,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'react-toastify/dist/ReactToastify.css';
 import "./i18n/i18n";
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import './Styles/fonts.css';
 
 
 createRoot(document.getElementById('root')).render(

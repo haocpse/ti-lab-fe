@@ -22,11 +22,11 @@
 
 .home-link {
     position: relative;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     color: #fff;
     text-decoration: none;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'DM Sans';
 }
 
 .home-link::after {
@@ -46,6 +46,6 @@
 
 .home-logo {
     max-width: 800px;
-    width: 100%;
+    width: 80%;
     height: auto;
 }

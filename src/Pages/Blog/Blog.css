@@ -6,7 +6,7 @@
 }
 
 .backgroundBlog h1 {
-    font-family: 'Platform', 'Inter', sans-serif;
+    font-family: 'Platform';
 }
 
 .blog-card {
@@ -31,12 +31,12 @@
 }
 
 .blog-card h4 {
-    font-family: 'Platform', 'Inter', sans-serif;
+    font-family: 'Platform';
     font-size: 1.25rem;
 }
 
 .bg-darkk h2 {
-    font-family: 'Platform', 'Inter', sans-serif;
+    font-family: 'Platform';
     color: #9AE6B4 !important;
 }
 

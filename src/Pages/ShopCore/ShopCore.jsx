@@ -117,7 +117,7 @@ const ShopCore = () => {
                             <div className="col-12">
                                 <div className="d-flex flex-column flex-md-row align-items-md-end justify-content-center">
                                     <div>
-                                        <h5 className="mb-4 mt-4 artistH5" style={{ fontSize: "2rem" }}>{t("shopcore.artistCollection")}</h5>
+                                        <h5 className="mb-4 mt-4 artistH5" style={{ fontSize: "2.5rem" }}>{t("shopcore.artistCollection")}</h5>
                                     </div>
 
                                 </div>

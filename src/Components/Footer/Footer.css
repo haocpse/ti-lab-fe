@@ -1,7 +1,8 @@
 .footer-title {
     font-size: 3.5rem;
     line-height: 1.1;
-    font-family: 'Platform', 'Inter', sans-serif;
+    font-family: 'Platform';
+    font-weight: 400;
 }
 
 .footer-dark {

@@ -1,7 +1,7 @@
 .navbar .nav-link {
   font-weight: 500;
   color: black;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'DM Sans';
   transition: all 0.2s ease-in-out;
 }
 

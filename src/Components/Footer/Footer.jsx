@@ -16,7 +16,7 @@ const Footer = () => {
                 <div className="row">
                     <div className="col-lg-6 col-md-12 mb-4">
                         <h2
-                            className="footer-title fw-semibold mb-4"
+                            className="footer-title  mb-4"
                             style={{ color: isShopPage ? "#CAFF01" : "#0d6efd" }}
                         >
                             Little things<br />

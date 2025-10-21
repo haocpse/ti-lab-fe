@@ -1,7 +1,7 @@
 .welcome-titles {
     font-size: 12rem;
     font-weight: 700;
-    font-family: 'Platform', 'Inter', sans-serif;
+    font-family: 'Platform';
     letter-spacing: 2px;
     line-height: 1;
     white-space: nowrap;
@@ -39,7 +39,7 @@
     font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 1rem;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'DM Sans';
 }
 
 .separator-line {
@@ -55,7 +55,7 @@
     font-size: 1.2rem;
     line-height: 1.8;
     font-weight: 300;
-    font-family: 'Platform', 'Inter', sans-serif;
+    font-family: 'Platform';
 }
 
 .content-box {
@@ -76,7 +76,7 @@
     font-weight: 600;
     text-transform: lowercase;
     margin-bottom: 1rem;
-    font-family: 'Platform', 'Inter', sans-serif;
+    font-family: 'Platform';
 }
 
 .content-text {
@@ -84,7 +84,7 @@
     font-size: 1rem;
     line-height: 1.5;
     font-weight: 300;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'DM Sans';
 }
 
 .brand-story {
