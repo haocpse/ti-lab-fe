@@ -47,7 +47,7 @@ const Footer = () => {
                             <div className={`col-12 mb-3 ${isShopPage ? "text-light" : "text-dark"}`}>
                                 <h6 className="fw-bold mb-3">Social</h6>
                                 <div className="d-flex flex-wrap gap-3">
-                                    <a href="#" className={`text-decoration-none ${isShopPage ? "text-light" : "text-dark"}`}>Facebook</a>
+                                    <a href="https://www.facebook.com/profile.php?id=61581888875479" className={`text-decoration-none ${isShopPage ? "text-light" : "text-dark"}`}>Facebook</a>
                                     <a href="#" className={`text-decoration-none ${isShopPage ? "text-light" : "text-dark"}`}>Instagram</a>
                                     <a href="#" className={`text-decoration-none ${isShopPage ? "text-light" : "text-dark"}`}>Youtube</a>
                                     <a href="#" className={`text-decoration-none ${isShopPage ? "text-light" : "text-dark"}`}>Tiktok</a>
