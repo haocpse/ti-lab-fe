@@ -97,7 +97,7 @@ const ShopViewDetail = () => {
                                 alt={bag?.name}
                                 className="img-fluid mb-3"
                                 style={{
-                                    width: "450px",
+                                    width: "380px",
                                     height: "530px",
                                     background: "#eee",
                                     borderRadius: "8px"
