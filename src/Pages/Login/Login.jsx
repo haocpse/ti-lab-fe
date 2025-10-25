@@ -45,7 +45,7 @@ const Login = () => {
 
             console.log("Login successful:", data);
 
-            sessionStorage.setItem('token', data.data.accessToken);
+            localStorage.setItem('token', data.data.accessToken);
 
             const redirectPath = location.state?.from || "/";
 
@@ -76,7 +76,7 @@ const Login = () => {
         try {
             const token = tokenResponse.access_token;
             const response = await AxiosSetup.post('/login-email', { token: token });
-            sessionStorage.setItem('token', response.data.data.token);
+            localStorage.setItem('token', response.data.data.token);
 
             toast.success("Login Successfully");
 
