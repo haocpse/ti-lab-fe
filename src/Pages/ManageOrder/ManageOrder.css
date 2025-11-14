@@ -1,0 +1,13 @@
+.admin-order-table-container {
+    height: 75vh;         /* chiều cao 80% màn hình */
+    overflow-y: auto;     /* scroll phần tbody */
+}
+
+/* cố định header */
+.admin-order-table-container table thead th {
+    position: sticky;
+    top: 0;
+    background: #212529;
+    color: white;
+    z-index: 2;
+}
