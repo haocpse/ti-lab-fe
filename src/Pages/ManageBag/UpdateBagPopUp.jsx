@@ -15,6 +15,7 @@ const UpdateBagPopUp = ({ onClose, onSubmit, bag }) => {
         type: "CORE_COLLECTION",
         bagImages: [],
         mainImageId: null,
+        mainPosition: 0,
     });
 
     // Khởi tạo formData khi popup mở
@@ -49,38 +50,73 @@ const UpdateBagPopUp = ({ onClose, onSubmit, bag }) => {
             file,
             name: file.name,
         }));
-        setFormData(prev => ({
-            ...prev,
-            bagImages: [...prev.bagImages, ...newFiles],
-            mainImageId: prev.mainImageId || newFiles[0].id,
-        }));
+
+        console.log("➕ ADD NEW IMAGES:", newFiles);
+
+        setFormData(prev => {
+            const updated = {
+                ...prev,
+                bagImages: [...prev.bagImages, ...newFiles],
+                mainImageId: prev.mainImageId || newFiles[0].id,
+            };
+
+            console.log("📂 ALL IMAGES AFTER ADD:", updated.bagImages);
+            console.log("⭐ MAIN IMAGE ID:", updated.mainImageId);
+
+            return updated;
+        });
+
         e.target.value = null;
     };
 
     const handleRemoveImage = (id) => {
+        console.log("❌ REMOVE IMAGE:", id);
+
         setFormData(prev => {
             const newImages = prev.bagImages.filter(img => img.id !== id);
-            return {
+
+            const updated = {
                 ...prev,
                 bagImages: newImages,
                 mainImageId: prev.mainImageId === id ? (newImages[0]?.id || null) : prev.mainImageId
             };
+
+            console.log("📂 ALL IMAGES AFTER REMOVE:", newImages);
+            console.log("⭐ MAIN IMAGE ID AFTER REMOVE:", updated.mainImageId);
+
+            return updated;
         });
     };
 
     const handleSetMainImage = (id) => {
-        setFormData(prev => ({ ...prev, mainImageId: id }));
+        console.log("⭐ SET MAIN IMAGE:", id);
+
+        setFormData(prev => {
+            const updated = {
+                ...prev,
+                mainImageId: id
+            };
+
+            console.log("➡️ mainImageId UPDATED:", updated.mainImageId);
+            console.log("📂 CURRENT IMAGE ORDER:", updated.bagImages);
+
+            return updated;
+        });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const formDataToSend = new FormData();
-    
+
             const removeIds = bag.bagImages
                 ?.filter(img => !formData.bagImages.find(f => f.id === img.id))
                 .map(img => img.id) || [];
-    
+
+            const mainPosition = formData.bagImages.findIndex(
+                img => img.id === formData.mainImageId
+            );
+
             // Dữ liệu chính
             const bagsData = {
                 name: formData.name,
@@ -91,27 +127,27 @@ const UpdateBagPopUp = ({ onClose, onSubmit, bag }) => {
                 length: parseFloat(formData.length),
                 weight: parseFloat(formData.weight),
                 type: formData.type,
-                removeIds
+                removeIds,
+                mainPosition
             };
-    
+
             console.log("👉 bagsData (JSON):", bagsData);
-    
+
             formDataToSend.append(
                 "bags",
                 new Blob([JSON.stringify(bagsData)], { type: "application/json" })
             );
-    
+
             // Append chỉ file mới
             formData.bagImages.forEach(img => {
                 if (!img.file) return; // bỏ qua ảnh cũ
-                let fileToSend = img.file;
-                if (img.id === formData.mainImageId) {
-                    const safeName = img.file.name.replace(/\s/g, "_");
-                    fileToSend = new File([img.file], `_main_${safeName}`, { type: img.file.type });
-                }
-                formDataToSend.append("imageBagRequest", fileToSend);
+                formData.bagImages.forEach(img => {
+                    if (img.file) {
+                        formDataToSend.append("imageBagRequest", img.file);
+                    }
+                });
             });
-    
+
             console.log("👉 FormData gửi lên:");
             for (let [key, value] of formDataToSend.entries()) {
                 if (value instanceof File) {
@@ -126,11 +162,48 @@ const UpdateBagPopUp = ({ onClose, onSubmit, bag }) => {
                     console.log(`${key}:`, value);
                 }
             }
-    
+
             const token = localStorage.getItem("token");
-    
+
+            console.log("============== 🚀 DEBUG BEFORE SENDING TO BACKEND ==============");
+            console.log("📌 Bag ID:", bag.id);
+
+            console.log("📝 BAGS JSON DATA (bagsData):", bagsData);
+
+            console.log("🗑️ REMOVE IDS:", removeIds);
+
+            console.log("⭐ MAIN IMAGE ID:", formData.mainImageId);
+            console.log("⭐ MAIN POSITION (index):", mainPosition);
+
+            console.log("📂 ALL IMAGES CURRENT ORDER:");
+            formData.bagImages.forEach((img, index) => {
+                console.log(`   [${index}] => id=${img.id}, name=${img.name}, file? ${img.file ? "YES" : "NO"}`);
+            });
+
+            console.log("📤 FILES TO UPLOAD (imageBagRequest):");
+            formData.bagImages
+                .filter(img => img.file)
+                .forEach((img, index) => {
+                    console.log(
+                        `   file[${index}]: name=${img.file.name}, size=${img.file.size}, type=${img.file.type}`
+                    );
+                });
+
+            console.log("📦 FINAL FORMDATA ENTRIES:");
+            for (let [key, value] of formDataToSend.entries()) {
+                if (value instanceof File) {
+                    console.log(`   ${key} => FILE: name=${value.name}, size=${value.size}, type=${value.type}`);
+                } else {
+                    console.log(`   ${key} =>`, value);
+                }
+            }
+
+            console.log("===============================================================");
+
+
             const response = await axios.put(
-                `https://tilab.com.vn/api/bags/${bag.id}`,
+                //     `https://tilab.com.vn/api/bags/${bag.id}`,
+                `http://localhost:8080/api/bags/${bag.id}`,
                 formDataToSend,
                 {
                     headers: {
@@ -139,20 +212,16 @@ const UpdateBagPopUp = ({ onClose, onSubmit, bag }) => {
                     }
                 }
             );
-    
+
             toast.success("Bag updated successfully!");
             onSubmit(response.data.data);
             onClose();
-            window.location.reload()
+            window.location.reload();
         } catch (error) {
             console.error("❌ Error updating bag:", error.response?.data || error.message);
             toast.error("Update bag failed");
         }
     };
-    
-
-
-
 
     return (
         <div className="popup-overlay">

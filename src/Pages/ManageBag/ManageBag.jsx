@@ -32,7 +32,7 @@ const ManageBag = () => {
 
     useEffect(() => {
         fetchBags(page);
-    }, [page]);
+    }, [page], showUpdateModal);
 
 
 
@@ -66,13 +66,12 @@ const ManageBag = () => {
             console.log(error)
         }
     }
-    
+
 
     const filteredBags = bags.filter((bag) =>
         bag.name.toLowerCase().includes(searchFunction.toLowerCase()) ||
         bag.status.toLowerCase().includes(searchFunction.toLowerCase())
     );
-
 
     return (
         <div className="container mt-4 textDmSan">
@@ -120,17 +119,10 @@ const ManageBag = () => {
                                 />
                                 <div className="card-body p-3">
                                     <h6 className="card-title mb-2 fw-bold">{bag.name}</h6>
-                                    <p className="card-text text-muted mb-2 small">{bag.description}</p>
 
                                     <p className="mb-1">
                                         <strong>Price:</strong>{" "}
                                         <span className="text-success fw-bold">{bag.price.toLocaleString()} VND</span>
-                                    </p>
-                                    <p className="mb-1">
-                                        <strong>Quantity:</strong> {bag.quantity} items
-                                    </p>
-                                    <p className="mb-1">
-                                        <strong>Type:</strong> {bag.type}
                                     </p>
                                     <p className="mb-0">
                                         <strong>Status:</strong>{" "}
