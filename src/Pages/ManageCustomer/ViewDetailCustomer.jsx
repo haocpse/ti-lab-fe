@@ -8,7 +8,11 @@ const ViewDetailCustomer = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const { id } = useParams();
+    const [orders, setOrders] = useState([]);
     const navigate = useNavigate();
+    const [selectedOrder, setSelectedOrder] = useState(null);
+    const [orderModalOpen, setOrderModalOpen] = useState(false);
+    const [orderDetailLoading, setOrderDetailLoading] = useState(false);
 
     const fetchProfile = async () => {
         try {
@@ -30,9 +34,42 @@ const ViewDetailCustomer = () => {
         }
     };
 
+    const fetchOrderDetail = async (orderId) => {
+        try {
+            setOrderDetailLoading(true);
+            const response = await AxiosSetup.get(`/orders/${orderId}`);
+            if (response.data.code === 200) {
+                setSelectedOrder(response.data.data);
+                setOrderModalOpen(true);
+            }
+        } catch (err) {
+            console.error("Error loading order detail:", err);
+        } finally {
+            setOrderDetailLoading(false);
+        }
+    };
+
+    const fetchOrders = async () => {
+        try {
+            const response = await AxiosSetup.get(`/customers/${id}/orders`);
+            if (response.data.code === 200 || response.data.code === 0) {
+                const sortedOrders = response.data.data.sort(
+                    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                );
+                setOrders(sortedOrders);
+            } else {
+                setOrders([]);
+            }
+        } catch (e) {
+            console.error("Error loading orders:", e);
+            setOrders([]);
+        }
+    };
+
     useEffect(() => {
         if (id) {
             fetchProfile();
+            fetchOrders();
         }
     }, [id]);
 
@@ -272,7 +309,139 @@ const ViewDetailCustomer = () => {
                     </div>
                 </div>
             )}
+            <div className="row mb-4">
+                <div className="col-12">
+                    <div className="card shadow-sm border-0" style={{ borderRadius: "12px" }}>
+                        <div className="card-body">
+                            <h5 className="card-title">
+                                <i className="fas fa-shopping-bag text-primary"></i> Order History
+                            </h5>
+
+                            {orders.length === 0 ? (
+                                <p className="text-muted fst-italic">No orders found.</p>
+                            ) : (
+                                <table className="table table-hover mt-3">
+                                    <thead className="table-light">
+                                        <tr>
+                                            <th style={{ width: "60px" }}>#</th>
+                                            <th>Order ID</th>
+                                            <th>Date</th>
+                                            <th>Number of Bags</th>
+                                            <th>Total</th>
+                                            <th style={{ width: "140px" }}>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {orders.map((order, index) => {
+                                            const date = new Date(order.createdAt);
+                                            const formattedDate = date.toLocaleDateString("vi-VN"); // dd/MM/yyyy
+
+                                            return (
+                                                <tr key={index}>
+                                                    <td className="fw-bold">{index + 1}</td>
+                                                    <td className="font-monospace">{order.orderId}</td>
+                                                    <td>{formattedDate}</td>
+                                                    <td>{order.numberOfBag}</td>
+                                                    <td className="fw-bold text-success">
+                                                        {order.total.toLocaleString()}₫
+                                                    </td>
+                                                    <td>
+                                                        <button
+                                                            className="btn btn-outline-primary btn-sm"
+                                                            onClick={() => fetchOrderDetail(order.orderId)}
+                                                        >
+                                                            <i className="fas fa-eye"></i> View
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </table>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/* Modal View Detail Order */}
+            {orderModalOpen && (
+                <div className="modal fade show d-block" tabIndex="-1" style={{ background: "rgba(0,0,0,0.5)" }}>
+                    <div className="modal-dialog modal-lg modal-dialog-scrollable">
+                        <div className="modal-content">
+
+                            <div className="modal-header">
+                                <h5 className="modal-title">
+                                    <i className="fas fa-receipt text-primary"></i> Order Detail
+                                </h5>
+                                <button type="button" className="btn-close" onClick={() => setOrderModalOpen(false)}></button>
+                            </div>
+
+                            <div className="modal-body">
+                                {orderDetailLoading ? (
+                                    <div className="text-center py-5">
+                                        <div className="spinner-border text-primary"></div>
+                                    </div>
+                                ) : (
+                                    <>
+                                        <p><strong>Order ID:</strong> {selectedOrder.orderId}</p>
+                                        <p><strong>Status:</strong>
+                                            <span className="badge bg-info ms-2">{selectedOrder.status}</span>
+                                        </p>
+
+                                        <p><strong>Created At:</strong>
+                                            {" "}
+                                            {new Date(selectedOrder.createdAt).toLocaleDateString("vi-VN")}
+                                        </p>
+
+                                        <hr />
+
+                                        <p><strong>Number of Bags:</strong> {selectedOrder.numberOfBag}</p>
+                                        <p><strong>Total:</strong>
+                                            <span className="text-success fw-bold ms-1">
+                                                {selectedOrder.total.toLocaleString()}₫
+                                            </span>
+                                        </p>
+
+                                        <hr />
+
+                                        <h6><strong>Products:</strong></h6>
+
+                                        <table className="table table-sm table-bordered mt-2">
+                                            <thead className="table-light">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Bag Name</th>
+                                                    <th>Qty</th>
+                                                    <th>Total Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {selectedOrder.orderDetailResponseList.map((item, index) => (
+                                                    <tr key={index}>
+                                                        <td>{index + 1}</td>
+                                                        <td>{item.bagResponse.name}</td>
+                                                        <td>{item.quantity}</td>
+                                                        <td>{item.totalPrice.toLocaleString()}₫</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </>
+                                )}
+                            </div>
+
+                            <div className="modal-footer">
+                                <button className="btn btn-secondary" onClick={() => setOrderModalOpen(false)}>
+                                    Close
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
+
     );
 };
 

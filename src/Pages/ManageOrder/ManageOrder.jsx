@@ -9,6 +9,7 @@ const ManageOrder = () => {
     const [totalElements, setTotalElements] = useState(0);
     const [searchFunction, setSearchFunction] = useState("");
     const [selectedOrder, setSelectedOrder] = useState(null);
+    const [confirmOrderId, setConfirmOrderId] = useState(null);
 
     const fetchOrder = async (page) => {
         try {
@@ -19,6 +20,24 @@ const ManageOrder = () => {
             setTotalElements(response.data.data.totalElements);
         } catch (error) {
             console.log(error);
+        }
+    };
+
+    const handleConfirmComplete = async () => {
+        if (!confirmOrderId) return;
+
+        try {
+            const response = await AxiosSetup.put(`/orders/${confirmOrderId}/complete`);
+
+            if (response.data.code === 200) {
+                alert("Order completed successfully!");
+                fetchOrder(page); // reload table
+            }
+        } catch (error) {
+            console.log(error);
+            alert("Failed to complete order!");
+        } finally {
+            setConfirmOrderId(null);
         }
     };
 
@@ -79,6 +98,7 @@ const ManageOrder = () => {
                             <th>Status</th>
                             <th>Created At</th>
                             <th>Details</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
 
@@ -107,6 +127,20 @@ const ManageOrder = () => {
                                         >
                                             View
                                         </button>
+                                    </td>
+                                    <td>
+                                        {order.status !== "COMPLETED" ? (
+                                            <button
+                                                className="btn btn-success btn-sm"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#confirmCompleteModal"
+                                                onClick={() => setConfirmOrderId(order.orderId)}
+                                            >
+                                                Complete
+                                            </button>
+                                        ) : (
+                                            <span className="badge bg-success">Completed</span>
+                                        )}
                                     </td>
                                 </tr>
                             ))
@@ -142,6 +176,47 @@ const ManageOrder = () => {
                     </li>
                 </ul>
             </nav>
+
+            <div
+                className="modal fade"
+                id="confirmCompleteModal"
+                tabIndex="-1"
+                aria-hidden="true"
+            >
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+
+                        <div className="modal-header">
+                            <h5 className="modal-title text-danger">
+                                <i className="bi bi-exclamation-triangle"></i> Confirm Action
+                            </h5>
+                            <button className="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div className="modal-body">
+                            <p className="fs-5">
+                                Are you sure you want to <b className="text-success">complete this order</b>?
+                            </p>
+                            <p>Order ID: <span className="font-monospace">{confirmOrderId}</span></p>
+                        </div>
+
+                        <div className="modal-footer">
+                            <button className="btn btn-secondary" data-bs-dismiss="modal">
+                                Cancel
+                            </button>
+
+                            <button
+                                className="btn btn-success"
+                                data-bs-dismiss="modal"
+                                onClick={handleConfirmComplete}
+                            >
+                                Yes, Complete
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
 
             {/* =======================
                 ORDER DETAIL MODAL

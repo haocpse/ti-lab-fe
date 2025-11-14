@@ -25,7 +25,7 @@ const ManageCustomer = () => {
         }
     };
     useEffect(() => {
-        fetchCustomer(page, 8);
+        fetchCustomer(page, 9);
     }, [page]);
 
 
