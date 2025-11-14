@@ -72,11 +72,11 @@ const Login = () => {
         }
     }
 
-    const handleGoogleLogin = async (tokenResponse  ) => {
+    const handleGoogleLogin = async (credentialResponse) => {
         try {
-            const token = tokenResponse.access_token;
-            const response = await AxiosSetup.post('/login-email', { token: token });
-            localStorage.setItem('token', response.data.data.token);
+            const idToken = credentialResponse.credential;
+            const response = await AxiosSetup.post('/login-email', { token: idToken });
+            localStorage.setItem('token', response.data.data.accessToken);
 
             toast.success("Login Successfully");
 
@@ -97,11 +97,7 @@ const Login = () => {
     const handleClose = () => {
         navigate('/');
     }
-    const login = useGoogleLogin({
-        onSuccess: (credentialResponse) => handleGoogleLogin(credentialResponse),
-        onError: () => toast.error("Google Login Failed"),
-      });
-      
+
 
     return (
         <>
@@ -143,15 +139,17 @@ const Login = () => {
 
 
                         <div className="social-login-section">
-                            <button className="social-btn apple-btn">
+                            {/*<button className="social-btn apple-btn">
                                 <i className="fab fa-apple"></i>
                             </button>
                             <button className="social-btn facebook-btn">
                                 <i className="fab fa-facebook-f"></i>
                             </button>
-                            <button className="social-btn google-btn" onClick={() => login()}>
-                                <img src={gg1} alt="Google" style={{ width: 20, height: 20 }} />
-                            </button>
+                            */}
+                            <GoogleLogin
+                                onSuccess={(credentialResponse) => handleGoogleLogin(credentialResponse)}
+                                onError={() => toast.error("Google Login Failed")}
+                            />
                         </div>
 
                         {/* dau gach nagng */}
