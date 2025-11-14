@@ -25,6 +25,7 @@ import Blog from "./Pages/Blog/Blog";
 import Custom from "./Pages/Custom/Custom";
 import ManageStaff from "./Pages/ManageStaff/ManageStaff";
 import ViewDetailStaff from "./Pages/ManageStaff/ViewDetailStaff";
+import AdminDashboard from "./Pages/Dashboard/AdminDashboard";
 import LoadingPage from "./Pages/LoadingPage/LoadingPage";
 import { useEffect, useState } from "react";
 import VerifiedPage from "./Pages/SignUp/VerifiedPage";
@@ -78,6 +79,7 @@ function App() {
               <Route path="manage-customer" element={<ManageCustomer />} />
               <Route path="manage-customer/view/:id" element={<ViewDetailCustomer />} />
               <Route path="manage-order" element={<ManageOrder />} />
+              <Route path="dashboard" element={<AdminDashboard />} />
             </Route>
           </Route>
 

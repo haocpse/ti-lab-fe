@@ -4,6 +4,7 @@ import Footer from "../../Components/Footer/Footer";
 import avt from "../../assets/hinhdaidien.jpg";
 import { fetchProfileCustomer, fetchProfileOrder } from "../../Services/Profile";
 import { useTranslation } from "react-i18next";
+import OrderDetailModal from "../OrderDetail/OrderDetailModal";
 
 const Profile = () => {
     const { t } = useTranslation();
@@ -20,6 +21,18 @@ const Profile = () => {
         FAILED: "#6c757d",
         RETURNED: "#fd7e14",
         REFUNDED: "#20c997"
+    };
+    const [showModal, setShowModal] = useState(false);
+    const [selectedOrderId, setSelectedOrderId] = useState(null);
+
+    const handleOpenDetail = (orderId) => {
+        setSelectedOrderId(orderId);
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setSelectedOrderId(null);
     };
 
     const itemsPerPage = 6;
@@ -145,24 +158,26 @@ const Profile = () => {
                             </div>
                             {displayedOrders && displayedOrders.length > 0 ? (
                                 displayedOrders.map((orderItem, index) => (
-                                    <div key={index} className="row mb-3 py-3" style={{ borderBottom: "1px solid rgba(202, 255, 1, 0.2)" }}>
+                                    <div
+                                        key={index}
+                                        className="row mb-3 py-3"
+                                        style={{ borderBottom: "1px solid rgba(202, 255, 1, 0.2)", cursor: "pointer" }}
+                                        onClick={() => handleOpenDetail(orderItem.orderId)}
+                                    >
                                         <div className="col-3">
                                             <span style={{ color: "#caff01" }}>#{orderItem.orderId}</span>
                                         </div>
                                         <div className="col-3">
                                             <span>
-                                                {orderItem.createdAt
-                                                    ? `${new Date(orderItem.createdAt).toLocaleDateString("en-GB")} ${new Date(orderItem.createdAt).toLocaleTimeString("en-GB")}`
-                                                    : "N/A"}
+                                                {new Date(orderItem.createdAt).toLocaleDateString("en-GB")}{" "}
+                                                {new Date(orderItem.createdAt).toLocaleTimeString("en-GB")}
                                             </span>
                                         </div>
                                         <div className="col-3">
-                                            <span style={{ color: statusColors[orderItem.status] }}>
-                                                {orderItem.status}
-                                            </span>
+                                            <span style={{ color: statusColors[orderItem.status] }}>{orderItem.status}</span>
                                         </div>
                                         <div className="col-3">
-                                            <span>{orderItem.total.toLocaleString() || "N/A"} VND </span>
+                                            <span>{orderItem.total.toLocaleString()} VND</span>
                                         </div>
                                     </div>
                                 ))
@@ -213,6 +228,11 @@ const Profile = () => {
 
                 </div>
             </div>
+            <OrderDetailModal
+                show={showModal}
+                orderId={selectedOrderId}
+                onClose={handleCloseModal}
+            />
             <Footer />
         </>
     );

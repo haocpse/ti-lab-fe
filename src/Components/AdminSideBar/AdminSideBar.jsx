@@ -27,6 +27,17 @@ const AdminSideBar = () => {
             <ul className="nav nav-pills flex-column mb-auto">
                 <li className="nav-item">
                     <NavLink
+                        to="/admin/dashboard"
+                        className={({ isActive }) =>
+                            "nav-link " + (isActive ? "active" : "text-white")
+                        }
+                    >
+                        <i class="bi bi-bar-chart" style={{ marginRight: "5px" }}></i>
+                        Dashboard
+                    </NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink
                         to="/admin/manage-bag"
                         className={({ isActive }) =>
                             "nav-link " + (isActive ? "active" : "text-white")
@@ -58,6 +69,7 @@ const AdminSideBar = () => {
                         Order Controller
                     </NavLink>
                 </li>
+                {/* 
                 <li>
                     <NavLink
                         to="/admin/manage-coupon"
@@ -69,6 +81,7 @@ const AdminSideBar = () => {
                         Coupon Controller
                     </NavLink>
                 </li>
+                
                 <li>
                     <NavLink
                         to="/admin/manage-membership"
@@ -80,7 +93,7 @@ const AdminSideBar = () => {
                         Membership Controller
                     </NavLink>
                 </li>
-
+                */}
                 <li>
                     <NavLink
                         to="/admin/manage-customer"
