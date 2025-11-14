@@ -15,12 +15,13 @@ import icon2 from "../../assets/Vector-1.png";
 import icon3 from "../../assets/Vector-2.png";
 import arrow from "../../assets/arrow.png";
 import { Link } from "react-router-dom";
-import { fetchProfileCustomer } from "../../Services/Profile";
+import { fetchProfileCustomer, fetchMembershipCustomer } from "../../Services/Profile";
 import { useTranslation } from "react-i18next";
 
 const Membership = () => {
 
     const [user, setUser] = useState(null);
+    const [membership, setMembership] = useState(null);
     const [isLogined, setIsLogined] = useState(false);
     const { t } = useTranslation();
 
@@ -31,8 +32,16 @@ const Membership = () => {
         console.log(user)
     }
 
+    const fetchMembership = async () => {
+
+        const response = await fetchMembershipCustomer();
+        setMembership(response);
+        console.log(membership)
+    }
+
     useEffect(() => {
         fetchUserInfor();
+        fetchMembership();
     }, [])
 
     useEffect(() => {
@@ -100,36 +109,53 @@ const Membership = () => {
                                             <div className="d-flex justify-content-between align-items-center mb-4">
                                                 <div className="d-flex align-items-center">
                                                     <div className="tier-icon me-3">
-                                                        <img src={logo1} alt="Seed tier" style={{ width: "40px", height: "40px" }} />
+                                                        <img src={logo1} alt="Tier icon" style={{ width: "40px", height: "40px" }} />
                                                     </div>
-                                                    <span className="tier-name h4 mb-0 text-dark">seed</span>
+
+                                                    {/* TÊN TIER */}
+                                                    <span className="tier-name h4 mb-0 text-dark">
+                                                        {membership?.name}
+                                                    </span>
                                                 </div>
+
+                                                {/* SỐ ĐIỂM HIỆN TẠI */}
                                                 <div className="points-display">
-                                                    <span className="fw-bold text-dark h4 mb-0">36 POINTS</span>
+                                                    <span className="fw-bold text-dark h4 mb-0">
+                                                        {membership?.point} POINTS
+                                                    </span>
                                                 </div>
                                             </div>
+
                                             <div className="progress-section">
+
+                                                {/* LABEL MIN → NEXT */}
                                                 <div className="d-flex justify-content-between mb-2">
-                                                    <span className="text-muted small">seed</span>
-                                                    <span className="text-muted small">grow</span>
+                                                    <span className="text-muted small">{membership?.name}</span>
+                                                    <span className="text-muted small">
+                                                        next tier
+                                                    </span>
                                                 </div>
+
+                                                {/* THANH PROGRESS */}
                                                 <div className="progress mb-3" style={{ height: "8px", backgroundColor: "#e9ecef" }}>
                                                     <div
                                                         className="progress-bar"
                                                         role="progressbar"
                                                         style={{
-                                                            width: "35%",
+                                                            width: `${Math.min((membership?.point / membership?.nextMin) * 100, 100)}%`,
                                                             backgroundColor: "#007bff",
                                                             borderRadius: "4px"
                                                         }}
-                                                        aria-valuenow="35"
+                                                        aria-valuenow={membership?.point}
                                                         aria-valuemin="0"
-                                                        aria-valuemax="100"
+                                                        aria-valuemax={membership?.nextMin}
                                                     ></div>
                                                 </div>
+
+                                                {/* THÔNG BÁO SỐ POINT CẦN ĐỂ LÊN CẤP */}
                                                 <div className="text-center">
                                                     <p className="text-muted mb-1 small">
-                                                        You're just <strong>65 POINTS</strong> away from leveling up!
+                                                        You're just <strong>{membership?.nextMin - membership?.point} POINTS</strong> away from leveling up!
                                                     </p>
                                                     <p className="text-muted mb-1 small">
                                                         Redeeming rewards won't affect your progress toward the next level.

@@ -10,6 +10,16 @@ export const fetchProfileCustomer = async () => {
 
 }
 
+export const fetchMembershipCustomer = async () => {
+    try {
+        const response = await AxiosSetup.get("/customers/me/membership");
+        return response.data.data;
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
 export const fetchProfileOrder = async (page = 0, size = 1000000) => {
     try {
         const response = await AxiosSetup.get(`/customers/me/orders?page=${page}&size=${size}`);
