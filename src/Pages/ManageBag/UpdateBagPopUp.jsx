@@ -202,8 +202,8 @@ const UpdateBagPopUp = ({ onClose, onSubmit, bag }) => {
 
 
             const response = await axios.put(
-                //     `https://tilab.com.vn/api/bags/${bag.id}`,
-                `http://localhost:8080/api/bags/${bag.id}`,
+                `https://tilab.com.vn/api/bags/${bag.id}`,
+                //`http://localhost:8080/api/bags/${bag.id}`,
                 formDataToSend,
                 {
                     headers: {
