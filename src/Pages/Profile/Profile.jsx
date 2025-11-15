@@ -152,8 +152,11 @@ const Profile = () => {
                                 <div className="col-3">
                                     <span style={{ color: "#caff01", fontWeight: 500 }}>{t("profile.status")}</span>
                                 </div>
-                                <div className="col-3">
-                                    <span style={{ color: "#caff01", fontWeight: 500 }}> {t("profile.price")}</span>
+                                <div className="col-2">
+                                    <span style={{ color: "#caff01", fontWeight: 500 }}>{t("profile.price")}</span>
+                                </div>
+                                <div className="col-1">
+                                    <span style={{ color: "#caff01", fontWeight: 500 }}>Report</span>
                                 </div>
                             </div>
                             {displayedOrders && displayedOrders.length > 0 ? (
@@ -176,8 +179,27 @@ const Profile = () => {
                                         <div className="col-3">
                                             <span style={{ color: statusColors[orderItem.status] }}>{orderItem.status}</span>
                                         </div>
-                                        <div className="col-3">
+                                        <div className="col-2">
                                             <span>{orderItem.total.toLocaleString()} VND</span>
+                                        </div>
+                                        <div className="col-1">
+                                            <button
+                                                className="btn btn-sm"
+                                                style={{
+                                                    backgroundColor: "transparent",
+                                                    border: "1px solid #caff01",
+                                                    color: "#caff01",
+                                                    padding: "3px 10px",
+                                                    borderRadius: "6px"
+                                                }}
+                                                onClick={(e) => {
+                                                    e.stopPropagation(); // Không mở modal order detail
+                                                    console.log("Report order:", orderItem.orderId);
+                                                    alert(`Report for order: ${orderItem.orderId}`);
+                                                }}
+                                            >
+                                                Report
+                                            </button>
                                         </div>
                                     </div>
                                 ))

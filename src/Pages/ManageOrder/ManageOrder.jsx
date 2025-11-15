@@ -10,10 +10,13 @@ const ManageOrder = () => {
     const [searchFunction, setSearchFunction] = useState("");
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [confirmOrderId, setConfirmOrderId] = useState(null);
-
+    const [unCompleted, setUnCompleted] = useState(false);
     const fetchOrder = async (page) => {
         try {
-            const response = await AxiosSetup.get(`/orders?page=${page}&size=10`);
+            const response = await AxiosSetup.get(
+                `/orders?page=${page}&size=10&unCompleted=${unCompleted}`
+            );
+
             setOrders(response.data.data.content);
             setTotalPages(response.data.data.totalPages);
             setPage(response.data.data.number);
@@ -52,7 +55,7 @@ const ManageOrder = () => {
 
     useEffect(() => {
         fetchOrder(page);
-    }, [page]);
+    }, [page, unCompleted]);
 
     const filteredOrders = orders.filter((order) =>
         order.customerResponse.fullName.toLowerCase().includes(searchFunction.toLowerCase()) ||
@@ -77,6 +80,19 @@ const ManageOrder = () => {
                         value={searchFunction}
                         onChange={(e) => setSearchFunction(e.target.value)}
                     />
+                </div>
+                <div className="form-check form-switch ms-3">
+                    <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="unCompletedToggle"
+                        checked={unCompleted}
+                        onChange={(e) => setUnCompleted(e.target.checked)}
+                        style={{ cursor: "pointer" }}
+                    />
+                    <label className="form-check-label" htmlFor="unCompletedToggle" style={{ cursor: "pointer" }}>
+                        Uncompleted Only
+                    </label>
                 </div>
             </div>
 
@@ -243,7 +259,8 @@ const ManageOrder = () => {
                                     <p className="mb-2">
                                         <b>{selectedOrder.customerResponse.fullName}</b><br />
                                         Email: {selectedOrder.customerResponse.email}<br />
-                                        Phone: {selectedOrder.phone || "No phone provided"}
+                                        Phone: {selectedOrder.phone || "No phone provided"} <br />
+                                        Address: {selectedOrder.address || "No address provided"}
                                     </p>
 
                                     <hr />
@@ -270,15 +287,42 @@ const ManageOrder = () => {
 
                                     {/* PAYMENT */}
                                     <h5 className="fw-bold">Payment</h5>
-                                    <p>
-                                        Method: <b>{selectedOrder.paymentResponse?.method || "N/A"}</b> <br />
-                                        Status: {selectedOrder.paymentResponse?.status || "N/A"} <br />
-                                        Payment Date: {selectedOrder.paymentResponse?.paymentDate
-                                            ? new Date(selectedOrder.paymentResponse.paymentDate).toLocaleString()
-                                            : "N/A"}
-                                    </p>
+                                    {(() => {
+                                        const status = selectedOrder.paymentResponse?.status || "N/A";
 
-                                    <hr />
+                                        const getStatusBadge = (status) => {
+                                            switch (status.toUpperCase()) {
+                                                case "PAID":
+                                                    return <span className="badge bg-success ms-2">Paid</span>;
+                                                case "UNPAID":
+                                                    return <span className="badge bg-warning text-dark ms-2">Pending</span>;
+                                                case "FAILED":
+                                                case "CANCELLED":
+                                                    return <span className="badge bg-danger ms-2">{status}</span>;
+                                                default:
+                                                    return <span className="badge bg-secondary ms-2">{status}</span>;
+                                            }
+                                        };
+
+                                        return (
+                                            <div className="mb-3">
+                                                <p className="mb-1">
+                                                    Method: <b>{selectedOrder.paymentResponse?.method || "N/A"}</b>
+                                                </p>
+
+                                                <p className="mb-1">
+                                                    Status: {getStatusBadge(status)}
+                                                </p>
+
+                                                <p className="mb-1">
+                                                    Payment Date:{" "}
+                                                    {selectedOrder.paymentResponse?.paymentDate
+                                                        ? new Date(selectedOrder.paymentResponse.paymentDate).toLocaleString()
+                                                        : "N/A"}
+                                                </p>
+                                            </div>
+                                        );
+                                    })()}
 
                                     {/* ORDER SUMMARY */}
                                     <h5 className="fw-bold">Order Summary</h5>
@@ -286,7 +330,10 @@ const ManageOrder = () => {
                                     <div className="alert alert-info mt-3">
                                         <b>Total: {selectedOrder.total.toLocaleString()} VND</b> <br />
                                         Status: {selectedOrder.status} <br />
-                                        Created At: {new Date(selectedOrder.createdAt).toLocaleString()}
+                                        Created At: {new Date(selectedOrder.createdAt).toLocaleString()} <br />
+                                        {selectedOrder.deliveredAt && (
+                                            <p>Delivered At: {new Date(selectedOrder.deliveredAt).toLocaleString()}</p>
+                                        )}
                                     </div>
                                 </>
                             ) : (

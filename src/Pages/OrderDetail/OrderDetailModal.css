@@ -1,0 +1,49 @@
+.my-order-progress-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.my-order-progress-step {
+    text-align: center;
+    flex: 1;
+    color: #999;
+    position: relative;
+}
+
+.my-order-progress-step.active {
+    color: #caff01;
+    font-weight: bold;
+}
+
+.my-order-progress-step::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    background: #555;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 8px;
+}
+
+.my-order-progress-step.active::before {
+    background: #caff01;
+}
+
+.my-order-progress-line {
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background: #555;
+    z-index: -1;
+}
+
+.my-order-progress-step:first-child .my-order-progress-line {
+    display: none;
+}
+
+.my-order-progress-step.active .my-order-progress-line {
+    background: #caff01;
+}
